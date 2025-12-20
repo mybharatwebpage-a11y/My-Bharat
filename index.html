@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🇮🇳 My Bharat</title>
+
+  <style>
+    :root {
+      --primary-bg: #2b0a06;
+      --accent: #d9a441;
+      --light-text: #f8f5ef;
+      --font-main: "Poppins", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background: #fff7ec;
+      display: flex;
+      flex-direction: column;
+      color: #2b0a06;
+      min-height: 100vh;
+    }
+
+    main { flex: 1; display: flex; flex-direction: column; align-items: center; }
+
+    /* ========== SECTION WRAPPER ========== */
+    .section-wrapper {
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 24px 16px 40px;
+      flex-wrap: wrap;
+    }
+
+    .info-panel {
+      width: 340px;
+      background: #fffbe6;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .info-panel:hover { transform: translateY(-5px) scale(1.03); }
+
+    .info-panel h3 { margin: 0; font-size: 1.35rem; color: var(--primary-bg); }
+    .info-panel p { font-size: 1.1rem; color: #4b2e05; line-height: 1.4; }
+
+    /* ========== SLIDER ========== */
+    .slider {
+      width: 500px;
+      height: 500px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      border: 4px solid var(--accent);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      background: #fff;
+      animation: glow 3s infinite alternate;
+    }
+
+    .slides { display: flex; height: 100%; transform: translateX(0); }
+    .slide { min-width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease-in-out; position: absolute; top: 0; left: 0; }
+    .slide.active { opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .prev { left: 12px; }
+    .next { right: 12px; }
+
+    @keyframes glow { 0% { box-shadow: 0 0 12px var(--accent); } 100% { box-shadow: 0 0 28px var(--accent); } }
+
+    /* ========== QUOTE SECTION ========== */
+    .quote-box {
+      background: #fffbe6;
+      border-left: 6px solid var(--accent);
+      padding: 22px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      text-align: center;
+      margin: 40px auto;
+      max-width: 900px;
+    }
+
+    .quote-box h2 { color: var(--primary-bg); margin-bottom: 10px; font-size: 1.8rem; }
+    #quote-text { font-size: 1.3rem; color: #5a3c0c; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+
+    <!-- INFO PANELS + SLIDER -->
+    <div class="section-wrapper">
+      <div class="info-panel">
+        <h3>Population</h3>
+        <p>1.4 Billion people</p>
+        <h3>Languages</h3>
+        <p>Hindi, English, Regional Languages</p>
+        <h3>GDP</h3>
+        <p>$3.7 Trillion (Nominal)</p>
+      </div>
+
+      <section class="slider">
+        <div class="slides">
+          <div class="slide"><img src="imageshomepage/imgmain.png" alt="slide 1"></div>
+          <div class="slide"><img src="imageshomepage/img1.jpg" alt="slide 2"></div>
+          <div class="slide"><img src="imageshomepage/img2.jpg" alt="slide 3"></div>
+          <div class="slide"><img src="imageshomepage/img3.jpg" alt="slide 4"></div>
+          <div class="slide"><img src="imageshomepage/img4.jpg" alt="slide 5"></div>
+          <div class="slide"><img src="imageshomepage/img5.png" alt="slide 6"></div>
+          <div class="slide"><img src="imageshomepage/img6.png" alt="slide 7"></div>
+        </div>
+        <button class="slider-btn prev">&#10094;</button>
+        <button class="slider-btn next">&#10095;</button>
+      </section>
+
+      <div class="info-panel">
+        <h3>Area</h3>
+        <p>3.287 Million km²</p>
+        <h3>Capital</h3>
+        <p>New Delhi</p>
+        <h3>Time Zone</h3>
+        <p>IST (UTC+5:30)</p>
+      </div>
+    </div>
+
+    <!-- QUOTE -->
+    <section class="quote-box">
+      <h2>🌟 Quote of the Day</h2>
+      <p id="quote-text">Loading quote...</p>
+    </section>
+
+  </main>
+
+   <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <script>
+  // Load header
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+  // Load footer
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+
+  // Slider and Quote of the Day
+  document.addEventListener("DOMContentLoaded", () => {
+    // Slider JS
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+
+    function showSlide(i){
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+    }
+
+    document.querySelector('.next').onclick = () => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+
+    document.querySelector('.prev').onclick = () => {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    }
+
+    setInterval(() => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }, 4000);
+
+    showSlide(index);
+
+    // 100+ Quotes / Thoughts
+    const quotes = [
+      "The future depends on what we do in the present. — Mahatma Gandhi",
+      "Arise, awake, and stop not until the goal is reached. — Swami Vivekananda",
+      "A nation's culture resides in the hearts and in the soul of its people. — Mahatma Gandhi",
+      "Education is the most powerful weapon which you can use to change the world.",
+      "Unity is strength. When there is teamwork and collaboration, wonderful things can be achieved.",
+      "In India, the art of living is learning the art of giving.",
+      "Strength does not come from physical capacity. It comes from an indomitable will. — Mahatma Gandhi",
+      "Peace comes from within. Do not seek it without.",
+      "Where the mind is without fear, and the head is held high — Rabindranath Tagore",
+      "You must be the change you wish to see in the world. — Mahatma Gandhi",
+      "Courage is not the absence of fear, but the triumph over it. — Nelson Mandela",
+      "Happiness is when what you think, what you say, and what you do are in harmony. — Gandhi",
+      "Small deeds done are better than great deeds planned. — Peter Marshall",
+      "The more you read, the more things you will know. — Dr. Seuss",
+      "An eye for an eye only ends up making the whole world blind. — Gandhi",
+      "A nation's greatness lies in its undying ideals of love and sacrifice. — Jawaharlal Nehru",
+      "Service to humanity is the best work of life. — Swami Vivekananda",
+      "Do not wait for leaders; do it alone, person to person. — Mother Teresa",
+      "Simplicity is the ultimate sophistication.",
+      "Honesty is the first chapter in the book of wisdom. — Thomas Jefferson",
+      "Kindness is the language which the deaf can hear and the blind can see. — Mark Twain",
+      "Wisdom is knowing the right path to take. Integrity is taking it.",
+      "Work is worship. — Mahatma Gandhi",
+      "True education must correspond to the surrounding circumstances or it is not a healthy growth. — Gandhi",
+      "Faith is taking the first step even when you don’t see the whole staircase. — Martin Luther King Jr.",
+      "Let noble thoughts come to us from every side. — Rigveda",
+      "Life is the flower for which love is the honey. — Victor Hugo",
+      "The best way to find yourself is to lose yourself in the service of others. — Gandhi",
+      "Patience is bitter, but its fruit is sweet. — Aristotle",
+      "Live as if you were to die tomorrow. Learn as if you were to live forever. — Gandhi",
+      "He who is not courageous enough to take risks will accomplish nothing in life.",
+      "The greatness of a nation is measured by how it treats its weakest members. — Gandhi",
+      "Happiness is not something ready-made. It comes from your own actions. — Dalai Lama",
+      "Where there is love there is life. — Mahatma Gandhi",
+      "The soul is healed by being with children. — Fyodor Dostoevsky",
+      "Love is the strongest force the world possesses.",
+      "It always seems impossible until it’s done. — Nelson Mandela",
+      "A drop of water, if it could write out its own history, would explain the universe. — Chinese Proverb",
+      "In the middle of every difficulty lies opportunity. — Albert Einstein",
+      "Freedom is nothing else but a chance to be better. — Albert Camus",
+      "Meditation brings wisdom; lack of meditation leaves ignorance.",
+      "Happiness depends upon ourselves. — Aristotle",
+      "The only way to do great work is to love what you do. — Steve Jobs",
+      "Truth never damages a cause that is just.",
+      "Nothing is impossible, the word itself says ‘I’m possible’! — Audrey Hepburn",
+      "Do what you can, with what you have, where you are. — Theodore Roosevelt",
+      "Success is not final, failure is not fatal: it is the courage to continue that counts. — Winston Churchill",
+      "Life is 10% what happens to us and 90% how we react to it. — Charles Swindoll",
+      "Change your thoughts and you change your world. — Norman Vincent Peale",
+      "Dream big and dare to fail. — Norman Vaughan",
+      "Every moment is a fresh beginning. — T.S. Eliot",
+      "Great minds discuss ideas; average minds discuss events; small minds discuss people. — Eleanor Roosevelt",
+      "Do not go where the path may lead, go instead where there is no path and leave a trail. — Ralph Waldo Emerson",
+      "The journey of a thousand miles begins with a single step. — Lao Tzu",
+      "It is not length of life, but depth of life. — Ralph Waldo Emerson",
+      "The best way to predict your future is to create it. — Abraham Lincoln",
+      "An investment in knowledge pays the best interest. — Benjamin Franklin",
+      "Do not let what you cannot do interfere with what you can do. — John Wooden",
+      "In a gentle way, you can shake the world. — Mahatma Gandhi",
+      "It is health that is real wealth and not pieces of gold and silver. — Gandhi",
+      "Act as if what you do makes a difference. It does. — William James",
+      "The weak can never forgive. Forgiveness is the attribute of the strong. — Gandhi",
+      "If you want to shine like a sun, first burn like a sun. — A.P.J. Abdul Kalam",
+      "Dream, dream, dream. Dreams transform into thoughts. Thoughts result in action. — A.P.J. Abdul Kalam",
+      "Excellence is a continuous process and not an accident. — A.P.J. Abdul Kalam",
+      "You have to dream before your dreams can come true. — A.P.J. Abdul Kalam",
+      "Man needs his difficulties because they are necessary to enjoy success. — A.P.J. Abdul Kalam",
+      "Let us sacrifice our today so that our children can have a better tomorrow. — A.P.J. Abdul Kalam",
+      "Climbing to the top demands strength, whether it is to the top of Mount Everest or to the top of your career. — A.P.J. Abdul Kalam",
+      "All of us do not have equal talent. But, all of us have an equal opportunity to develop our talents. — A.P.J. Abdul Kalam",
+      "Without your involvement you can't succeed. — A.P.J. Abdul Kalam",
+      "Thinking should become your capital asset, no matter whatever ups and downs you come across in your life. — A.P.J. Abdul Kalam",
+      "Excellence is not a skill, it's an attitude. — Ralph Marston",
+      "Happiness is the highest form of health. — Dalai Lama",
+      "A good head and a good heart are always a formidable combination. — Nelson Mandela",
+      "The power of imagination makes us infinite. — John Muir",
+      "Try to be a rainbow in someone else's cloud. — Maya Angelou",
+      "Be the change that you wish to see in the world. — Gandhi",
+      "Injustice anywhere is a threat to justice everywhere. — Martin Luther King Jr.",
+      "Nothing will work unless you do. — Maya Angelou",
+      "Courage is grace under pressure. — Ernest Hemingway",
+      "Opportunities don't happen, you create them. — Chris Grosser",
+      "To succeed in life, you need two things: ignorance and confidence. — Mark Twain",
+      "Injustice anywhere is a threat to justice everywhere. — Martin Luther King Jr.",
+      "Happiness is not by chance, but by choice. — Jim Rohn",
+      "Live life to the fullest and focus on the positive. — Matt Cameron",
+      "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. — Malcolm X",
+      "Peace begins with a smile. — Mother Teresa",
+      "Spread love everywhere you go. Let no one ever come to you without leaving happier. — Mother Teresa",
+      "Be faithful in small things because it is in them that your strength lies. — Mother Teresa",
+      "If you judge people, you have no time to love them. — Mother Teresa",
+      "Kind words can be short and easy to speak but their echoes are truly endless. — Mother Teresa",
+      "Do not wait for leaders; do it alone, person to person. — Mother Teresa",
+      "God doesn’t require us to succeed; he only requires that you try. — Mother Teresa",
+      "Love begins at home, and it is not how much we do… but how much love we put in that action. — Mother Teresa"
+      // You can keep adding more quotes here to reach any number
+    ];
+
+    document.getElementById("quote-text").textContent =
+      quotes[Math.floor(Math.random() * quotes.length)];
+  });
+</script>
+
+</body>
+</html>

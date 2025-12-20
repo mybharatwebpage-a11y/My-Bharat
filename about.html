@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Incredible India</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- FIX: These variables were missing, causing transparent header -->
+  <style>
+    :root {
+      --primary-bg: #2b0a06;
+      --accent: #ffd567;
+      --light-text: #ffffff;
+    }
+  </style>
+
+  <!-- About Us internal styles -->
+  <style>
+    /* --- About Us Layout Enhancements --- */
+    .about-team {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      display: flex;
+      align-items: center;
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .team-member:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .team-member img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 1.8rem;
+      border: 4px solid #e67e22;
+    }
+
+    .team-info h3 {
+      margin: 0;
+      font-size: 2rem;
+      color: #222;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .team-info p {
+      margin: 0.5rem 0 0;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    /* --- School Logo --- */
+    .school-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .school-logo img {
+      height: 110px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    /* --- Special Thanks Section --- */
+    .special-thanks {
+      background: linear-gradient(135deg, #fff8e1, #fff);
+      border-left: 6px solid #e67e22;
+      padding: 2rem;
+      margin-top: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .special-thanks h3 {
+      font-size: 1.8rem;
+      color: #c0392b;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .special-thanks p {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .team-member {
+        flex-direction: column;
+        text-align: center;
+      }
+      .team-member img {
+        margin: 0 0 1rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER STYLES -->
+<style id="header-style">
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+
+    <a href="states.html">States</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="about-section">
+  <div class="about-container">
+
+    <!-- ABOUT US FIRST -->
+    <h2>About <span>Us</span></h2>
+
+    <!-- SCHOOL LOGO -->
+    <div class="school-logo">
+      <img src="logo3.png" alt="Siddhartha Public School Logo">
+    </div>
+
+    <!-- TEAM -->
+    <div class="about-team">
+      <div class="team-member">
+        <img src="karthik.jpg" alt="Karthik Choudhary">
+        <div class="team-info">
+          <h3>Karthik Choudhary</h3>
+          <p>Grade 8-D, Siddhartha Public School</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="jaaswith.jpg" alt="Jaashwith">
+        <div class="team-info">
+          <h3>Jaashwith</h3>
+          <p>Grade 8-C, Siddhartha Public School</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIAL THANKS -->
+    <div class="special-thanks">
+      <h3>Special Thanks 🙏</h3>
+      <p>
+       A heartfelt thank you to our respected <strong>Renuka  Sarkar Ma'am </strong>for her unwavering guidance,
+        patience, and encouragement throughout the creation of the My Bharat website. Her
+         clear explanations, thoughtful support, and dedication to our learning helped us
+          overcome challenges and strengthened our confidence as budding coders. We are
+           truly grateful for the time, effort, and inspiration she invested in us, making
+            this project not only successful but also a meaningful learning experience.
+      </p>
+    </div>
+
+    <blockquote>
+      <p>“Vasudhaiva Kutumbakam” — <em>The World Is One Family</em>.</p>
+    </blockquote>
+
+    <br><br>
+
+    <!-- ABOUT MY BHARAT SECOND -->
+    <h2>About <span>My Bharat</span></h2>
+
+    <p>
+      <strong>My Bharat</strong> is a humble attempt to showcase the beauty, culture, and heritage
+      of India in a way that is simple, engaging, and enjoyable. This website is built with love
+      by students who want to share the greatness of our country with the world.
+    </p>
+
+    <p>
+      India is a land where ancient wisdom meets modern innovation. From the artistic brilliance
+      of Ajanta and Ellora to the scientific advancements of today, India continues to inspire
+      minds across the globe.
+    </p>
+
+    <p>
+      Through this website, we explore India’s rich <strong>art, culture, festivals, history,
+      cuisine, architecture, and tourism</strong>—everything that makes our nation vibrant and extraordinary.
+    </p>
+
+    <p>
+      We created “My Bharat” so that students, teachers, and anyone curious can learn
+      about India in one place—with clear information, beautiful visuals, and a user-friendly design.
+    </p>
+
+    <p>
+      Our mission is simple:
+      <strong>Celebrate India. Learn India. Love India.</strong>
+    </p>
+
+  </div>
+</section>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+
+</body>
+</html>

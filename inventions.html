@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Inventions of India | My Bharat</title>
+<style>
+:root{
+  --deep-maroon:#4a1a0a;
+  --gold:#d9a441;
+  --card:#fff8f2;
+  --muted:#5a3f34;
+  --shadow: 0 8px 24px rgba(0,0,0,0.12);
+  --radius:12px;
+  --maxw:1200px;
+  --font: "Poppins", sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--font);background:linear-gradient(180deg,#fffaf4 0%, #fff8f0 100%);color:var(--muted);-webkit-font-smoothing:antialiased}
+/* Header */
+header{
+  background: linear-gradient(90deg,var(--deep-maroon),#5c2e07);
+  padding:10px 20px;
+  position:sticky; top:0; z-index:1200;
+  box-shadow:0 4px 14px rgba(0,0,0,0.22);
+}
+.nav-wrapper{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  justify-content:space-between;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-shrink:0;
+}
+.logo img{
+  width:52px;height:52px;border-radius:8px;border:2px solid var(--gold);background:#fff;padding:3px;display:block;
+  box-shadow:0 4px 10px rgba(0,0,0,0.12);
+}
+.logo .brand{
+  color:var(--gold);
+  font-weight:800;
+  font-size:1.25rem;
+  letter-spacing:0.3px;
+}
+nav{display:flex;align-items:center;gap:14px;flex:1;justify-content:flex-end}
+nav a, nav button.drop{
+  color:#fff;
+  text-decoration:none;
+  background:transparent;
+  border:none;
+  padding:8px 10px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  font-size:0.95rem;
+}
+nav a:hover, nav button.drop:hover{ color:var(--gold); background: rgba(245,197,66,0.12) }
+.dropdown{ position:relative }
+.dropdown .menu{
+  display:none;
+  position:absolute;
+  top:110%;
+  left:0;
+  background:var(--card);
+  box-shadow:var(--shadow);
+  border-radius:10px;
+  overflow:hidden;
+  min-width:190px;
+  z-index:1400;
+}
+.dropdown .menu a{
+  display:block;
+  padding:10px 12px;
+  color:var(--deep-maroon);
+  text-decoration:none;
+  font-weight:600;
+}
+.dropdown .menu a:hover{ background:var(--gold); color:var(--deep-maroon) }
+/* Hero */
+.hero {
+  max-width:var(--maxw);
+  margin:20px auto 14px;
+  padding:22px;
+  background:linear-gradient(180deg,#fff8ec,#fff2e0);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  border:2px solid rgba(217,164,65,0.12);
+  text-align:center;
+}
+.hero h1{ margin:0 0 8px; font-family:"Merriweather",serif; color:var(--deep-maroon); font-size:1.6rem }
+.hero p{ margin:0;color:#4b3226;line-height:1.6; max-width:960px; margin-left:auto;margin-right:auto }
+/* Grid */
+.grid-wrap{ max-width:var(--maxw); margin:18px auto 60px; padding:0 18px }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+}
+.card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--card);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:transform .18s, box-shadow .18s;
+  border:3px solid rgba(217,164,65,0.10);
+  height:100%;
+}
+.card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.16) }
+.card img{ width:100%; height:160px; object-fit:cover; display:block; border-bottom:4px solid #ecd09a }
+.card .meta{ padding:12px; text-align:center; background:linear-gradient(90deg,var(--deep-maroon),var(--gold)); color:#fff; font-weight:700 }
+.card .meta small{ display:block; font-weight:600; font-size:.9rem; opacity:0.95; margin-top:6px; background:transparent }
+/* Modal */
+.modal{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.6); z-index:2000; padding:20px;
+}
+.modal.open{ display:flex }
+.modal-box{
+  width:100%; max-width:980px; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 26px 60px rgba(0,0,0,0.55); position:relative;
+}
+.modal-box img{ width:100%; max-height:460px; object-fit:cover; display:block }
+.modal-body{ padding:18px 20px; color:#3f2f25 }
+.modal-body h2{ margin:0 0 8px; color:var(--deep-maroon); font-size:1.3rem }
+.modal-body p{ margin:8px 0; line-height:1.6 }
+.modal-close{
+  position:absolute; top:12px; right:12px; width:40px; height:40px; border-radius:50%; border:none; background:rgba(255,255,255,0.95);
+  cursor:pointer; font-size:1.3rem; box-shadow:0 6px 12px rgba(0,0,0,0.12)
+}
+.modal-close:hover{ background:var(--gold); color:var(--deep-maroon) }
+footer{ text-align:center;padding:18px 8px;background:linear-gradient(90deg,var(--deep-maroon),#5c2e07); color:#fff; margin-top:28px }
+@media (max-width:720px){
+  .card img{ height:140px }
+  .hero h1{ font-size:1.3rem }
+  nav{ gap:8px }
+  .nav-wrapper{ padding:0 8px }
+  .dropdown .menu{ left:auto; right:0; min-width:160px }
+}
+</style>
+</head>
+<body>
+ <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Inventions of India</h1>
+  <p>Explore inventions, discoveries and innovations from across India. Click any tile to open a popup with a short description.</p>
+</section>
+
+<div class="grid" id="monumentsGrid" aria-live="polite">
+
+  <!-- 1 -->
+  <div class="card" tabindex="0" data-title="Zero" data-desc="Conceptualized in ancient India, revolutionizing mathematics." 
+  data-img="imagesinventions/zero.jpg">
+    <img src="imagesinventions/zero.jpg" alt="Zero">
+    <div class="meta">Zero <small>Mathematics</small></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" tabindex="0" data-title="Hindu-Arabic Numerals" data-desc="Place-value numeral system that spread worldwide." 
+  data-img="imagesinventions/hindu-arabic numericals.jpg">
+    <img src="imagesinventions/hindu-arabic numericals.jpg" alt="Hindu-Arabic Numerals">
+    <div class="meta">Hindu-Arabic Numerals <small>Mathematics</small></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" tabindex="0" data-title="Chess" data-desc="Originated as Chaturanga — an ancestor of modern chess." 
+  data-img="imagesinventions/chess.jpg">
+    <img src="imagesinventions/chess.jpg" alt="Chess">
+    <div class="meta">Chess <small>Games</small></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" tabindex="0" data-title="Snakes & Ladders" data-desc="Originated as Moksha Patam, a moral teaching game." 
+  data-img="imagesinventions/snakes and ladders.jpg">
+    <img src="imagesinventions/snakes and ladders.jpg" alt="Snakes & Ladders">
+    <div class="meta">Snakes & Ladders <small>Games</small></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card" tabindex="0" data-title="Pachisi / Ludo" data-desc="Traditional board game that inspired modern Ludo." 
+  data-img="imagesinventions/pachisi.jpg">
+    <img src="imagesinventions/pachisi.jpg" alt="Pachisi">
+    <div class="meta">Pachisi / Ludo <small>Games</small></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" tabindex="0" data-title="Ayurveda" data-desc="Ancient system of medicine with herbal formulations and surgery." 
+  data-img="imagesinventions/ayurveda.jpg">
+    <img src="imagesinventions/ayurveda.jpg" alt="Ayurveda">
+    <div class="meta">Ayurveda <small>Medicine</small></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" tabindex="0" data-title="Yoga" data-desc="Physical, mental, and spiritual practices originating in ancient India." 
+  data-img="imagesinventions/yoga.jpg">
+    <img src="imagesinventions/yoga.jpg" alt="Yoga">
+    <div class="meta">Yoga <small>Wellness</small></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card" tabindex="0" data-title="Surgical Techniques (Sushruta)" data-desc="Sushruta Samhita describes surgeries including rhinoplasty and cataract operations." 
+  data-img="imagesinventions/surgical india.jpg">
+    <img src="imagesinventions/surgical india.jpg" alt="Surgical Techniques">
+    <div class="meta">Surgical Techniques <small>Medicine</small></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card" tabindex="0" data-title="Plastic Surgery" data-desc="Rhinoplasty and reconstructive procedures described in ancient texts." 
+  data-img="imagesinventions/plastic.jpg">
+    <img src="imagesinventions/plastic.jpg" alt="Plastic Surgery">
+    <div class="meta">Plastic Surgery <small>Medicine</small></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card" tabindex="0" data-title="Cataract Surgery" data-desc="Early methods of cataract removal documented by ancient surgeons." 
+  data-img="imagesinventions/Cataract Surgery.jpg">
+    <img src="imagesinventions/Cataract Surgery.jpg" alt="Cataract Surgery">
+    <div class="meta">Cataract Surgery <small>Medicine</small></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card" tabindex="0" data-title="Herbal Medicines" data-desc="Many herbal preparations and treatment systems originate from India." 
+  data-img="imagesinventions/herbal.jpg">
+    <img src="imagesinventions/herbal.jpg" alt="Herbal Medicines">
+    <div class="meta">Herbal Medicines <small>Medicine</small></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card" tabindex="0" data-title="Shampoo" data-desc="From the Hindi word 'chāmpo' — early hair-cleaning massage and preparations." 
+  data-img="imagesinventions/shampoo.png">
+    <img src="imagesinventions/shampoo.png" alt="Shampoo">
+    <div class="meta">Shampoo <small>Daily Life</small></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card" tabindex="0" data-title="Cotton Cultivation & Textiles" data-desc="India was an early centre for cotton farming, spinning, weaving, and dyeing."
+  data-img="imagesinventions/Cotton Textiles.jpg">
+    <img src="imagesinventions/Cotton Textiles.jpg" alt="Cotton Textiles">
+    <div class="meta">Cotton Textiles <small>Textiles</small></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card" tabindex="0" data-title="Hand-operated Cotton Gin" data-desc="Early devices for separating cotton fibers from seeds." 
+  data-img="imagesinventions/Cotton Gin.jpg">
+    <img src="imagesinventions/Cotton Gin.jpg" alt="Cotton Gin">
+    <div class="meta">Cotton Gin <small>Textiles</small></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card" tabindex="0" data-title="Natural Dyeing & Block Printing" data-desc="Ancient Indian techniques for dyeing and textile printing." 
+  data-img="imagesinventions/Natural Dyeing.jpg">
+    <img src="imagesinventions/Natural Dyeing.jpg" alt="Natural Dyeing">
+    <div class="meta">Natural Dyeing <small>Textiles</small></div>
+  </div>
+
+  <!-- 16 -->
+  <div class="card" tabindex="0" data-title="Wootz / Crucible Steel" data-desc="Advanced steelmaking process producing high-quality alloyed steel." 
+  data-img="imagesinventions/Wootz Steel.jpg">
+    <img src="imagesinventions/Wootz Steel.jpg" alt="Wootz Steel">
+    <div class="meta">Wootz Steel <small>Metallurgy</small></div>
+  </div>
+
+  <!-- 17 -->
+  <div class="card" tabindex="0" data-title="Iron Pillar (Rust Resistance)" data-desc="Ancient Indian metallurgy created corrosion-resistant iron structures." 
+  data-img="imagesinventions/Iron Pillar.jpg">
+    <img src="imagesinventions/Iron Pillar.jpg" alt="Iron Pillar">
+    <div class="meta">Iron Pillar <small>Metallurgy</small></div>
+  </div>
+
+  <!-- 18 -->
+  <div class="card" tabindex="0" data-title="Zinc Smelting" data-desc="Early zinc production and distillation techniques from India." 
+  data-img="imagesinventions/Zinc Smelting.jpg">
+    <img src="imagesinventions/Zinc Smelting.jpg" alt="Zinc Smelting">
+    <div class="meta">Zinc Smelting <small>Metallurgy</small></div>
+  </div>
+
+  <!-- 19 -->
+  <div class="card" tabindex="0" data-title="Harappan Town Planning" data-desc="Sophisticated urban planning and drainage in the Indus Valley Civilization." 
+  data-img="imagesinventions/Harappan Town Planning.jpg">
+    <img src="imagesinventions/Harappan Town Planning.jpg" alt="Harappan Town Planning">
+    <div class="meta">Harappan Town Planning <small>Urbanism</small></div>
+  </div>
+
+  <!-- 20 -->
+  <div class="card" tabindex="0" data-title="Flush Toilets & Sewage" data-desc="Sanitation systems including household toilets and covered drains in Harappan cities." 
+  data-img="imagesinventions/Flush Toilets.jpg">
+    <img src="imagesinventions/Flush Toilets.jpg" alt="Flush Toilets">
+    <div class="meta">Flush Toilets <small>Sanitation</small></div>
+  </div>
+
+  <!-- 21 -->
+  <div class="card" tabindex="0" data-title="Sugar Crystallization" data-desc="Methods for producing and refining sugar developed in ancient India." 
+  data-img="imagesinventions/Sugar Refining.jpg">
+    <img src="imagesinventions/Sugar Refining.jpg" alt="Sugar Refining">
+    <div class="meta">Sugar Refining <small>Food</small></div>
+  </div>
+
+  <!-- 22 -->
+  <div class="card" tabindex="0" data-title="Diamond Mining & Cutting" data-desc="Early diamond mining and initial cutting/polishing techniques." 
+  data-img="imagesinventions/Diamond Mining.jpg">
+    <img src="imagesinventions/Diamond Mining.jpg" alt="Diamond Mining">
+    <div class="meta">Diamond Mining <small>Gems</small></div>
+  </div>
+
+  <!-- 23 -->
+  <div class="card" tabindex="0" data-title="Button (Indus)" data-desc="Decorative buttons and fasteners found in Indus Valley artefacts." 
+  data-img="imagesinventions/Button.jpg">
+    <img src="imagesinventions/Button.jpg" alt="Button">
+    <div class="meta">Button <small>Craft</small></div>
+  </div>
+
+  <!-- 24 -->
+  <div class="card" tabindex="0" data-title="Ink (Masi)" data-desc="Carbon-based inks and recipes used in ancient India for writing and painting." 
+  data-img="imagesinventions/Ink.jpg">
+    <img src="imagesinventions/Ink.jpg" alt="Ink">
+    <div class="meta">Ink (Masi) <small>Writing</small></div>
+  </div>
+
+  <!-- 25 -->
+  <div class="card" tabindex="0" data-title="Astronomical Calculations" data-desc="Contributions by Aryabhata, Brahmagupta and others to astronomy and mathematics." 
+  data-img="imagesinventions/Astronomy.jpg">
+    <img src="imagesinventions/Astronomy.jpg" alt="Astronomy">
+    <div class="meta">Astronomical Calculations <small>Astronomy</small></div>
+  </div>
+
+  <!-- 26 -->
+  <div class="card" tabindex="0" data-title="Decimal System" data-desc="Decimal place-value concepts used in Indian mathematics." 
+  data-img="imagesinventions/decimalsystem.jpg">
+    <img src="imagesinventions/decimalsystem.jpg" alt="Decimal System">
+    <div class="meta">Decimal System <small>Mathematics</small></div>
+  </div>
+
+  <!-- 27 -->
+  <div class="card" tabindex="0" data-title="Chakravala Method" data-desc="A cyclic algorithm for solving indeterminate quadratic equations." 
+  data-img="imagesinventions/Chakravala Method.jpg">
+    <img src="imagesinventions/Chakravala Method.jpg" alt="Chakravala Method">
+    <div class="meta">Chakravala Method <small>Mathematics</small></div>
+  </div>
+
+  <!-- 28 -->
+  <div class="card" tabindex="0" data-title="Binary-like Ideas (Pingala)" data-desc="Early descriptions resembling binary notation in prosody and combinatorics." 
+  data-img="imagesinventions/Pingala.jpg">
+    <img src="imagesinventions/Pingala.jpg" alt="Binary Ideas">
+    <div class="meta">Binary Ideas <small>Mathematics</small></div>
+  </div>
+
+  <!-- 29 -->
+  <div class="card" tabindex="0" data-title="Metal Casting & Lost-wax Techniques" data-desc="Advanced bronze casting and repoussé techniques used in sculpture." 
+  data-img="imagesinventions/Lost Wax Casting.jpg">
+    <img src="imagesinventions/Lost Wax Casting.jpg" alt="Lost Wax Casting">
+    <div class="meta">Lost-wax Casting <small>Sculpture</small></div>
+  </div>
+
+  <!-- 30 -->
+  <div class="card" tabindex="0" data-title="Holography / Fiber Optics Contributions" data-desc="Work by Narinder Singh Kapany and others in optics and fiber technology." 
+  data-img="imagesinventions/Fiber Optics.jpg">
+    <img src="imagesinventions/Fiber Optics.jpg" alt="Fiber Optics">
+    <div class="meta">Fiber Optics <small>Optics</small></div>
+  </div>
+
+  <!-- 31 -->
+  <div class="card" tabindex="0" data-title="Radio & Microwave Research (J.C. Bose)" data-desc="Pioneering experiments in wireless signaling and radio science." 
+  data-img="imagesinventions/J C Bose.jpg">
+    <img src="imagesinventions/J C Bose.jpg" alt="Radio Research">
+    <div class="meta">Radio Research <small>Physics</small></div>
+  </div>
+
+  <!-- 32 -->
+  <div class="card" tabindex="0" data-title="Vaccination Ideas (Early)" data-desc="Traditional inoculation-like practices and later modern contributions." 
+  data-img="imagesinventions/Vaccination Ideas.jpg">
+    <img src="imagesinventions/Vaccination Ideas.jpg" alt="Vaccination">
+    <div class="meta">Vaccination Ideas <small>Medicine</small></div>
+  </div>
+
+  <!-- 33 -->
+  <div class="card" tabindex="0" data-title="Steam & Irrigation Devices" data-desc="Early devices and engineering for water management and irrigation." 
+  data-img="imagesinventions/Steam & Irrigation Devices.jpg">
+    <img src="imagesinventions/Steam & Irrigation Devices.jpg" alt="Irrigation Devices">
+    <div class="meta">Irrigation Devices <small>Engineering</small></div>
+  </div>
+
+  <!-- 34 -->
+  <div class="card" tabindex="0" data-title="Prefabrication & Urban Planning" data-desc="Evidence of advanced planning, standardised bricks and modular urban layouts." 
+  data-img="imagesinventions/Prefabrication.jpg">
+    <img src="imagesinventions/Prefabrication.jpg" alt="Prefabrication">
+    <div class="meta">Prefabrication <small>Urbanism</small></div>
+  </div>
+
+  <!-- 35 -->
+  <div class="card" tabindex="0" data-title="Takshashila & Nalanda (Universities)" data-desc="Ancient centres of higher learning attracting students from across Asia." 
+  data-img="imagesinventions/Ancient Universities.jpg">
+    <img src="imagesinventions/Ancient Universities.jpg" alt="Ancient Universities">
+    <div class="meta">Ancient Universities <small>Education</small></div>
+  </div>
+
+  <!-- 36 -->
+  <div class="card" tabindex="0" data-title="Bhaskara’s Insights" data-desc="Mathematical and astronomical contributions from Bhaskara II and others." 
+  data-img="imagesinventions/Bhaskara’s Insights.jpg">
+    <img src="imagesinventions/Bhaskara’s Insights.jpg" alt="Bhaskara">
+    <div class="meta">Bhaskara’s Work <small>Mathematics</small></div>
+  </div>
+
+  <!-- 37 -->
+  <div class="card" tabindex="0" data-title="Algebraic Methods" data-desc="Early solutions and methods in algebra documented by Indian mathematicians." 
+  data-img="imagesinventions/Algebra.jpg">
+    <img src="imagesinventions/Algebra.jpg" alt="Algebra">
+    <div class="meta">Algebraic Methods <small>Mathematics</small></div>
+  </div>
+
+  <!-- 38 -->
+  <div class="card" tabindex="0" data-title="Calendars & Timekeeping" data-desc="Complex lunisolar calendars and astronomical timekeeping systems." 
+  data-img="imagesinventions/Calendars.jpg">
+    <img src="imagesinventions/Calendars.jpg" alt="Calendars">
+    <div class="meta">Calendars <small>Astronomy</small></div>
+  </div>
+
+  <!-- 39 -->
+  <div class="card" tabindex="0" data-title="ISRO Achievements (Chandrayaan, Mangalyaan)" data-desc="India’s space missions like Chandrayaan and Mars Orbiter have global significance." 
+  data-img="imagesinventions/ISRO.jpg">
+    <img src="imagesinventions/ISRO.jpg" alt="ISRO">
+    <div class="meta">ISRO Missions <small>Space</small></div>
+  </div>
+
+  <!-- 40 -->
+  <div class="card" tabindex="0" data-title="Portable Music Instruments" data-desc="Traditional instrument design and innovation across regions." 
+  data-img="imagesinventions/Portable Music Instruments.jpg">
+    <img src="imagesinventions/Portable Music Instruments.jpg" alt="Musical Instruments">
+    <div class="meta">Musical Instruments <small>Culture</small></div>
+  </div>
+
+  <!-- 41 -->
+  <div class="card" tabindex="0" data-title="Classical Dance Forms (Technique)" data-desc="Codified techniques and training methods for dance forms." 
+  data-img="imagesinventions/Dance..jpg">
+    <img src="imagesinventions/Dance..jpg" alt="Dance">
+    <div class="meta">Dance Techniques <small>Culture</small></div>
+  </div>
+
+  <!-- 42 -->
+  <div class="card" tabindex="0" data-title="Sanskrit Grammar (Panini)" data-desc="Panini’s Ashtadhyayi describes a formal, rule-based grammar for Sanskrit." 
+  data-img="imagesinventions/Sanskrit Grammar (Panini).jpg">
+    <img src="imagesinventions/Sanskrit Grammar (Panini).jpg" alt="Sanskrit Grammar">
+    <div class="meta">Sanskrit Grammar <small>Linguistics</small></div>
+  </div>
+
+  <!-- 43 -->
+  <div class="card" tabindex="0" data-title="Architecture: Stepwells" data-desc="Innovative stepwell designs for water storage and social spaces." 
+  data-img="imagesinventions/stepwell.jpg">
+    <img src="imagesinventions/stepwell.jpg" alt="Stepwell">
+    <div class="meta">Stepwells <small>Architecture</small></div>
+  </div>
+
+  <!-- 44 -->
+  <div class="card" tabindex="0" data-title="Architecture: Temples & Stupas" data-desc="Distinctive Indian architectural innovations in religious structures." 
+  data-img="imagesinventions/Temples & Stupas.jpg">
+    <img src="imagesinventions/Temples & Stupas.jpg" alt="Temples & Stupas">
+    <div class="meta">Temples & Stupas <small>Architecture</small></div>
+  </div>
+
+  <!-- 45 -->
+  <div class="card" tabindex="0" data-title="Fairs & Festivals Organization" data-desc="Complex calendrical and societal planning of festivals and fairs." 
+  data-img="imagesinventions/Fairs & Festivals.jpg">
+    <img src="imagesinventions/Fairs & Festivals.jpg" alt="Fairs & Festivals">
+    <div class="meta">Fairs & Festivals <small>Culture</small></div>
+  </div>
+
+  <!-- 46 -->
+  <div class="card" tabindex="0" data-title="Mathematical Instruments" data-desc="Ancient devices for calculation, astronomy, and measurement." 
+  data-img="imagesinventions/Math Instrument.jpg">
+    <img src="imagesinventions/Math Instrument.jpg" alt="Mathematical Instruments">
+    <div class="meta">Math Instruments <small>Mathematics</small></div>
+  </div>
+
+  <!-- 47 -->
+  <div class="card" tabindex="0" data-title="Water Clocks & Time Measurement" data-desc="Devices for measuring time using water flow, in temples and cities." 
+  data-img="imagesinventions/Water Clocks & Time Measurement.jpg">
+    <img src="imagesinventions/Water Clocks & Time Measurement.jpg" alt="Water Clocks">
+    <div class="meta">Water Clocks <small>Engineering</small></div>
+  </div>
+
+  <!-- 48 -->
+  <div class="card" tabindex="0" data-title="Road & Bridge Engineering" data-desc="Sophisticated road networks and stone bridge construction techniques." 
+  data-img="imagesinventions/Roads & Bridges.jpg">
+    <img src="imagesinventions/Roads & Bridges.jpg" alt="Roads & Bridges">
+    <div class="meta">Road & Bridge Engineering <small>Engineering</small></div>
+  </div>
+
+  <!-- 49 -->
+  <div class="card" tabindex="0" data-title="Maritime Navigation & Shipbuilding" data-desc="Ancient ports, shipbuilding, and navigation techniques." 
+  data-img="imagesinventions/Shipbuilding.jpg">
+    <img src="imagesinventions/Shipbuilding.jpg" alt="Shipbuilding">
+    <div class="meta">Shipbuilding <small>Maritime</small></div>
+  </div>
+
+  <!-- 50 -->
+  <div class="card" tabindex="0" data-title="Cricket Origins" data-desc="Some early bat-and-ball games in India influenced modern cricket." 
+  data-img="imagesinventions/Cricket.jpg">
+    <img src="imagesinventions/Cricket.jpg" alt="Cricket">
+    <div class="meta">Cricket Origins <small>Sports</small></div>
+  </div>
+
+  <!-- 51 -->
+  <div class="card" tabindex="0" data-title="Sports Equipment (Early)" data-desc="Bows, arrows, chariots, and other traditional sports equipment." 
+  data-img="imagesinventions/Sports Equipment (Early).jpg">
+    <img src="imagesinventions/Sports Equipment (Early).jpg" alt="Sports Equipment">
+    <div class="meta">Sports Equipment <small>Sports</small></div>
+  </div>
+
+  <!-- 52 -->
+  <div class="card" tabindex="0" data-title="Textiles: Silk & Weaving Techniques" data-desc="Ancient silk weaving, embroidery, and textile innovations."
+  data-img="imagesinventions/TextilesSilk and Weaving Techniques.jpg">
+    <img src="imagesinventions/TextilesSilk and Weaving Techniques.jpg" alt="Silk Weaving">
+    <div class="meta">Silk & Weaving <small>Textiles</small></div>
+  </div>
+
+  <!-- 53 -->
+  <div class="card" tabindex="0" data-title="Mathematical Proof Techniques" data-desc="Systematic logical proofs for mathematical results." 
+  data-img="imagesinventions/Proof Techniques.jpg">
+    <img src="imagesinventions/Proof Techniques.jpg" alt="Mathematical Proof">
+    <div class="meta">Proof Techniques <small>Mathematics</small></div>
+  </div>
+
+  <!-- 54 -->
+  <div class="card" tabindex="0" data-title="Calendrical Astrology & Astronomy" data-desc="Complex astrological and astronomical calculations." 
+  data-img="imagesinventions/Calendrical Astrology & Astronomy.jpg">
+    <img src="imagesinventions/Calendrical Astrology & Astronomy.jpg" alt="Astrology">
+    <div class="meta">Calendrical Astrology <small>Astronomy</small></div>
+  </div>
+
+  <!-- 55 -->
+  <div class="card" tabindex="0" data-title="Scientific Literature & Texts" data-desc="Extensive treatises covering medicine, mathematics, astronomy, and more." 
+  data-img="imagesinventions/Scientific Texts.jpg">
+    <img src="imagesinventions/Scientific Texts.jpg" alt="Scientific Texts">
+    <div class="meta">Scientific Texts <small>Literature</small></div>
+  </div>
+
+  <!-- 56 -->
+  <div class="card" tabindex="0" data-title="Ayurvedic Surgery Instruments" data-desc="Metal and stone instruments designed for surgery and procedures." 
+  data-img="imagesinventions/Ayurvedic Surgery Instruments.jpg">
+    <img src="imagesinventions/Ayurvedic Surgery Instruments.jpg" alt="Ayurvedic Surgery Instruments">
+    <div class="meta">Surgery Instruments <small>Medicine</small></div>
+  </div>
+
+  <!-- 57 -->
+  <div class="card" tabindex="0" data-title="Ancient Metallurgical Recipes" data-desc="Instructions for producing alloys and metalwork documented in texts." 
+  data-img="imagesinventions/Metallurgical Recipes.jpg">
+    <img src="imagesinventions/Metallurgical Recipes.jpg" alt="Metallurgical Recipes">
+    <div class="meta">Metallurgical Recipes <small>Metallurgy</small></div>
+  </div>
+
+  <!-- 58 -->
+  <div class="card" tabindex="0" data-title="Mathematical Instruments: Astrolabe & Yantra" data-desc="Used for astronomical calculations and observations." 
+  data-img="imagesinventions/astrolabe.jpg">
+    <img src="imagesinventions/astrolabe.jpg" alt="Astrolabe">
+    <div class="meta">Astrolabe & Yantra <small>Astronomy</small></div>
+  </div>
+
+  <!-- 59 -->
+  <div class="card" tabindex="0" data-title="Gunpowder & Fireworks Contributions" data-desc="Some chemical and pyrotechnic knowledge documented historically." 
+  data-img="imagesinventions/fireworks.jpg">
+    <img src="imagesinventions/fireworks.jpg" alt="Fireworks">
+    <div class="meta">Gunpowder & Fireworks <small>Chemistry</small></div>
+  </div>
+
+  <!-- 60 -->
+  <div class="card" tabindex="0" data-title="Water Management Systems" data-desc="Canals, dams, and reservoirs developed for irrigation and urban use." 
+  data-img="imagesinventions/Water Management Systems.jpg">
+    <img src="imagesinventions/Water Management Systems.jpg" alt="Water Management">
+    <div class="meta">Water Management <small>Engineering</small></div>
+  </div>
+
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="modal-close">&times;</button>
+    <img id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <h2 id="modalTitle">Title</h2>
+      <p id="modalDesc">Description</p>
+    </div>
+  </div>
+</div>
+
+   <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const artsDropdown=document.getElementById('artsDropdown');
+  const artsBtn=artsDropdown?.querySelector('.drop');
+  const artsMenu=artsDropdown?.querySelector('.menu');
+  if(artsBtn && artsMenu){
+    artsBtn.addEventListener('click',e=>{e.stopPropagation(); artsMenu.style.display=(artsMenu.style.display==='block')?'none':'block';});
+    window.addEventListener('click',()=>{artsMenu.style.display='none';});
+  }
+
+  const grid=document.getElementById('monumentsGrid');
+  const modal=document.getElementById('modal');
+  const modalImg=document.getElementById('modalImg');
+  const modalTitle=document.getElementById('modalTitle');
+  const modalDesc=document.getElementById('modalDesc');
+  const modalClose=modal.querySelector('.modal-close');
+
+  function openModal({img,title,desc,fallback}){modalImg.src=img||fallback||'';modalImg.alt=title||'';modalTitle.textContent=title||'';modalDesc.textContent=desc||'';modal.classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){modal.classList.remove('open');modalImg.src='';document.body.style.overflow='';}
+
+  grid.addEventListener('click',e=>{const card=e.target.closest('.card');if(!card)return;openModal({img:card.dataset.img,title:card.dataset.title,desc:card.dataset.desc,fallback:card.querySelector('img')?.src});});
+  grid.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const card=e.target.closest('.card');if(!card)return;e.preventDefault();openModal({img:card.dataset.img,title:card.dataset.title,desc:card.dataset.desc,fallback:card.querySelector('img')?.src});}});
+  modalClose.addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal();});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Architecture | My Bharat</title>
+  <!-- Inline styles (self-contained file as requested) -->
+  <style>
+    :root{
+      --deep-maroon:#4a1a0a;
+      --gold:#d9a441;
+      --light-bg:#fff9f0;
+      --card:#fff8f2;
+      --muted:#5a3f34;
+      --shadow: 0 8px 24px rgba(0,0,0,0.12);
+      --radius:12px;
+      --maxw:1200px;
+      --font: "Poppins", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:var(--font);background:linear-gradient(180deg,#fffaf4 0%, #fff8f0 100%);color:var(--muted);-webkit-font-smoothing:antialiased}
+
+    /* ===== HEADER ===== */
+    header{
+      background: linear-gradient(90deg,var(--deep-maroon),#5c2e07);
+      padding:10px 20px;
+      position:sticky; top:0; z-index:1200;
+      box-shadow:0 4px 14px rgba(0,0,0,0.22);
+    }
+    .nav-wrapper{
+      max-width:var(--maxw);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:space-between;
+    }
+    /* Logo first */
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .logo img{
+      width:52px;height:52px;border-radius:8px;border:2px solid var(--gold);background:#fff;padding:3px;display:block;
+      box-shadow:0 4px 10px rgba(0,0,0,0.12);
+    }
+    .logo .brand{
+      color:var(--gold);
+      font-weight:800;
+      font-size:1.25rem;
+      letter-spacing:0.3px;
+    }
+
+    /* nav */
+    nav{display:flex;align-items:center;gap:14px;flex:1;justify-content:flex-end}
+    nav a, nav button.drop{
+      color:#fff;
+      text-decoration:none;
+      background:transparent;
+      border:none;
+      padding:8px 10px;
+      border-radius:8px;
+      font-weight:600;
+      cursor:pointer;
+      font-size:0.95rem;
+    }
+    nav a:hover, nav button.drop:hover{ color:var(--gold); background: rgba(245,197,66,0.12) }
+
+    /* dropdown style (same style as Music page) */
+    .dropdown{ position:relative }
+    .dropdown .menu{
+      display:none;
+      position:absolute;
+      top:110%;
+      left:0;
+      background:var(--card);
+      box-shadow:var(--shadow);
+      border-radius:10px;
+      overflow:hidden;
+      min-width:190px;
+      z-index:1400;
+    }
+    .dropdown .menu a{
+      display:block;
+      padding:10px 12px;
+      color:var(--deep-maroon);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .dropdown .menu a:hover{ background:var(--gold); color:var(--deep-maroon) }
+
+    /* hero box */
+    .hero {
+      max-width:var(--maxw);
+      margin:20px auto 14px;
+      padding:22px;
+      background:linear-gradient(180deg,#fff8ec,#fff2e0);
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      border:2px solid rgba(217,164,65,0.12);
+      text-align:center;
+    }
+    .hero h1{ margin:0 0 8px; font-family:"Merriweather",serif; color:var(--deep-maroon); font-size:1.6rem }
+    .hero p{ margin:0;color:#4b3226;line-height:1.6; max-width:960px; margin-left:auto;margin-right:auto }
+
+    /* grid */
+    .grid-wrap{ max-width:var(--maxw); margin:18px auto 60px; padding:0 18px }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      transition:transform .18s, box-shadow .18s;
+      border:3px solid rgba(217,164,65,0.10);
+      display:flex;
+      flex-direction:column;
+    }
+    .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.16) }
+    .card img{ width:100%; height:150px; object-fit:cover; display:block; border-bottom:4px solid #ecd09a }
+    .card .meta{ padding:12px; text-align:center; background:linear-gradient(90deg,var(--deep-maroon),var(--gold)); color:#fff; font-weight:700 }
+    .card .meta small{ display:block; font-weight:600; font-size:.9rem; opacity:0.95; margin-top:6px; background:transparent }
+
+    /* modal */
+    .modal{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background:rgba(0,0,0,0.6); z-index:2000; padding:20px;
+    }
+    .modal.open{ display:flex }
+    .modal-box{
+      width:100%; max-width:980px; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 26px 60px rgba(0,0,0,0.55); position:relative;
+    }
+    .modal-box img{ width:100%; max-height:460px; object-fit:cover; display:block }
+    .modal-body{ padding:18px 20px; color:#3f2f25 }
+    .modal-body h2{ margin:0 0 8px; color:var(--deep-maroon); font-size:1.3rem }
+    .modal-body p{ margin:8px 0; line-height:1.6 }
+    .modal-close{
+      position:absolute; top:12px; right:12px; width:40px; height:40px; border-radius:50%; border:none; background:rgba(255,255,255,0.95);
+      cursor:pointer; font-size:1.3rem; box-shadow:0 6px 12px rgba(0,0,0,0.12)
+    }
+    .modal-close:hover{ background:var(--gold); color:var(--deep-maroon) }
+
+    footer{ text-align:center;padding:18px 8px;background:linear-gradient(90deg,var(--deep-maroon),#5c2e07); color:#fff; margin-top:28px }
+    /* responsive tweaks */
+    @media (max-width:720px){
+      .card img{ height:140px }
+      .hero h1{ font-size:1.3rem }
+      nav{ gap:8px }
+      .nav-wrapper{ padding:0 8px }
+      .dropdown .menu{ left:auto; right:0; min-width:160px }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="archHeading">
+    <h1 id="archHeading">Architecture of India — Monuments & Masterpieces</h1>
+    <p>Explore 30 iconic monuments from across the subcontinent. Click any tile or image to open a popup with an image and a short description. Replace the placeholder image filenames with your images when you're ready.</p>
+  </section>
+
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="grid" id="monumentsGrid" aria-live="polite">
+      <!-- 30 monument cards (image filepaths are placeholders; update to your images) -->
+      <div class="card" tabindex="0"
+           data-title="Taj Mahal"
+           data-desc="Agra's white marble mausoleum — Shah Jahan’s timeless symbol of love."
+           data-img="imagesarchitecture/tajmahal.jpeg">
+        <img src="imagesarchitecture/tajmahal.jpeg" alt="Taj Mahal">
+        <div class="meta">Taj Mahal <small>Agra, Uttar Pradesh</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Qutub Minar"
+           data-desc="A soaring victory tower and a UNESCO site, built in the early Delhi Sultanate period."
+           data-img="imagesarchitecture/qutubminar.jpg">
+        <img src="imagesarchitecture/qutubminar.jpg" alt="Qutub Minar">
+        <div class="meta">Qutub Minar <small>Delhi</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Red Fort"
+           data-desc="A Mughal fort complex that was the ceremonial and political centre of Mughal government."
+           data-img="imagesarchitecture/redfort.jpg">
+        <img src="imagesarchitecture/redfort.jpg" alt="red Fort" >
+        <div class="meta">Red Fort <small>Delhi</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Charminar"
+           data-desc="Iconic 16th-century monument at the heart of Hyderabad's old city."
+           data-img="imagesarchitecture/charminar.jpg">
+        <img src="imagesarchitecture/charminar.jpg" alt="Charminar">
+        <div class="meta">Charminar <small>Hyderabad</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Hampi (Vijayanagara)"
+           data-desc="Ruins of a once-powerful South Indian empire; spectacular stone temples & bazaars."
+           data-img="imagesarchitecture/hampi.jpg">
+        <img src="imagesarchitecture/hampi.jpg" alt="Hampi ruins">
+        <div class="meta">Hampi <small>Karnataka</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Konark Sun Temple"
+           data-desc="13th-century temple carved like a massive chariot — a UNESCO masterpiece."
+           data-img="imagesarchitecture/konark.jpg">
+        <img src="imagesarchitecture/konark.jpg" alt="Konark Sun Temple">
+        <div class="meta">Konark Sun Temple <small>Odisha</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Ajanta Caves"
+           data-desc="Buddhist rock-cut caves renowned for their murals and sculptures."
+           data-img="imagesarchitecture/ajanta.jpg">
+        <img src="imagesarchitecture/ajanta.jpg" alt="Ajanta Caves">
+        <div class="meta">Ajanta Caves <small>Maharashtra</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Ellora Caves"
+           data-desc="A unique complex of Buddhist, Hindu and Jain caves carved from the rock face."
+           data-img="imagesarchitecture/ellora.jpg">
+        <img src="imagesarchitecture/ellora.jpg" alt="Ellora Caves">
+        <div class="meta">Ellora Caves <small>Maharashtra</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Mysore Palace"
+           data-desc="A splendid example of Indo-Saracenic architecture and royal heritage."
+           data-img="imagesarchitecture/mysore.jpg">
+        <img src="imagesarchitecture/mysore.jpg" alt="Mysore Palace">
+        <div class="meta">Mysore Palace <small>Karnataka</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="City Palace (Udaipur)"
+           data-desc="A romantic lakeside palace complex blending Rajput & Mughal styles."
+           data-img="imagesarchitecture/citypalace.jpg">
+        <img src="imagesarchitecture/citypalace.jpg" alt="Udaipur City Palace">
+        <div class="meta">City Palace <small>Udaipur, Rajasthan</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Humayun's Tomb"
+           data-desc="Early Mughal garden-tomb that inspired later Mughal architecture."
+           data-img="imagesarchitecture/humayuns tomb.jpg">
+        <img src="imagesarchitecture/humayuns tomb.jpg" alt="Humayun's Tomb">
+        <div class="meta">Humayun's Tomb <small>Delhi</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Gateway of India"
+           data-desc="An imposing ceremonial arch built during the British era, overlooking Mumbai harbour."
+           data-img="imagesarchitecture/gate way of india.jpg">
+        <img src="imagesarchitecture/gate way of india.jpg" alt="Gateway of India">
+        <div class="meta">Gateway of India <small>Mumbai</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Sanchi Stupa"
+           data-desc="Ancient Buddhist stupa complex and an early example of stone architecture."
+           data-img="imagesarchitecture/sanchistupa.jpg">
+        <img src="imagesarchitecture/sanchistupa.jpg" alt="Sanchi Stupa">
+        <div class="meta">Sanchi Stupa <small>Madhya Pradesh</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Meenakshi Temple"
+           data-desc="A towering, colourful Dravidian temple famous for its sculpted gopurams."
+           data-img="imagesarchitecture/madurai.jpg">
+        <img src="imagesarchitecture/madurai.jpg" alt="Meenakshi Temple">
+        <div class="meta">Meenakshi Temple <small>Madurai, Tamil Nadu</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Khajuraho"
+           data-desc="Temples famous for intricate sculpture and erotic art — a UNESCO site."
+           data-img="imagesarchitecture/khajuraho.jpg">
+        <img src="imagesarchitecture/khajuraho.jpg" alt="Khajuraho temples">
+        <div class="meta">Khajuraho <small>Madhya Pradesh</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Fatehpur Sikri"
+           data-desc="A planned Mughal capital with outstanding palaces and mosques."
+           data-img="imagesarchitecture/fatepur.jpg">
+        <img src="imagesarchitecture/fatepur.jpg" alt="Fatehpur Sikri">
+        <div class="meta">Fatehpur Sikri <small>Uttar Pradesh</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Golden Temple"
+           data-desc="The Harmandir Sahib — Sikhism’s holiest shrine, gilded and serene."
+           data-img="imagesarchitecture/golden templr.jpg">
+        <img src="imagesarchitecture/golden templr.jpg" alt="Golden Temple">
+        <div class="meta">Golden Temple <small>Amritsar, Punjab</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Victoria Memorial"
+           data-desc="A colonial-era white marble monument commemorating the British period in Kolkata."
+           data-img="imagesarchitecture/victoria.jpg">
+        <img src="imagesarchitecture/victoria.jpg" alt="Victoria Memorial">
+        <div class="meta">Victoria Memorial <small>Kolkata</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Jaisalmer Fort"
+           data-desc="A living fort of sandstone rising from the Thar Desert — houses and havelis inside."
+           data-img="imagesarchitecture/jaisalmir.jpg">
+        <img src="imagesarchitecture/jaisalmir.jpg" alt="Jaisalmer Fort">
+        <div class="meta">Jaisalmer Fort <small>Rajasthan</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Mehrangarh Fort"
+           data-desc="A massive hill fort with sweeping views and elaborate palaces in Jodhpur."
+           data-img="imagesarchitecture/mehrangarh-Fort-Jodhpur.jpg">
+        <img src="imagesarchitecture/mehrangarh-Fort-Jodhpur.jpg" alt="Mehrangarh Fort">
+        <div class="meta">Mehrangarh Fort <small>Jodhpur</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Golconda Fort"
+           data-desc="A grand fortress with acoustics, gates and diamond-trading history."
+           data-img="imagesarchitecture/golconda.jpg">
+        <img src="imagesarchitecture/golconda.jpg" alt="Golconda Fort">
+        <div class="meta">Golconda Fort <small>Hyderabad</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Ramappa Temple"
+           data-desc="Medieval temple in Telangana noted for its ornate carvings and floating bricks."
+           data-img="imagesarchitecture/ramappa.jpg">
+        <img src="imagesarchitecture/ramappa.jpg" alt="Ramappa Temple">
+        <div class="meta">Ramappa Temple <small>Telangana</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Lotus Temple"
+           data-desc="Modern Bahá'í house of worship shaped like a lotus — serene and symbolic."
+           data-img="imagesarchitecture/lotus.jpg">
+        <img src="imagesarchitecture/lotus.jpg" alt="Lotus Temple">
+        <div class="meta">Lotus Temple <small>Delhi</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="India Gate"
+           data-desc="National war memorial and landmark of central Delhi."
+           data-img="imagesarchitecture/india-gate.jpg">
+        <img src="imagesarchitecture/india-gate.jpg" alt="India Gate">
+        <div class="meta">India Gate <small>Delhi</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Nalanda Ruins"
+           data-desc="Remains of an ancient great university and Buddhist learning centre."
+           data-img="imagesarchitecture/nalanda-university-ruins.jpg">
+        <img src="imagesarchitecture/nalanda-university-ruins.jpg" alt="Nalanda ruins">
+        <div class="meta">Nalanda Ruins <small>Bihar</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Rani ki Vav"
+           data-desc="An intricately carved stepwell — UNESCO-listed subterranean architecture."
+           data-img="imagesarchitecture/rani ki vav.jpg">
+        <img src="imagesarchitecture/rani ki vav.jpg" alt="Rani ki Vav">
+        <div class="meta">Rani ki Vav <small>Gujarat</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Cellular Jail"
+           data-desc="A colonial prison, historically significant and architecturally austere."
+           data-img="imagesarchitecture/cellular.jpg">
+        <img src="imagesarchitecture/cellular.jpg" alt="Cellular Jail">
+        <div class="meta">Cellular Jail <small>Andaman & Nicobar</small></div>
+      </div>
+
+      <div class="card" tabindex="0"
+           data-title="Rock Cut Temples (Badami)"
+           data-desc="Early medieval rock-cut architecture of the Deccan illustrating sculpture & temple craft."
+           data-img="imagesarchitecture/badami-cave-temples.jpg">
+        <img src="imagesarchitecture/badami-cave-temples.jpg" alt="Badami caves">
+        <div class="meta">Badami Rock Temples <small>Karnataka</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-box" role="document">
+      <button class="modal-close" aria-label="Close popup">&times;</button>
+      <img id="modalImg" src="" alt="">
+      <div class="modal-body">
+        <h2 id="modalTitle">Title</h2>
+        <p id="modalDesc">Description</p>
+      </div>
+    </div>
+  </div>
+
+ <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+  <!-- Inline JS (self-contained) -->
+  <script>
+    (function(){
+      // Dropdown behaviour (click to toggle, accessible)
+      const artsDropdown = document.getElementById('artsDropdown');
+      const artsBtn = artsDropdown?.querySelector('.drop');
+      const artsMenu = artsDropdown?.querySelector('.menu');
+
+      if(artsBtn && artsMenu){
+        artsBtn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const open = artsMenu.style.display === 'block';
+          artsMenu.style.display = open ? 'none' : 'block';
+          artsBtn.setAttribute('aria-expanded', String(!open));
+          artsMenu.setAttribute('aria-hidden', String(open));
+        });
+        // close on outside click
+        window.addEventListener('click', ()=> {
+          artsMenu.style.display = 'none';
+          artsBtn.setAttribute('aria-expanded', 'false');
+          artsMenu.setAttribute('aria-hidden', 'true');
+        });
+        // keyboard accessibility: Esc closes menu
+        window.addEventListener('keydown', (e)=> {
+          if(e.key === 'Escape'){
+            artsMenu.style.display = 'none';
+            artsBtn.setAttribute('aria-expanded', 'false');
+            artsMenu.setAttribute('aria-hidden', 'true');
+          }
+        });
+        // prevent closing when clicking inside menu
+        artsMenu.addEventListener('click', (e)=> e.stopPropagation());
+      }
+
+      // Modal logic for grid tiles and images
+      const grid = document.getElementById('monumentsGrid');
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalClose = modal.querySelector('.modal-close');
+
+      function openModal({img, title, desc, fallback}) {
+        const src = (img && img.trim() !== '') ? img : (fallback || '');
+        modalImg.src = src;
+        modalImg.alt = title || '';
+        modalTitle.textContent = title || '';
+        modalDesc.textContent = desc || '';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        modalClose.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      // Attach click & keyboard handlers to cards (delegation)
+      grid.addEventListener('click', (e)=>{
+        const card = e.target.closest('.card');
+        if(!card) return;
+        const imgAttr = card.dataset.img || '';
+        const title = card.dataset.title || '';
+        const desc = card.dataset.desc || '';
+        const fallback = card.querySelector('img') ? card.querySelector('img').src : '';
+        openModal({img: imgAttr, title, desc, fallback});
+      });
+
+      // Make keyboard Enter/Space open (delegated)
+      grid.addEventListener('keydown', (e)=>{
+        if(e.key === 'Enter' || e.key === ' '){
+          const card = e.target.closest('.card');
+          if(!card) return;
+          e.preventDefault();
+          const imgAttr = card.dataset.img || '';
+          const title = card.dataset.title || '';
+          const desc = card.dataset.desc || '';
+          const fallback = card.querySelector('img') ? card.querySelector('img').src : '';
+          openModal({img: imgAttr, title, desc, fallback});
+        }
+      });
+
+      // Close handlers
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal) closeModal();
+      });
+      window.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      // Ensure images inside each card also behave (they'll delegate to the card click)
+      // No extra code required because of delegation above.
+
+      // Small accessibility enhancement: make cards focusable
+      document.querySelectorAll('.card').forEach(c => {
+        if(!c.hasAttribute('tabindex')) c.setAttribute('tabindex','0');
+      });
+
+    })();
+  </script>
+</body>
+</html>

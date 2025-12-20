@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Indian Facts | My Bharat</title>
+
+  <style>
+    :root{
+      --bg: #faf7f2;
+      --card: #fffaf0;
+      --accent: #d9a441;
+      --brand: #2b0a06;
+      --muted: #6a4936;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 10px 30px rgba(15,10,7,0.04);
+      --radius: 12px;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
+
+    /* HEADER (keep your header style) */
+    header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 22px;
+      background:linear-gradient(90deg,var(--brand),#5c2e07);
+      color:var(--accent);
+    }
+    header .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    header .brand img{width:48px;height:32px;object-fit:cover;border-radius:4px}
+    header nav{margin-left:auto}
+    header nav a{color:#fff;text-decoration:none;margin-left:14px;font-weight:500}
+    header nav a:hover{color:var(--accent)}
+
+    /* PAGE LAYOUT */
+    main{max-width:1200px;margin:28px auto;padding:18px}
+    .hero{
+      display:flex;gap:18px;align-items:center;
+      background: linear-gradient(180deg, rgba(217,164,65,0.07), transparent 60%);
+      padding:18px;border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero img{width:110px;height:70px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .hero h1{margin:0;font-size:1.6rem}
+    .hero p{margin:6px 0 0;color:var(--muted)}
+
+    /* Controls (search + filters + counters) */
+    .controls-bar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin:18px 0;
+      flex-wrap:wrap;
+    }
+    .search {
+      flex:1 1 320px;
+      display:flex;align-items:center;gap:8px;
+      background:var(--card);padding:8px;border-radius:10px;border:1px solid rgba(0,0,0,0.03);
+    }
+    .search input{
+      border:0;background:transparent;outline:none;font-size:1rem;padding:8px;width:100%;
+    }
+    .filters{
+      display:flex;gap:8px;flex-wrap:wrap;
+    }
+    .filter-btn{
+      background:var(--card);border-radius:10px;padding:8px 10px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;
+    }
+    .filter-btn.active{box-shadow:0 6px 18px rgba(0,0,0,0.06);border-color:var(--accent);background:linear-gradient(180deg,var(--card),#fff8e8)}
+
+    .counters{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .counter{
+      background:var(--card);padding:10px 14px;border-radius:10px;min-width:140px;text-align:center;border:1px solid rgba(0,0,0,0.03)
+    }
+    .counter strong{display:block;font-size:1.35rem;color:var(--brand)}
+    .counter small{color:var(--muted)}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:10px}
+    .card{
+      background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.03);
+      transform: translateY(0); transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 14px 34px rgba(0,0,0,0.08)}
+    .card h3{margin:0 0 8px;color:var(--brand);display:flex;gap:8px;align-items:center}
+    .card p{margin:0;color:var(--muted)}
+    .card .img-wrap{margin-top:10px;border-radius:10px;overflow:hidden}
+    .card img{width:100%;height:140px;object-fit:cover;display:block}
+
+    /* top records card special styling */
+    .top-records li{margin-bottom:8px}
+
+    /* small text */
+    .muted{color:var(--muted);font-size:0.95rem}
+
+    /* animations */
+    .fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .5s ease forwards}
+    @keyframes fadeUp {to {opacity:1;transform:translateY(0)}}
+
+    /* responsive tweaks */
+    @media (max-width:520px){
+      .hero{flex-direction:column;align-items:flex-start}
+      header nav{margin-left:0}
+      .counters{justify-content:flex-start}
+    }
+    /* ===== COLLAGE GALLERY ===== */
+.facts-collage {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.facts-collage h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #222;
+  font-weight: 700;
+}
+
+.collage-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.collage-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 32%;
+}
+
+.collage-column img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.collage-column img:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile-friendly */
+@media (max-width: 768px) {
+  .collage-container {
+    flex-direction: column;
+  }
+
+  .collage-column {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="hero fade-up" aria-labelledby="hero-title">
+      <img src="imagesothers/indianflag.png" alt="Indian Flag">
+      <div>
+        <h1 id="hero-title">Indian Facts — Quick & Fascinating</h1>
+        <p class="muted">Curated facts grouped by Geography, Culture, Economy, Records and Defence. Use the search or filters to find facts quickly.</p>
+      </div>
+    </section>
+
+    <!-- controls -->
+    <div class="controls-bar fade-up" role="region" aria-label="controls">
+      <div class="search" title="Search facts">
+        🔍 <input id="search" type="search" placeholder="Search facts (e.g. 'river', 'stadium', 'GDP')">
+      </div>
+
+      <div class="filters" role="tablist" aria-label="category filters">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="geography">Geography</button>
+        <button class="filter-btn" data-cat="culture">Culture</button>
+        <button class="filter-btn" data-cat="economy">Economy</button>
+        <button class="filter-btn" data-cat="records">Records</button>
+        <button class="filter-btn" data-cat="defence">Defence</button>
+      </div>
+
+      <div style="flex:0 0 10px"></div>
+
+      <div class="counters" aria-hidden="false">
+        <div class="counter" title="Estimated population">
+          <small>Population (approx.)</small>
+          <strong data-target="1400000000" id="counter-pop">0</strong>
+        </div>
+        <div class="counter" title="GDP rank">
+          <small>GDP Rank</small>
+          <strong data-target="5" id="counter-gdp">0</strong>
+        </div>
+        <div class="counter" title="Active military strength">
+          <small>Armed Forces (active)</small>
+          <strong data-target="1400000" id="counter-army">0</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID OF FACTS -->
+    <section class="grid" id="factsGrid" aria-live="polite">
+
+      <!-- Geography cards -->
+      <article class="card fade-up" data-categories="geography" data-tags="largest, state, area">
+        <h3>🗺️ Largest State — Rajasthan</h3>
+        <p class="muted">Rajasthan is the largest Indian state by area. It includes the Thar Desert.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="geography" data-tags="smallest, state, area">
+        <h3>📍 Smallest State — Goa</h3>
+        <p class="muted">Goa is the smallest Indian state by area, famous for its coastlines and heritage.</p>
+        
+      </article>
+
+      <article class="card fade-up" data-categories="geography" data-tags="river,longest">
+        <h3>🏞️ Longest River — Ganga</h3>
+        <p class="muted">The Ganga (Ganges) is considered the longest and most sacred river system in India.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="geography" data-tags="highest,peak">
+        <h3>⛰️ Highest Peak — Kangchenjunga</h3>
+        <p class="muted">Kangchenjunga (8,586 m) on the India-Nepal border is India's highest peak.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="geography" data-tags="desert">
+        <h3>🏜️ Largest Desert — Thar</h3>
+        <p class="muted">The Thar Desert, mostly in Rajasthan, is India’s largest desert region.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="geography" data-tags="coastline">
+        <h3>🌊 Longest Coastline State — Gujarat</h3>
+        <p class="muted">Gujarat has one of the longest coastlines in India and hosts many ports.</p>
+      </article>
+
+      <!-- Culture -->
+      <article class="card fade-up" data-categories="culture" data-tags="language,oldest">
+        <h3>🗣️ Oldest Language — Tamil</h3>
+        <p class="muted">Tamil is one of the world's oldest literary languages still in use today.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="culture" data-tags="dance,arts">
+        <h3>💃 Oldest Classical Dance — Bharatanatyam</h3>
+        <p class="muted">Bharatanatyam from Tamil Nadu is among the oldest classical dances in India.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="culture" data-tags="festival,kumbh">
+        <h3>🕉️ Largest Religious Gathering — Kumbh Mela</h3>
+        <p class="muted">Kumbh Mela is the world’s largest human gathering, held periodically at sacred rivers.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="culture" data-tags="food,spices">
+        <h3>🍛 Largest Producer of Spices</h3>
+        <p class="muted">India is the world’s largest producer and exporter of many spices — cardamom, pepper, turmeric and more.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="culture" data-tags="yoga,origin">
+        <h3>🧘 Origin of Yoga</h3>
+        <p class="muted">Yoga originated in ancient India over 5,000 years ago and is practiced globally.</p>
+      </article>
+
+      <!-- Economy -->
+      <article class="card fade-up" data-categories="economy" data-tags="currency,gdp">
+        <h3>💱 Currency — Indian Rupee (INR)</h3>
+        <p class="muted">The Indian Rupee (₹) is the official currency. India is among the top 5 global economies by nominal GDP.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="economy" data-tags="gdp,rank">
+        <h3>📈 GDP Rank — Top 5</h3>
+        <p class="muted">India ranks among the world’s top 5 economies (by nominal GDP).</p>
+      </article>
+
+      <article class="card fade-up" data-categories="economy" data-tags="railways,network">
+        <h3>🚆 One of the Largest Railway Networks</h3>
+        <p class="muted">Indian Railways operates one of the world’s largest rail networks by size and ridership.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="economy" data-tags="milk,producer">
+        <h3>🥛 Largest Milk Producer</h3>
+        <p class="muted">India is the world’s largest milk producer, thanks to cooperative dairy models like Amul.</p>
+      </article>
+
+      <!-- Records -->
+      <article class="card fade-up" data-categories="records" data-tags="train,fast">
+        <h3>🚄 Fastest Train — Vande Bharat</h3>
+        <p class="muted">Vande Bharat Express is India’s indigenously-built semi-high-speed train set.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="records" data-tags="bridge,longest">
+        <h3>🌉 Longest Rail-cum-Road Bridge — Bogibeel</h3>
+        <p class="muted">Bogibeel Bridge (Assam) is one of India’s longest rail-cum-road bridges.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="records" data-tags="stadium,largest">
+        <h3>🏟️ Largest Stadium — Narendra Modi Stadium</h3>
+        <p class="muted">Located in Ahmedabad, it is the world’s largest cricket stadium by capacity.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="records" data-tags="airport,largest">
+        <h3>✈️ Busiest Airport (by traffic) — IGI Delhi</h3>
+        <p class="muted">Indira Gandhi International Airport (Delhi) handles the most passenger traffic in India.</p>
+      </article>
+
+      <!-- Defence -->
+      <article class="card fade-up" data-categories="defence" data-tags="army,strength">
+        <h3>🪖 Armed Forces — Among Top 4</h3>
+        <p class="muted">India has one of the largest armed forces in the world in terms of active personnel and capabilities.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="defence" data-tags="space,isro">
+        <h3>🚀 Space Achievements — ISRO</h3>
+        <p class="muted">ISRO reached Mars on its first attempt (Mangalyaan) and set records for satellite launches.</p>
+      </article>
+
+      <article class="card fade-up" data-categories="defence" data-tags="civil_award">
+        <h3>🏅 Highest Civilian Award — Bharat Ratna</h3>
+        <p class="muted">Bharat Ratna is India’s highest civilian honour, awarded for exceptional service in any field.</p>
+      </article>
+
+      <!-- TOP 10 RECORDS (special wide card) -->
+      <article class="card fade-up" data-categories="records" style="grid-column: 1 / -1;">
+        <h3>🏆 Top 10 India Records</h3>
+        <ul class="top-records muted">
+          <li>Largest democracy in the world (voter base).</li>
+          <li>First nation to reach Mars on first attempt (Mangalyaan).</li>
+          <li>World’s largest film industry by production (Bollywood & regional films).</li>
+          <li>World’s largest dairy producer.</li>
+          <li>Largest collection of languages and dialects in one country.</li>
+          <li>Hosts the Kumbh Mela — largest human gathering.</li>
+          <li>Home to the world’s largest cricket stadium.</li>
+          <li>Record satellite launch missions by a single country’s space agency (ISRO achievements).</li>
+          <li>Extensive railway network — one of the world’s largest.</li>
+          <li>Major producer of spices and textiles globally.</li>
+        </ul>
+      </article>
+<!-- ===== IMAGE COLLAGE GALLERY ===== -->
+<section class="facts-collage">
+  <h2>India in Pictures</h2>
+
+  <div class="collage-container">
+
+    <div class="collage-column">
+      <img src="imagesothers/img1.jpeg" alt="India 1">
+      <img src="imagesothers/img2.jpeg" alt="India 4">
+      <img src="imagesothers/img3.jpeg" alt="India 7">
+    </div>
+
+    <div class="collage-column">
+      <img src="imagesothers/img4.jpeg" alt="India 2">
+      <img src="imagesothers/img5.jpeg" alt="India 5">
+      <img src="imagesothers/img6.jpeg" alt="India 8">
+    </div>
+
+    <div class="collage-column">
+      <img src="imagesothers/img7.jpeg" alt="India 3">
+      <img src="imagesothers/img8.jpeg" alt="India 6">
+      <img src="imagesothers/img9.jpeg" alt="India 9">
+    </div>
+
+  </div>
+</section>
+
+    </section>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+
+  <script>
+    // ---------- SEARCH & FILTER ----------
+    (function(){
+      const searchInput = document.getElementById('search');
+      const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+      const cards = Array.from(document.querySelectorAll('#factsGrid .card'));
+
+      let activeCategory = 'all';
+      let query = '';
+
+      function matchesCard(card, q, cat){
+        const text = (card.innerText || '').toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const cats = (card.dataset.categories || '').toLowerCase();
+        const qMatch = !q || text.includes(q) || tags.includes(q);
+        const catMatch = (cat === 'all') || cats.split(',').includes(cat);
+        return qMatch && catMatch;
+      }
+
+      function updateVisibility(){
+        const q = query.trim().toLowerCase();
+        cards.forEach(card=>{
+          if(matchesCard(card,q,activeCategory)){
+            card.style.display = ''; // show
+            // small reflow animation
+            card.classList.remove('fade-up');
+            void card.offsetWidth;
+            card.classList.add('fade-up');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // search handler (debounce)
+      let debounce;
+      searchInput.addEventListener('input', (e)=>{
+        clearTimeout(debounce);
+        debounce = setTimeout(()=>{
+          query = e.target.value;
+          updateVisibility();
+        }, 150);
+      });
+
+      // filters
+      filterBtns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          filterBtns.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          activeCategory = btn.dataset.cat;
+          updateVisibility();
+        });
+      });
+
+      // show all initially
+      updateVisibility();
+    })();
+
+    // ---------- ANIMATED COUNTERS ----------
+    (function(){
+      const counters = [
+        {el: document.getElementById('counter-pop'), target: Number(document.getElementById('counter-pop').dataset.target || 1400000000)},
+        {el: document.getElementById('counter-gdp'), target: Number(document.getElementById('counter-gdp').dataset.target || 5)},
+        {el: document.getElementById('counter-army'), target: Number(document.getElementById('counter-army').dataset.target || 1400000)}
+      ];
+
+      // helper: animate number
+      function animateNumber(el, start, end, duration=1300){
+        const range = end - start;
+        let startTime = null;
+        function step(ts){
+          if(!startTime) startTime = ts;
+          const progress = Math.min((ts - startTime) / duration, 1);
+          const value = Math.floor(start + (range * progress));
+          el.textContent = value.toLocaleString();
+          if(progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // use IntersectionObserver to start when visible
+      const observer = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            // start counters once
+            counters.forEach(c=>{
+              const el = c.el;
+              const target = Number(el.dataset.target || c.target);
+              // small mapping: if large numbers, scale animation
+              animateNumber(el, 0, target, 1400);
+            });
+            obs.disconnect();
+          }
+        });
+      }, {threshold: 0.4});
+
+      // attach observer to first counter element wrapper
+      const firstCounter = document.getElementById('counter-pop');
+      if(firstCounter) observer.observe(firstCounter);
+    })();
+
+    // ---------- Entrance animation on scroll (simple) ----------
+    (function(){
+      const animated = Array.from(document.querySelectorAll('.fade-up'));
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'none';
+            entry.target.classList.remove('fade-up');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.12});
+
+      animated.forEach(el=>io.observe(el));
+    })();
+  </script>
+
+</body>
+</html>

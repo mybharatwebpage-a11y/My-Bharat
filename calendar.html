@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Indian Festival Calendar | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* PAGE-SPECIFIC: Festival-themed month grid & accordion (keeps your site's aesthetics) */
+    .calendar-hero {
+      text-align: center;
+      padding: 44px 20px;
+      background: linear-gradient(135deg,#fff6ea,#fff0d9);
+      border-bottom: 3px solid #e6b800;
+    }
+    .calendar-wrap { max-width:1200px; margin: 34px auto; padding: 0 20px 60px; }
+    .month-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px,1fr));
+      gap:18px;
+    }
+    .month-card {
+      border-radius:14px; overflow:hidden; cursor:pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      transition: transform .28s ease, box-shadow .28s ease;
+      border:2px solid rgba(0,0,0,0.04);
+      position:relative; min-height:120px; display:flex; flex-direction:column;
+    }
+    .month-card:hover { transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,.12); }
+    .month-head { display:flex; align-items:center; gap:12px; padding:14px; color:white; font-weight:700; font-family:"Cinzel Decorative",serif; font-size:1.05rem; }
+    .month-emoji { font-size:1.6rem; width:44px; height:44px; display:inline-grid; place-items:center; border-radius:10px; background: rgba(255,255,255,0.08); backdrop-filter: blur(2px); }
+    .month-sub { font-weight:600; font-size:.9rem; opacity:.95; }
+    .month-body { background: rgba(255,255,255,0.96); color:#3a1f0b; padding:14px; display:none; font-size:.98rem; line-height:1.5; }
+    .month-card.open .month-body { display:block; animation: slideDown 260ms ease; }
+    @keyframes slideDown { from{opacity:0;transform:translateY(-6px);} to{opacity:1;transform:translateY(0);} }
+    .fest-list{ list-style:none; padding:0; margin:0; }
+    .fest-list li{ padding:8px 0; border-bottom:1px dashed rgba(0,0,0,0.06); display:flex; gap:10px; align-items:center; }
+    .fest-list li:last-child{ border-bottom:none; }
+    .fest-date{ font-weight:700; width:86px; color:#6b1a00; }
+    /* Month themes */
+    .theme-jan { background: linear-gradient(135deg,#ffd89b,#ffb347); color:#3a1f0b; } /* Sankranti */
+    .theme-feb { background: linear-gradient(135deg,#e0f7fa,#b2ebf2); color:#064a6d; }
+    .theme-mar { background: linear-gradient(135deg,#ffd1dc,#ff9aa2); color:#4a1a2a; } /* Holi */
+    .theme-apr { background: linear-gradient(135deg,#fff1c9,#ffd59e); color:#5e3a10; }
+    .theme-may { background: linear-gradient(135deg,#e8f5e9,#c8e6c9); color:#145a32; }
+    .theme-jun { background: linear-gradient(135deg,#e3f2fd,#bbdefb); color:#0b4a6f; }
+    .theme-jul { background: linear-gradient(135deg,#fff3e0,#ffd180); color:#6b3a00; }
+    .theme-aug { background: linear-gradient(135deg,#ffe6a7,#ffd59e); color:#2b3a2f; }
+    .theme-sep { background: linear-gradient(135deg,#fff0f6,#ffd6e8); color:#4b2432; }
+    .theme-oct { background: linear-gradient(135deg,#fff4e6,#ffe2b3); color:#5e320f; }
+    .theme-nov { background: linear-gradient(135deg,#fff9e6,#ffe4b5); color:#5b3610; }
+    .theme-dec { background: linear-gradient(135deg,#e8f0ff,#cfe3ff); color:#08306b; }
+    @media (max-width:760px){ .calendar-wrap{padding:0 12px 40px;} .month-head{padding:12px; font-size:.98rem;} }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const monthCards = document.querySelectorAll('.month-card');
+      monthCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.tagName.toLowerCase() === 'a') return;
+          const wasOpen = card.classList.contains('open');
+          monthCards.forEach(c => c.classList.remove('open'));
+          if (!wasOpen) card.classList.add('open');
+          if (card.classList.contains('open') && window.innerWidth < 700) {
+            setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'center' }), 120);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+ <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+        <section class="calendar-hero">
+    <h2>Indian Festival Calendar — 2025 (Highlights)</h2>
+    <p>Click any month to expand and see its main festival dates and short notes. Lunar festivals marked "varies" depend on moon sighting / regional practice.</p>
+  </section>
+
+  <div class="calendar-wrap">
+    <div class="month-grid">
+
+      <!-- JAN -->
+      <div class="month-card theme-jan">
+        <div class="month-head"><div class="month-emoji">🪁</div>
+          <div><div class="month-sub">January</div><div style="font-size:.85rem;opacity:.9">Main: Makar Sankranti / Pongal (Jan 14)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Jan 14</span> 🪁 Makar Sankranti / Pongal — Harvest festival celebrated across India. <!-- source: Times of India / BankBazaar --> </li>
+            <li><span class="fest-date">Jan 13</span> 🔥 Lohri — Punjabi harvest bonfire.</li>
+            <li><span class="fest-date">Jan 26</span> 🇮🇳 Republic Day — National celebration & parade.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FEB -->
+      <div class="month-card theme-feb">
+        <div class="month-head"><div class="month-emoji">🌼</div>
+          <div><div class="month-sub">February</div><div style="font-size:.85rem;opacity:.9">Main: Vasant Panchami (varies)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">varies</span> 🌼 Vasant Panchami — Saraswati puja & spring rites.</li>
+            <li><span class="fest-date">varies</span> 🕉️ Mahashivratri — Shiva fasting & night vigil.</li>
+            <li><span class="fest-date">varies</span> 🎭 Goa Carnival — Parades in Goa.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MAR -->
+      <div class="month-card theme-mar">
+        <div class="month-head"><div class="month-emoji">🎨</div>
+          <div><div class="month-sub">March</div><div style="font-size:.85rem;opacity:.9">Main: Holi — Mar 13–14, 2025</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Mar 13–14</span> 🌈 Holi — Festival of Colors (2025 dates based on panchang). <!-- source: Times of India / CalendarDate --> </li>
+            <li><span class="fest-date">varies</span> 🌿 Ugadi / Gudi Padwa — Regional new years.</li>
+            <li><span class="fest-date">varies</span> 🎶 Chapchar Kut — Spring festival (Mizoram).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- APR -->
+      <div class="month-card theme-apr">
+        <div class="month-head"><div class="month-emoji">🌅</div>
+          <div><div class="month-sub">April</div><div style="font-size:.85rem;opacity:.9">Main: Baisakhi / Puthandu (Apr 14)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Apr 14</span> 🌾 Baisakhi / Puthandu / Vishu — Harvest & regional new year.</li>
+            <li><span class="fest-date">varies</span> 🙏 Ram Navami — Birth of Lord Rama.</li>
+            <li><span class="fest-date">varies</span> 🕉️ Mahavir Jayanti.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MAY -->
+      <div class="month-card theme-may">
+        <div class="month-head"><div class="month-emoji">🌕</div>
+          <div><div class="month-sub">May</div><div style="font-size:.85rem;opacity:.9">Main: Buddha Purnima (varies)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">varies</span> 🕯️ Buddha Purnima — Buddha's birth/enlightenment.</li>
+            <li><span class="fest-date">Mar 31</span> ✨ Eid-ul-Fitr — End of Ramadan (expected Mar 31, 2025; moon sighting can shift to Apr 1 in some regions). <!-- source: CalendarDate / Times of India --> </li>
+            <li><span class="fest-date">varies</span> 🎺 Thrissur Pooram — Major Kerala temple festival.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- JUNE -->
+      <div class="month-card theme-jun">
+        <div class="month-head"><div class="month-emoji">🚩</div>
+          <div><div class="month-sub">June</div><div style="font-size:.85rem;opacity:.9">Main: Rath Yatra (varies)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">varies</span> 🛕 Rath Yatra — Grand chariot festival (Puri).</li>
+            <li><span class="fest-date">varies</span> 🌊 Ganga Dussehra.</li>
+            <li><span class="fest-date">Jun 21</span> 🧘 International Yoga Day.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- JULY -->
+      <div class="month-card theme-jul">
+        <div class="month-head"><div class="month-emoji">🎊</div>
+          <div><div class="month-sub">July</div><div style="font-size:.85rem;opacity:.9">Main: Bonalu (varies)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">varies</span> 🙏 Guru Purnima — Honouring teachers and gurus.</li>
+            <li><span class="fest-date">varies</span> 💃 Bonalu — Telangana offering festival (July–Aug window).</li>
+            <li><span class="fest-date">varies</span> ⛰️ Hemis Festival — Masked dances (Ladakh).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- AUGUST -->
+      <div class="month-card theme-aug">
+        <div class="month-head"><div class="month-emoji">🇮🇳</div>
+          <div><div class="month-sub">August</div><div style="font-size:.85rem;opacity:.9">Main: Independence Day (Aug 15) / Janmashtami (Aug 15–16)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Aug 15</span> 🇮🇳 Independence Day — National celebrations & parades.</li>
+            <li><span class="fest-date">Aug 15–16</span> 🐮 Janmashtami — Birth of Lord Krishna (2025 observed Aug 15–16 in many parts). <!-- source: Times of India / Timeanddate --> </li>
+            <li><span class="fest-date">Aug 9</span> 🤝 Raksha Bandhan — Sibling festival (2025: Aug 9). <!-- source: Timeanddate / EconomicTimes --> </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SEPT -->
+      <div class="month-card theme-sep">
+        <div class="month-head"><div class="month-emoji">🐘</div>
+          <div><div class="month-sub">September</div><div style="font-size:.85rem;opacity:.9">Main: Ganesh Chaturthi (late Aug / Sep 2025)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Aug 26–27</span> 🐘 Ganesh Chaturthi — Public processions & visarjan (some sources list Aug 26; others Aug 27 in 2025). <!-- sources: CalendarDate / EconomicTimes (discussing Aug26 vs Aug27) --> </li>
+            <li><span class="fest-date">varies</span> 🌾 Hartalika Teej — Women's fasting day in some states.</li>
+            <li><span class="fest-date">varies</span> 🔱 Navratri begins (varies).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OCT -->
+      <div class="month-card theme-oct">
+        <div class="month-head"><div class="month-emoji">🏹</div>
+          <div><div class="month-sub">October</div><div style="font-size:.85rem;opacity:.9">Main: Dussehra (Oct 2, 2025)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Oct 2</span> 🏹 Dussehra / Vijayadashami — Victory of good over evil (2025: Oct 2). <!-- source: Timeanddate / Times of India --> </li>
+            <li><span class="fest-date">Oct 2</span> ✊ Gandhi Jayanti — Oct 2 (national observance).</li>
+            <li><span class="fest-date">varies</span> 🌕 Sharad Purnima — Harvest moon celebration.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NOV -->
+      <div class="month-card theme-nov">
+        <div class="month-head"><div class="month-emoji">🪔</div>
+          <div><div class="month-sub">November</div><div style="font-size:.85rem;opacity:.9">Main: Diwali — Oct 20 (observed in 2025; see note)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">varies</span> 🪔 Diwali (2025 observed Oct 20 in many regions; some sources note overlap into Oct 21 due to Amavasya spanning both dates)—check local panchang. <!-- source: Times of India / Kashi Vidwat announcement --> </li>
+            <li><span class="fest-date">varies</span> 🧱 Govardhan Puja — After Diwali in many places.</li>
+            <li><span class="fest-date">varies</span> 🙏 Guru Nanak Jayanti (Gurpurab) — Date varies by lunar calendar (2025 observed in Nov). <!-- source: NDTV / Moneycontrol --> </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DEC -->
+      <div class="month-card theme-dec">
+        <div class="month-head"><div class="month-emoji">🎄</div>
+          <div><div class="month-sub">December</div><div style="font-size:.85rem;opacity:.9">Main: Christmas (Dec 25)</div></div>
+        </div>
+        <div class="month-body">
+          <ul class="fest-list">
+            <li><span class="fest-date">Dec 25</span> 🎄 Christmas — Celebrated across India.</li>
+            <li><span class="fest-date">varies</span> 🦅 Hornbill Festival — Nagaland cultural festival.</li>
+            <li><span class="fest-date">Dec 31</span> 🎆 New Year's Eve — Countdown & celebrations.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div> <!-- month-grid -->
+  </div> <!-- wrap -->
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

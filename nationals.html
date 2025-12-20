@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nationals of India | My Bharat</title>
+
+  <style>
+    :root{
+      --bg: #faf7f2;
+      --card: #fffaf0;
+      --accent: #d9a441;
+      --brand: #2b0a06;
+      --muted: #6a4936;
+      --glass: rgba(255,255,255,0.6);
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--brand);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
+
+    /* Header (user-provided style kept) */
+    header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 22px;
+      background:linear-gradient(90deg,var(--brand),#5c2e07);
+      color:var(--accent);
+    }
+    header .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    header .brand img{width:48px;height:32px;object-fit:cover;border-radius:4px}
+    header nav{margin-left:auto}
+    header nav a{color:#fff;text-decoration:none;margin-left:14px;font-weight:500}
+    header nav a:hover{color:var(--accent)}
+
+    main{max-width:1100px;margin:26px auto;padding:18px}
+    .hero{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      background: linear-gradient(180deg, rgba(217,164,65,0.07), transparent 60%);
+      padding:18px;border-radius:12px;
+      animation: fadeUp 550ms ease both;
+    }
+    .hero img{width:110px;height:70px;object-fit:cover;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .hero h1{margin:0;font-size:1.5rem}
+    .hero p{margin:6px 0 0;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:20px}
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(15,10,7,0.04);
+      border: 1px solid rgba(0,0,0,0.03);
+      transform-origin: center bottom;
+      animation: fadeUp 500ms ease both;
+    }
+    .card h2{margin:0 0 10px;color:var(--brand);font-size:1.05rem}
+    .muted{color:var(--muted);font-size:0.95rem}
+    .text-block{background:var(--glass);padding:12px;border-radius:8px;max-height:320px;overflow:auto}
+    pre{white-space:pre-wrap;margin:0;font-family:inherit;font-size:0.98rem}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+    .btn{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+    .btn.secondary{background:transparent;color:var(--brand);border:1px solid rgba(43,10,6,0.08)}
+    figure{margin:0}
+    figcaption{font-size:0.9rem;color:var(--muted);margin-top:8px}
+    footer{padding:18px;text-align:center;background:transparent;color:var(--muted);border-top:1px solid rgba(0,0,0,0.04)}
+
+    /* subtle animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* responsive */
+    @media (max-width:520px){
+      .hero{flex-direction:column;align-items:flex-start}
+      header nav{margin-left:0}
+    }
+
+    /* accessible focus */
+    :focus{outline: 3px solid rgba(217,164,65,0.25); outline-offset: 3px}
+  </style>
+</head>
+<body>
+
+  <header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art  ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts Done at SPS</a>
+      </div>
+    </div>
+  <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine  ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India </a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a> 
+        <a href="nationals.html">Nationals </a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a> 
+        <a href="ourpm.html">Our P.M </a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+
+<!-- ================== INLINE CSS ================== -->
+<style>
+:root {
+  --primary-bg: #2b0a06;
+  --accent: #d9a441;
+  --light-text: #f8f5ef;
+  --hover-bg: #f5c54220;
+  --font-main: "Poppins", sans-serif;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  padding: 12px 40px;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap; /* prevents wrapping */
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+}
+
+.logo span {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-family: var(--font-main);
+}
+
+/* NAV LINKS */
+.navbar {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.navbar a,
+.dropbtn {
+  color: var(--light-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: var(--font-main);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar a:hover,
+.dropbtn:hover {
+  color: var(--accent);
+  background: var(--hover-bg);
+}
+
+
+/* DROPDOWN */
+.dropdown{position:relative;}
+.dropdown-content{
+  display:none;
+  position:absolute;
+  background:#fffaf0;
+  min-width:160px;
+  border-radius:6px;
+  box-shadow:0 8px 16px rgba(0,0,0,0.2);
+}
+.dropdown-content a{
+  display:block;
+  padding:10px;
+  text-decoration:none;
+  color:var(--deep-maroon);
+}
+.dropdown:hover .dropdown-content{display:block;}
+.dropdown-content a:hover{
+  background:var(--gold);
+  color:#000;
+}
+/* MOBILE */
+@media (max-width: 820px) {
+  .nav-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+</style>
+
+<!-- ================== INLINE JAVASCRIPT ================== -->
+<script>
+// Dropdown click functionality (mobile friendly)
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdownBtn = document.querySelector(".dropbtn");
+  const dropdownContent = document.querySelector(".dropdown-content");
+
+  dropdownBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    dropdownContent.style.display =
+      dropdownContent.style.display === "block" ? "none" : "block";
+  });
+
+  // Close dropdown if clicking outside
+  document.addEventListener("click", () => {
+    dropdownContent.style.display = "none";
+  });
+});
+</script>
+<!-- ================== HEADER END ================== -->
+
+  <main>
+
+    <section class="hero" aria-labelledby="page-title">
+      <img src="imagesothers/indianflag.png" alt="Indian Flag">
+      <div>
+        <h1 id="page-title">Nationals of India — Anthem · Song · Pledge</h1>
+        <p class="muted">English versions shown. Audio-ready players included. Replace placeholders in <code>images/</code> and <code>audio/</code>.</p>
+      </div>
+    </section>
+
+    <div class="grid" role="list">
+
+      <!-- Anthem card (English) -->
+      <article class="card" role="listitem" aria-labelledby="anthem-title">
+        <h2 id="anthem-title">National Anthem — <em>Jana Gana Mana</em> (English)</h2>
+
+        <div class="controls" aria-hidden="false">
+          <audio id="anthem-audio" preload="none">
+            <source src="audio/anthem_en.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <button class="btn" id="play-anthem">Play Anthem (English)</button>
+          <button class="btn secondary" id="stop-anthem">Stop</button>
+        </div>
+
+        <figure style="display:flex;gap:12px;align-items:flex-start">
+          <img src="imagesothers/indianflag.png" alt="Anthem illustration" style="width:120px;height:80px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.05)">
+          <figcaption>
+            <div class="muted">Official English rendering (Tagore's translation).</div>
+          </figcaption>
+        </figure>
+
+        <div class="text-block" style="margin-top:12px" aria-live="polite">
+<pre>
+Jana-gana-mana-adhinayaka jaya he Bharata-bhagya-vidhata Panjaba-Sindhu-Gujarata-Maratha Dravida-Utkala-Banga 
+Vindhya-Himachala-Yamuna-Ganga uchchala-jaladhi-taranga Tava Subha name jage, tave subha asisa mage, gahe tava
+ jaya-gatha. Jana-gana-mangala-dayaka jaya he Bharata-bhagya-vidhata.
+</pre>
+          <p class="muted" style="margin-top:10px">Note: Official protocol uses only the first stanza for ceremonies.</p>
+        </div>
+      </article>
+
+      <!-- National Song card (English) -->
+      <article class="card" role="listitem" aria-labelledby="song-title">
+        <h2 id="song-title">National Song — <em>Vande Mataram</em> (English)</h2>
+
+        <div class="controls">
+          <audio id="vande-audio" preload="none">
+            <source src="audio/vande_en.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+          <button class="btn" id="play-vande">Play Vande Mataram (English)</button>
+          <button class="btn secondary" id="stop-vande">Stop</button>
+        </div>
+
+        <figure style="display:flex;gap:12px;align-items:flex-start">
+          <img src="imagesothers/indianflag.png" alt="Vande Mataram illustration" style="width:120px;height:80px;object-fit:cover;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.05)">
+          <figcaption><div class="muted">Poetic English rendering (excerpt).</div></figcaption>
+        </figure>
+
+        <div class="text-block" style="margin-top:12px">
+<pre>
+"Vande Mataram!
+Sujalam suphalam malayaja shitalam,
+Shasyashyamalam, Mataram!
+Shubhrajyotsna pulakitayaminim,
+Phullakusumita drumadala shobhinim,
+Suhasinim, sumadhura bhashinim,
+Sukhadam, varadam, Mataram! 
+Vande Mataram!
+</pre>
+          <p class="muted" style="margin-top:10px">Original is in Bengali/Sanskritized form; translations vary slightly.</p>
+        </div>
+      </article>
+
+      <!-- Pledges -->
+      <article class="card" role="listitem" aria-labelledby="pledge-title">
+        <h2 id="pledge-title">National Pledge</h2>
+
+        <div class="text-block">
+<pre>
+India is my country. All Indians are my brothers and sisters.
+I love my country and I am proud of its rich and varied heritage.
+I shall always strive to be worthy of it.
+I shall respect my parents, teachers and all elders,
+and treat everyone with courtesy.
+To my country and my people, I pledge my devotion.
+In their well-being and prosperity alone lies my happiness.
+</pre>
+        </div>
+
+        <div class="controls" style="margin-top:12px">
+          <audio id="pledge-audio" preload="none">
+            <source src="audio/pledge.mp3" type="audio/mpeg">
+          </audio>
+          <button class="btn" id="play-pledge">Play Pledge</button>
+          <button class="btn secondary" id="stop-pledge">Stop</button>
+        </div>
+      </article>
+
+      <!-- Flag & Emblem -->
+      <article class="card" role="listitem" aria-labelledby="flag-title">
+        <h2 id="flag-title">Indian National Flag — The Tiranga</h2>
+
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <figure>
+            <img src="imagesothers/indianflag.png" alt="Flag of India" style="width:180px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)">
+            <figcaption>National Flag (Tiranga)</figcaption>
+          </figure>
+
+          <figure>
+            <img src="imagesothers/emblem.png" alt="National Emblem" style="width:120px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)">
+            <figcaption>National Emblem (Lion Capital)</figcaption>
+          </figure>
+        </div>
+
+        <div class="text-block" style="margin-top:12px">
+          <strong>Meaning of colors & Ashoka Chakra:</strong>
+          <ul>
+            <li><strong>Saffron:</strong> Courage and sacrifice</li>
+            <li><strong>White:</strong> Peace, truth, and light (with Ashoka Chakra)</li>
+            <li><strong>Green:</strong> Fertility, growth, and auspiciousness</li>
+            <li><strong>Ashoka Chakra:</strong> 24-spoke wheel representing Dharma (righteousness)</li>
+          </ul>
+
+          <strong>Quick Flag Code Tips:</strong>
+          <ul>
+            <li>Proportion: 3:2 (length:height)</li>
+            <li>Do not let the flag touch the ground; handle with respect.</li>
+            <li>Do not use the flag as clothing that disrespects it.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- National Days -->
+      <article class="card" role="listitem" aria-labelledby="days-title">
+        <h2 id="days-title">Important National Days</h2>
+
+        <div class="text-block">
+          <ul>
+            <li><strong>26 January:</strong> Republic Day</li>
+            <li><strong>15 August:</strong> Independence Day</li>
+            <li><strong>2 October:</strong> Gandhi Jayanti</li>
+            <li><strong>25 January:</strong> National Voters Day</li>
+            <li><strong>11 July:</strong> National Population Day</li>
+            <li><strong>28 February:</strong> National Science Day</li>
+            <li><strong>21 June:</strong> International Yoga Day</li>
+            <li><strong>14 November:</strong> Children’s Day</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Awards & Motto -->
+      <article class="card" role="listitem" aria-labelledby="awards-title">
+        <h2 id="awards-title">National Motto & Major Awards</h2>
+
+        <div class="text-block">
+          <strong>National Motto:</strong>
+          <p><em>Satyameva Jayate</em> — "Truth Alone Triumphs" (from the Mundaka Upanishad).</p>
+
+          <strong>Major Awards:</strong>
+          <ul>
+            <li><strong>Bharat Ratna</strong> — India's highest civilian award.</li>
+            <li><strong>Padma Vibhushan</strong>, <strong>Padma Bhushan</strong>, <strong>Padma Shri</strong> — civilian honours.</li>
+            <li><strong>Gallantry:</strong> Param Vir Chakra, Maha Vir Chakra, Vir Chakra.</li>
+            <li><strong>Sports Awards:</strong> Major Dhyan Chand Khel Ratna, Arjuna, Dronacharya.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Saka Calendar -->
+      <article class="card" role="listitem" aria-labelledby="calendar-title">
+        <h2 id="calendar-title">Indian National Calendar (Saka Era)</h2>
+
+        <div class="text-block">
+          <p>The Saka calendar is the national civil calendar used alongside the Gregorian calendar.</p>
+          <strong>Months:</strong>
+          <pre>Chaitra, Vaishakha, Jyeshtha, Ashadha, Shravana, Bhadrapada,
+Ashwin, Kartika, Agrahayana (Margashirsha), Pausha, Magha, Phalguna</pre>
+
+          <strong>Seasons (Ritu):</strong>
+          <ul>
+            <li>Vasant (Spring)</li>
+            <li>Grishma (Summer)</li>
+            <li>Varsha (Monsoon)</li>
+            <li>Sharad (Autumn)</li>
+            <li>Hemant (Pre-winter)</li>
+            <li>Shishir (Winter)</li>
+          </ul>
+        </div>
+      </article>
+
+    </div> <!-- /.grid -->
+
+
+  </main>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <script>
+    // audio control: stop others when one plays
+    (function(){
+      const anthem = document.getElementById('anthem-audio');
+      const vande = document.getElementById('vande-audio');
+      const pledge = document.getElementById('pledge-audio');
+
+      function stopAll(){
+        [anthem, vande, pledge].forEach(a=>{
+          if(a && !a.paused){ a.pause(); a.currentTime = 0; }
+        });
+      }
+
+      // play / stop buttons
+      document.getElementById('play-anthem').addEventListener('click', ()=>{
+        stopAll();
+        if(anthem && anthem.src) anthem.play().catch(()=>alert('Missing audio file: audio/anthem_en.mp3'));
+      });
+      document.getElementById('stop-anthem').addEventListener('click', stopAll);
+
+      document.getElementById('play-vande').addEventListener('click', ()=>{
+        stopAll();
+        if(vande && vande.src) vande.play().catch(()=>alert('Missing audio file: audio/vande_en.mp3'));
+      });
+      document.getElementById('stop-vande').addEventListener('click', stopAll);
+
+      document.getElementById('play-pledge').addEventListener('click', ()=>{
+        stopAll();
+        if(pledge && pledge.src) pledge.play().catch(()=>alert('Missing audio file: audio/pledge.mp3'));
+      });
+      document.getElementById('stop-pledge').addEventListener('click', stopAll);
+
+      // pause audio on pagehide
+      window.addEventListener('pagehide', stopAll);
+    })();
+  </script>
+
+</body>
+</html>

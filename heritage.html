@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Indian Heritage Interactive Page</title>
+
+  <style>
+    /* ---------- Root & layout ---------- */
+    :root{
+      --brand:#2b0a06;
+      --brand-2:#5c2e07;
+      --accent:#d9a441;
+      --paper:#fff7e8;
+      --muted:#4b2e05;
+      --bg:#f7f3ea;
+    }
+    html,body{height:100%;margin:0;padding:0;background:var(--bg);color:var(--muted);font-family:Georgia, serif; -webkit-font-smoothing:antialiased;}
+    /* reserve space for sticky header so it doesn't overlap content */
+    body{padding-top:84px;}
+
+    /* ---------- Header (hover dropdowns) ---------- */
+    header.site-header{
+      position:fixed;
+      top:0;left:0;right:0;
+      height:72px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .nav-inner{
+      width:92%;
+      max-width:1100px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:1.15rem;
+    }
+    .logo img{width:48px;height:48px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;background:#fff;}
+
+    /* navbar */
+    nav.primary {
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    nav.primary > a, nav.primary .nav-item-btn {
+      color:#fff;
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:6px;
+      font-weight:500;
+      font-size:0.98rem;
+    }
+    nav.primary > a:hover { color:var(--accent); background: rgba(255,255,255,0.06); }
+
+    /* header dropdown (hover) */
+    .nav-dropdown {
+      position:relative;
+    }
+    .nav-dropdown .nav-trigger {
+      background:none;border:none;color:#fff;padding:8px 12px;border-radius:6px;font-weight:500;cursor:default;
+    }
+    .nav-dropdown .nav-panel {
+      position:absolute;
+      top:calc(100% + 10px);
+      right:0;
+      min-width:180px;
+      background:#fffaf0;
+      color:var(--muted);
+      border-radius:8px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.18);
+      padding:6px 6px;
+      display:none;
+      z-index:500;
+    }
+    .nav-dropdown .nav-panel a {
+      display:block;padding:10px 12px;color:var(--muted);text-decoration:none;border-radius:6px;
+    }
+    .nav-dropdown .nav-panel a:hover { background:rgba(0,0,0,0.03); color:var(--brand); }
+
+    /* show on hover */
+    .nav-dropdown:hover .nav-panel,
+    .nav-dropdown:focus-within .nav-panel {
+      display:block;
+    }
+
+    /* ---------- Page container ---------- */
+    .container {
+      width:92%;
+      max-width:1100px;
+      margin: 28px auto 80px;
+    }
+    .card {
+      background:var(--paper);
+      border:1px solid #e6d1a1;
+      border-radius:12px;
+      padding:20px;
+      margin-bottom:18px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.04);
+    }
+    h1{margin:0 0 6px;color:var(--brand);}
+    h2{margin:0 0 12px;color:var(--brand);font-size:1.35rem;}
+
+    /* ---------- Heritage accordions (accessible) ---------- */
+    details.heritage-accordion{
+      background:#fffdf5;
+      border-radius:8px;
+      border:1px solid #ead2a3;
+      padding:0;
+      margin-bottom:12px;
+      overflow:hidden;
+    }
+    details.heritage-accordion summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-weight:700;
+      background:linear-gradient(0deg, rgba(0,0,0,0.02), transparent);
+    }
+    details.heritage-accordion summary::-webkit-details-marker{display:none;}
+    details.heritage-accordion summary:after{content:'▾';opacity:0.7;font-size:1rem;}
+    details.heritage-accordion[open] summary:after{content:'▴';}
+    .heritage-accordion .content{padding:12px 18px 18px;color:#3b2a1c;line-height:1.6;}
+    .heritage-accordion .sub {
+      border:1px dashed #decfa2;padding:10px;border-radius:6px;margin-top:10px;background:#fffaf0;
+    }
+    .heritage-accordion ul{margin:8px 0 0;padding-left:18px;}
+
+    /* ---------- Info / Did you know ---------- */
+    .info-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px;}
+    @media(min-width:860px){ .info-grid{grid-template-columns:1fr 1fr;} }
+
+    .quote { font-style:italic;color:var(--muted); }
+    .fact-list li{margin:6px 0;}
+
+    /* ---------- Quiz ---------- */
+    .quiz-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+    .quiz-controls label{font-weight:600;margin-right:6px;}
+    select#difficultySelect{padding:8px 10px;border-radius:8px;border:1px solid #e0cfa0;background:#fff;}
+    .quiz-questions{margin-top:12px;}
+    .quiz-question{margin-bottom:14px;padding:12px;border-radius:10px;background:#fffdf6;border:1px solid #efe0ba;}
+    .quiz-question p{margin:0 0 8px;font-weight:700;}
+    .quiz-options{display:flex;flex-direction:column;gap:8px;}
+    .quiz-options button{
+      padding:10px 12px;border-radius:8px;border:1px solid #d4b067;background:#faf3e0;cursor:pointer;text-align:left;
+    }
+    .quiz-options button:hover{background:#f1e2b8;}
+    .quiz-options button.selected{background:var(--accent);color:#fff;border-color:var(--accent);}
+    #submitQuiz{margin-top:10px;padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;}
+    #submitQuiz:hover{opacity:0.95;transform:translateY(-1px);}
+
+    .result { margin-top:12px;font-weight:800;color:var(--brand); }
+
+    /* ---------- Footer ---------- */
+    footer.site-footer{
+      margin-top:36px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-2));
+      color:var(--accent);
+      padding:18px 0;
+    }
+    .footer-inner{max-width:1100px;margin:0 auto;width:92%;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;}
+    .footer-inner a{color:var(--accent);text-decoration:none;font-weight:600;}
+    .footer-inner a:hover{text-decoration:underline;}
+  </style>
+</head>
+
+<body>
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="container" role="main">
+    <section class="card">
+      <h1>Heritage of India — My Bharat</h1>
+      <p class="lead">Discover India’s history, arts, festivals and traditional knowledge through short reads and small interactive quizzes.</p>
+    </section>
+
+    <!-- HERITAGE ACCORDIONS -->
+    <section class="card" aria-labelledby="arch">
+      <h2 id="arch">Architecture & Cultural Heritage</h2>
+
+      <details class="heritage-accordion">
+        <summary>Khajuraho Temples</summary>
+        <div class="content">
+          <p>Built by the Chandela dynasty (9th–11th century). Famous for detailed sculptural panels that combine spiritual and human themes.</p>
+          <div class="sub">
+            <strong>Key points:</strong>
+            <ul>
+              <li>UNESCO World Heritage Site.</li>
+              <li>Temples built with sandstone; notable for their figural sculpture.</li>
+              <li>Blend of devotion, art and social life represented in carvings.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="heritage-accordion">
+        <summary>Rajasthan Palaces & Forts</summary>
+        <div class="content">
+          <p>Rajput palaces reflect power, defense needs, and romance — e.g. Mehrangarh, Amer Fort, City Palace.</p>
+          <div class="sub">
+            <strong>Key points:</strong>
+            <ul>
+              <li>Mix of fortification and royal living spaces.</li>
+              <li>Museums now display weapons, textiles and miniature paintings.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="heritage-accordion">
+        <summary>South Indian Temple Traditions</summary>
+        <div class="content">
+          <p>Dravidian architecture with towering gopurams, large prakara (enclosures) and stone sculptures — Meenakshi, Brihadeeswarar stand out.</p>
+          <div class="sub">
+            <ul>
+              <li>Centers of cultural life: music, dance, and festivals.</li>
+              <li>Temple towns grew as trade, craft and education centres.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ARTS & LITERATURE -->
+    <section class="card" aria-labelledby="arts">
+      <h2 id="arts">Arts & Literature</h2>
+
+      <details class="heritage-accordion">
+        <summary>Classical Dance & Music</summary>
+        <div class="content">
+          <p>Bharatanatyam, Kathak, Odissi, Kuchipudi — each carries a story-telling tradition tied to temples, courts and bhakti (devotional) practices.</p>
+          <div class="sub">
+            <ul>
+              <li>Classical ragas and talas form the basis of Indian classical music.</li>
+              <li>Instruments: sitar, sarod, tabla, mridangam and veena.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="heritage-accordion">
+        <summary>Folk Arts & Regional Literature</summary>
+        <div class="content">
+          <p>Paintings like Madhubani, Warli and Pattachitra preserve region-specific myths and techniques.</p>
+          <div class="sub">
+            <ul>
+              <li>Folk literature preserves oral history and local beliefs.</li>
+              <li>Regional languages produced classical poetry and modern prose.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- TRADITIONAL PRACTICES -->
+    <section class="card" aria-labelledby="trad">
+      <h2 id="trad">Traditional Practices & Festivals</h2>
+
+      <details class="heritage-accordion">
+        <summary>Ayurveda & Yoga</summary>
+        <div class="content">
+          <p>Ayurveda emphasizes individualized treatment and seasonal regimes; yoga integrates breath, posture and meditation.</p>
+          <div class="sub">
+            <ul>
+              <li>Holistic practices used for millennia; many modern wellness systems draw on them.</li>
+              <li>Local healing traditions and plant knowledge remain important for rural communities.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="heritage-accordion">
+        <summary>Festivals & Food Traditions</summary>
+        <div class="content">
+          <p>Festivals mark sowing/harvest cycles, religious events and social renewal — e.g. Diwali, Holi, Durga Puja, Pongal, Onam.</p>
+          <div class="sub">
+            <ul>
+              <li>Food plays a central role — festival sweets, community meals and regional specialties.</li>
+              <li>Street food and local snacks reflect diverse culinary techniques.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <!-- INFO + DID YOU KNOW -->
+    <section class="card">
+      <h2>Did you know & Fun Facts</h2>
+      <div class="info-grid">
+        <div>
+          <p class="quote"><strong>Did you know?</strong></p>
+          <ul class="fact-list">
+            <li>Chess originated in India (Chaturanga).</li>
+            <li>Takshashila and Nalanda were ancient centres of higher learning.</li>
+            <li>India has dozens of classical and hundreds of folk dance forms.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="quote"><strong>Fun Facts</strong></p>
+          <ul class="fact-list">
+            <li>The Konark Sun Temple is carved as a giant stone chariot.</li>
+            <li>Kumbh Mela attracts tens of millions on its major days.</li>
+            <li>India's cultural influence spread to Southeast Asia historically.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section class="card" id="quizCard" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">Heritage Quiz</h2>
+
+      <div class="quiz-controls">
+        <label for="difficultySelect">Choose difficulty:</label>
+        <select id="difficultySelect" aria-label="Select quiz difficulty">
+          <option value="default">-- Select Difficulty --</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <button id="resetQuiz" type="button" title="Reset quiz">Reset</button>
+      </div>
+
+      <div id="quizQuestions" class="quiz-questions" aria-live="polite"></div>
+
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <button id="submitQuiz" type="button">Submit Quiz</button>
+        <div id="result" class="result" role="status" aria-atomic="true"></div>
+      </div>
+    </section>
+  </main>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <!-- ---------- SCRIPTS: quiz + small helpers ---------- -->
+  <script>
+    /* ------------------ Quiz data (10 q per difficulty) ------------------ */
+    const quizData = {
+      easy: [
+        { q: 'Which animal appears on the Indian national emblem?', a: 'Lion', options: ['Tiger','Elephant','Lion','Peacock'] },
+        { q: 'Which colors are on the Indian flag?', a: 'Saffron, White, Green', options: ['Red, White, Blue','Saffron, White, Green','Blue, White, Orange','Green, White, Red'] },
+        { q: 'What is the national bird of India?', a: 'Peacock', options: ['Sparrow','Peacock','Eagle','Parrot'] },
+        { q: 'Which festival is known for colors?', a: 'Holi', options: ['Holi','Diwali','Pongal','Eid'] },
+        { q: 'What is the capital of India?', a: 'New Delhi', options: ['Mumbai','New Delhi','Kolkata','Chennai'] },
+        { q: 'Which river is considered most sacred by many in India?', a: 'Ganga', options: ['Yamuna','Ganga','Godavari','Krishna'] },
+        { q: 'What is India\'s national flower?', a: 'Lotus', options: ['Rose','Lotus','Sunflower','Marigold'] },
+        { q: 'Which classical dance originated in Tamil Nadu?', a: 'Bharatanatyam', options: ['Kathak','Bharatanatyam','Odissi','Kuchipudi'] },
+        { q: 'Which instrument has strings and is iconic to Indian classical music?', a: 'Sitar', options: ['Tabla','Sitar','Flute','Veena'] },
+        { q: 'Who is often called the Father of the Nation (India)?', a: 'Mahatma Gandhi', options: ['Subhash Chandra Bose','Mahatma Gandhi','Jawaharlal Nehru','Bhagat Singh'] }
+      ],
+
+      medium: [
+        { q: 'Which ancient civilization was known for planned cities like Mohenjo-Daro?', a: 'Indus Valley', options: ['Indus Valley','Maurya','Gupta','Mughal'] },
+        { q: 'Which Mughal emperor built the Taj Mahal?', a: 'Shah Jahan', options: ['Akbar','Shah Jahan','Aurangzeb','Babur'] },
+        { q: 'Which classical dance form is associated with Uttar Pradesh?', a: 'Kathak', options: ['Kathak','Bharatanatyam','Odissi','Kuchipudi'] },
+        { q: 'Which ancient scholar gave important work on astronomy and mathematics?', a: 'Aryabhata', options: ['Bhaskara','Aryabhata','Ramanujan','Varahamihira'] },
+        { q: 'Which epic poem teaches moral lessons and contains the Bhagavad Gita?', a: 'Mahabharata', options: ['Ramayana','Mahabharata','Puranas','Upanishads'] },
+        { q: 'Which famous temple is located in Madurai?', a: 'Meenakshi Temple', options: ['Konark Temple','Meenakshi Temple','Brihadeeswarar','Jagannath Temple'] },
+        { q: 'Which painting style originates from Bihar?', a: 'Madhubani', options: ['Warli','Madhubani','Pattachitra','Miniature'] },
+        { q: 'Which festival is the harvest festival of Tamil Nadu?', a: 'Pongal', options: ['Diwali','Holi','Pongal','Onam'] },
+        { q: 'Which rock-cut cave complex in India is a UNESCO World Heritage site?', a: 'Ajanta Caves', options: ['Ajanta Caves','Khajuraho','Taj Mahal','Red Fort'] },
+        { q: 'Who is known as the Father of Surgery in ancient India?', a: 'Sushruta', options: ['Charaka','Sushruta','Aryabhata','Vagbhata'] }
+      ],
+
+      hard: [
+        { q: 'Which dynasty constructed the major temples at Khajuraho?', a: 'Chandela', options: ['Chandela','Maurya','Gupta','Mughal'] },
+        { q: 'From which period does a lot of the earliest Indian classical music tradition trace?', a: 'Vedic', options: ['Vedic','Mughal','Maurya','Gupta'] },
+        { q: 'Who authored the Ramcharitmanas?', a: 'Tulsidas', options: ['Kalidasa','Tulsidas','Valmiki','Bharavi'] },
+        { q: 'Which mathematician wrote about value of pi and astronomical models?', a: 'Aryabhata', options: ['Bhaskara','Aryabhata','Ramanujan','Varahamihira'] },
+        { q: 'Which Vedic text is the oldest?', a: 'Rigveda', options: ['Samaveda','Rigveda','Yajurveda','Atharvaveda'] },
+        { q: 'Which temple houses the largest monolithic Nandi?', a: 'Brihadeeswarar Temple', options: ['Meenakshi Temple','Brihadeeswarar Temple','Konark Temple','Jagannath Temple'] },
+        { q: 'Who wrote the classical Sanskrit play Shakuntala?', a: 'Kalidasa', options: ['Kalidasa','Valmiki','Vyasa','Bharavi'] },
+        { q: 'Which empire is particularly noted for rock-cut architecture (e.g., Barabar caves / some Mauryan works)?', a: 'Maurya', options: ['Maurya','Gupta','Mughal','Chola'] },
+        { q: 'Which ancient university was famous across Asia for learning?', a: 'Nalanda', options: ['Takshashila','Nalanda','Vikramshila','Kanchi'] },
+        { q: 'Which mass religious festival is celebrated with huge fairs in Prayagraj?', a: 'Kumbh Mela', options: ['Diwali','Holi','Kumbh Mela','Onam'] }
+      ]
+    };
+
+    /* ---------- Helpers ---------- */
+    const difficultySelect = document.getElementById('difficultySelect');
+    const quizQuestionsDiv = document.getElementById('quizQuestions');
+    const submitBtn = document.getElementById('submitQuiz');
+    const resetBtn = document.getElementById('resetQuiz');
+    const resultDiv = document.getElementById('result');
+
+    function loadQuizForDifficulty(level){
+      quizQuestionsDiv.innerHTML = '';
+      resultDiv.textContent = '';
+      if(!quizData[level]) return;
+      quizData[level].forEach((item,idx) => {
+        const block = document.createElement('div');
+        block.className = 'quiz-question';
+        block.setAttribute('data-answer', item.a);
+
+        const qP = document.createElement('p');
+        qP.textContent = (idx+1) + '. ' + item.q;
+        block.appendChild(qP);
+
+        const optWrap = document.createElement('div');
+        optWrap.className = 'quiz-options';
+
+        item.options.forEach(opt => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = opt;
+          b.addEventListener('click', () => {
+            // toggle selection
+            optWrap.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));
+            b.classList.add('selected');
+          });
+          optWrap.appendChild(b);
+        });
+
+        block.appendChild(optWrap);
+        quizQuestionsDiv.appendChild(block);
+      });
+    }
+
+    difficultySelect.addEventListener('change', (e)=>{
+      const val = e.target.value;
+      if(val === 'default'){ quizQuestionsDiv.innerHTML=''; resultDiv.textContent=''; return; }
+      loadQuizForDifficulty(val);
+      // scroll slightly so user sees quiz (nice UX)
+      setTimeout(()=>{ document.getElementById('quizCard').scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
+    });
+
+    submitBtn.addEventListener('click', ()=>{
+      const questions = document.querySelectorAll('.quiz-question');
+      if(questions.length === 0){ resultDiv.textContent = 'Please choose a difficulty and answer the questions.'; return; }
+      let score = 0;
+      questions.forEach(q => {
+        const selected = q.querySelector('button.selected');
+        const ans = q.getAttribute('data-answer');
+        if(selected && selected.textContent.trim() === ans.trim()) score++;
+      });
+      resultDiv.textContent = `Your score: ${score} / ${questions.length}`;
+      // small visual highlight
+      resultDiv.style.opacity = '1';
+    });
+
+    resetBtn.addEventListener('click', ()=>{
+      difficultySelect.value = 'default';
+      quizQuestionsDiv.innerHTML = '';
+      resultDiv.textContent = '';
+    });
+
+    /* Accessibility: close nav panels on Escape */
+    document.addEventListener('keydown', (ev) => {
+      if(ev.key === 'Escape'){
+        // nothing to "close" since nav uses hover, but if any summary is open, close it:
+        document.querySelectorAll('details.heritage-accordion[open]').forEach(d => d.removeAttribute('open'));
+      }
+    });
+
+    /* Improve keyboard behavior for <summary> (allow Enter/Space to toggle) - browsers handle this but ensure style */
+    // nothing extra needed; details/summary are keyboard accessible by default.
+
+  </script>
+</body>
+</html>

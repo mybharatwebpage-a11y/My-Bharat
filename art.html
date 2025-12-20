@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art & Architecture | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+ <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h2>Art & Architecture of India</h2>
+    <p>
+      India’s art and architecture reflect the soul of its civilization — a breathtaking blend of creativity, devotion, and craftsmanship.
+      From intricate temple carvings to colorful folk paintings, every piece narrates a story rooted in faith and tradition.
+    </p>
+  </section>
+
+  <section class="art-grid">
+    <!-- Existing Art Cards -->
+    <div class="art-card" data-title="Madhubani Painting" data-desc="A traditional folk art from Bihar, using natural dyes and intricate line work." data-img="imagesart/madhubani.jpg">
+      <img src="imagesart/madhubani.jpg" alt="Madhubani Painting">
+      <h3>Madhubani Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Warli Art" data-desc="Originating from Maharashtra, Warli art depicts tribal life using geometric shapes." data-img="imagesart/warli.jpg">
+      <img src="imagesart/warli.jpg" alt="Warli Art">
+      <h3>Warli Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Tanjore Painting" data-desc="South Indian art form known for its rich colors and gold foil detailing." data-img="imagesart/tanjore.jpg">
+      <img src="imagesart/tanjore.jpg" alt="Tanjore Painting">
+      <h3>Tanjore Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Pattachitra" data-desc="Odisha’s traditional cloth-based scroll painting with mythological themes." data-img="imagesart/pattachitra.jpg">
+      <img src="imagesart/pattachitra.jpg" alt="Pattachitra">
+      <h3>Pattachitra</h3>
+    </div>
+
+    <div class="art-card" data-title="Miniature Art" data-desc="Rajasthan’s miniature paintings depict royal courts, gods, and nature with precision." data-img="imagesart/miniature.jpg">
+      <img src="imagesart/miniature.jpg" alt="Miniature Painting">
+      <h3>Miniature Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Kalamkari" data-desc="Hand-painted or block-printed cotton textile art from Andhra Pradesh." data-img="imagesart/kalamkari.jpg">
+      <img src="imagesart/kalamkari.jpg" alt="Kalamkari">
+      <h3>Kalamkari</h3>
+    </div>
+
+    <div class="art-card" data-title="Phad Painting" data-desc="Long scroll paintings narrating heroic tales, especially of Pabuji from Rajasthan." data-img="imagesart/phadpaintings.jpeg">
+      <img src="imagesart/phadpaintings.jpeg" alt="Phad Painting">
+      <h3>Phad Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Gond Art" data-desc="Tribal art form from Madhya Pradesh, filled with patterns and forest motifs." data-img="imagesart/gond.jpg">
+      <img src="imagesart/gond.jpg" alt="Gond Art">
+      <h3>Gond Art</h3>
+    </div>
+
+    <!-- New Art Cards -->
+    <div class="art-card" data-title="Chittara Art" data-desc="A traditional mural painting from Karnataka, known for intricate floral and geometric designs." data-img="imagesart/chittaraart.jpeg">
+      <img src="imagesart/chittaraart.jpeg" alt="Chittara Art">
+      <h3>Chittara Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Cheriyal Painting" data-desc="Scroll painting from Telangana depicting stories of folklore and mythology in vibrant colors." data-img="imagesart/cheriyalpainting.jpeg">
+      <img src="imagesart/cheriyalpainting.jpeg" alt="Cheriyal Painting">
+      <h3>Cheriyal Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Rogan Art" data-desc="Folk painting from Gujarat created with castor oil-based colors on cloth, showcasing bright motifs." data-img="imagesart/roganart.jpeg">
+      <img src="imagesart/roganart.jpeg" alt="Rogan Art">
+      <h3>Rogan Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Bhil Art" data-desc="Tribal art from Madhya Pradesh and Rajasthan, featuring dots, vibrant colors, and nature themes." data-img="imagesart/bhilart.jpeg">
+      <img src="imagesart/bhilart.jpeg" alt="Bhil Art">
+      <h3>Bhil Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Pahari Painting" data-desc="Miniature painting from Himachal Pradesh with romantic and devotional themes." data-img="imagesart/pahariart.jpeg">
+      <img src="imagesart/pahariart.jpeg" alt="Pahari Painting">
+      <h3>Pahari Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Kangra Painting" data-desc="Lush landscapes and romantic themes from Himachal Pradesh." data-img="imagesart/kangrapainting.jpeg">
+      <img src="imagesart/kangrapainting.jpeg" alt="Kangra Painting">
+      <h3>Kangra Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Saura Art" data-desc="Tribal wall painting from Odisha featuring symbolic motifs." data-img="imagesart/sauraart.jpeg">
+      <img src="imagesart/sauraart.jpeg" alt="Saura Art">
+      <h3>Saura Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Chamba Rumal" data-desc="Embroidered handkerchiefs from Himachal Pradesh with intricate designs." data-img="imagesart/chambarumal.jpeg">
+      <img src="imagesart/chambarumal.jpeg" alt="Chamba Rumal">
+      <h3>Chamba Rumal</h3>
+    </div>
+
+    <div class="art-card" data-title="Phulkari" data-desc="Traditional embroidery from Punjab using vibrant silk threads." data-img="imagesart/phulkari.jpeg">
+      <img src="imagesart/phulkari.jpeg" alt="Phulkari">
+      <h3>Phulkari</h3>
+    </div>
+
+    <div class="art-card" data-title="Sanjhi Art" data-desc="Paper stencil art from Uttar Pradesh used in decorative patterns." data-img="imagesart/sanjhiart.jpeg">
+      <img src="imagesart/sanjhiart.jpeg" alt="Sanjhi Art">
+      <h3>Sanjhi Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Batik" data-desc="Textile dyeing art with wax resist technique from India." data-img="imagesart/batik.jpeg">
+      <img src="imagesart/batik.jpeg" alt="Batik">
+      <h3>Batik</h3>
+    </div>
+
+    <div class="art-card" data-title="Block Printing" data-desc="Traditional textile printing using hand-carved wooden blocks from Rajasthan." data-img="imagesart/blockprinting.jpeg">
+      <img src="imagesart/blockprinting.jpeg" alt="Block Printing">
+      <h3>Block Printing</h3>
+    </div>
+
+    <div class="art-card" data-title="Mysore Painting" data-desc="Classical South Indian painting style with rich colors and gold leaf." data-img="imagesart/mysorepainting.jpeg">
+      <img src="imagesart/mysorepainting.jpeg" alt="Mysore Painting">
+      <h3>Mysore Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Bharni Painting" data-desc="Traditional Pattachitra style painting from Odisha with vivid colors." data-img="imagesart/bharni.jpeg">
+      <img src="imagesart/bharni.jpeg" alt="Bharni Painting">
+      <h3>Bharni Painting</h3>
+    </div>
+
+    <div class="art-card" data-title="Chitrakathi Art" data-desc="Storytelling scroll paintings from Maharashtra depicting folk tales." data-img="imagesart/chitrakathipainting.jpeg">
+      <img src="imagesart/chitrakathipainting.jpeg" alt="Chitrakathi Art">
+      <h3>Chitrakathi Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Kantha Embroidery" data-desc="Embroidery from West Bengal using simple running stitches to form motifs." data-img="imagesart/kantha.jpeg">
+      <img src="imagesart/kantha.jpeg" alt="Kantha Embroidery">
+      <h3>Kantha Embroidery</h3>
+    </div>
+
+    <div class="art-card" data-title="Phad Miniature" data-desc="Smaller scroll paintings from Rajasthan narrating local folklore." data-img="imagesart/phadminiature.jpeg">
+      <img src="imagesart/phadminiature.jpeg" alt="Phad Miniature">
+      <h3>Phad Miniature</h3>
+    </div>
+
+    <div class="art-card" data-title="Thangka Art" data-desc="Tibetan Buddhist scroll paintings with intricate religious themes." data-img="imagesart/thangkaart.jpeg">
+      <img src="imagesart/thangkaart.jpeg" alt="Thangka Art">
+      <h3>Thangka Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Madhya Pradesh Lacquerware" data-desc="Decorative lacquered items with vibrant colors from Madhya Pradesh." data-img="imagesart/Madhya Pradesh Lacquerware.jpeg">
+      <img src="imagesart/Madhya Pradesh Lacquerware.jpeg" alt="Lacquerware">
+      <h3>Madhya Pradesh Lacquerware</h3>
+    </div>
+
+    <div class="art-card" data-title="Meenakari" data-desc="Enamel work on metal, popular in Rajasthan, often used for jewelry and decor." data-img="imagesart/meenakari.jpeg">
+      <img src="imagesart/meenakari.jpeg" alt="Meenakari">
+      <h3>Meenakari</h3>
+    </div>
+
+    <div class="art-card" data-title="Bidriware" data-desc="Black metal with silver inlay from Karnataka used in decorative items." data-img="imagesart/bidriware.jpeg">
+      <img src="imagesart/bidriware.jpeg" alt="Bidriware">
+      <h3>Bidriware</h3>
+    </div>
+
+    <div class="art-card" data-title="Terracotta Art" data-desc="Clay sculptures and pottery from West Bengal and other regions of India." data-img="imagesart/terracotaart.jpeg">
+      <img src="imagesart/terracotaart.jpeg" alt="Terracotta Art">
+      <h3>Terracotta Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Dokra Art" data-desc="Tribal metal casting art from Odisha and Chhattisgarh using lost-wax technique." data-img="imagesart/dhokraart.jpeg">
+      <img src="imagesart/dhokraart.jpeg" alt="Dokra Art">
+      <h3>Dokra Art</h3>
+    </div>
+
+    <div class="art-card" data-title="Kalamkari Painting (Varanasi)" data-desc="Regional variant of Kalamkari textile art from Varanasi." data-img="imagesart/kalamkarivarnasi.jpeg">
+      <img src="imagesart/kalamkarivarnasi.jpeg" alt="Kalamkari Painting Varanasi">
+      <h3>Kalamkari Painting (Varanasi)</h3>
+    </div>
+
+  </section>
+</main>
+
+<!-- Modal -->
+<div class="modal" id="art-modal" aria-hidden="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <div class="modal-image-wrap">
+      <img class="modal-image" src="" alt="Art Image">
+    </div>
+    <div class="modal-info">
+      <h2 class="modal-title"></h2>
+      <p class="modal-desc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

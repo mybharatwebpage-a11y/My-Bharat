@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indian Dance Forms | My Bharat</title>
+
+  <!-- ===== INLINE JAVASCRIPT ===== -->
+  <script defer>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".dance-card");
+      const modal = document.getElementById("dance-modal");
+      const modalImg = document.querySelector(".modal-image");
+      const modalTitle = document.querySelector(".modal-title");
+      const modalDesc = document.querySelector(".modal-desc");
+      const closeBtn = document.querySelector(".modal-close");
+
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          modalImg.src = card.dataset.img;
+          modalTitle.textContent = card.dataset.title;
+          modalDesc.textContent = card.dataset.desc;
+          modal.style.display = "flex";
+        });
+      });
+
+      closeBtn.addEventListener("click", () => modal.style.display = "none");
+      modal.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+    });
+  </script>
+
+  <!-- ===== INLINE CSS ===== -->
+  <style>
+    :root {
+      --primary-bg: #2b0a06;
+      --accent: #d9a441;
+      --light-text: #f8f5ef;
+      --hover-bg: #f5c54220;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background-color: #fff8e6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+      color: var(--light-text);
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav a,
+    .dropbtn {
+      color: var(--light-text);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: 0.3s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover,
+    .dropbtn:hover {
+      background-color: var(--hover-bg);
+      color: var(--accent);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fffaf0;
+      min-width: 170px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .dropdown-content a {
+      color: #4a1a0a;
+      padding: 10px 14px;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: var(--accent);
+      color: var(--primary-bg);
+      font-weight: 600;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero-box {
+      background-color: #fff;
+      border: 2px solid #f4b400;
+      border-radius: 16px;
+      margin: 2.5rem auto;
+      padding: 2rem 1.5rem;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-box h2 {
+      color: #c47f00;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-box p {
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 750px;
+    }
+
+    /* ===== GRID ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      padding: 20px 40px 60px;
+      justify-items: center;
+    }
+
+    .dance-card {
+      background: #fffaf0;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .dance-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .dance-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .dance-card h3 {
+      color: #4a1a0a;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      background-color: #fff8e6;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 10px;
+    }
+
+    .modal-content {
+      background: #fffaf0;
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      color: #c47f00;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-desc {
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #2b0a06;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      background: #2b0a06;
+      color: #f8f5ef;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+ <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+  <!-- ===== HERO ===== -->
+  <section class="hero-box">
+    <h2>💃 The Grace of Indian Dance 💫</h2>
+    <p>From classical expressions of devotion to lively folk performances, India’s dance forms mirror its cultural rhythm and soul. Each state tells a unique story through movement and music.</p>
+  </section>
+
+  <!-- ===== DANCE GRID ===== -->
+  <section class="gallery">
+    <div class="dance-card" data-title="Bharatanatyam" data-desc="Tamil Nadu’s classical dance known for grace and devotion." data-img="imagesdance/bharatnatyam.jpg"><img src="imagesdance/bharatnatyam.jpg"><h3>Bharatanatyam</h3></div>
+    <div class="dance-card" data-title="Kathak" data-desc="From North India, marked by spins and expressive storytelling." data-img="imagesdance/KATHAK.jpg"><img src="imagesdance/KATHAK.jpg"><h3>Kathak</h3></div>
+    <div class="dance-card" data-title="Odissi" data-desc="Odisha’s ancient dance inspired by temple sculptures." data-img="imagesdance/ODDISSI.jpg"><img src="imagesdance/ODDISSI.jpg"><h3>Odissi</h3></div>
+    <div class="dance-card" data-title="Kathakali" data-desc="Kerala’s dance-drama with vibrant costumes and gestures." data-img="imagesdance/kathakali.jpg"><img src="imagesdance/kathakali.jpg"><h3>Kathakali</h3></div>
+    <div class="dance-card" data-title="Kuchipudi" data-desc="Andhra Pradesh’s classical dance combining grace and speed." data-img="imagesdance/kuchipudi.jpg"><img src="imagesdance/kuchipudi.jpg"><h3>Kuchipudi</h3></div>
+    <div class="dance-card" data-title="Manipuri" data-desc="Manipur’s lyrical dance inspired by Radha-Krishna devotion." data-img="imagesdance/manipuri.jpg"><img src="imagesdance/manipuri.jpg"><h3>Manipuri</h3></div>
+    <div class="dance-card" data-title="Mohiniyattam" data-desc="Kerala’s graceful solo dance of enchantment." data-img="imagesdance/mohit.jpg"><img src="imagesdance/mohit.jpg"><h3>Mohiniyattam</h3></div>
+    <div class="dance-card" data-title="Sattriya" data-desc="Assam’s classical dance rooted in Vaishnavite monasteries." data-img="images/sattriya.jpg"><img src="imagesdance/sattriya.jpg"><h3>Sattriya</h3></div>
+    <div class="dance-card" data-title="Garba" data-desc="Gujarat’s folk dance performed in circles during Navratri." data-img="imagesdance/garba.jpg"><img src="imagesdance/garba.jpg"><h3>Garba</h3></div>
+    <div class="dance-card" data-title="Bihu" data-desc="Assam’s joyful dance celebrating spring and harvest." data-img="imagesdance/bihu.jpg"><img src="imagesdance/bihu.jpg"><h3>Bihu</h3></div>
+    <div class="dance-card" data-title="Lavani" data-desc="Maharashtra’s rhythmic dance to dholki beats." data-img="imagesdance/lavani.jpg"><img src="imagesdance/lavani.jpg"><h3>Lavani</h3></div>
+    <div class="dance-card" data-title="Ghoomar" data-desc="Rajasthan’s graceful swirling folk dance." data-img="imagesdance/ghoomar.jpg"><img src="imagesdance/ghoomar.jpg"><h3>Ghoomar</h3></div>
+    <div class="dance-card" data-title="Bhangra" data-desc="Punjab’s energetic dance celebrating harvest and joy." data-img="imagesdance/bhangra.jpg"><img src="imagesdance/bhangra.jpg"><h3>Bhangra</h3></div>
+    <div class="dance-card" data-title="Chhau" data-desc="Martial tribal dance from Jharkhand and Odisha." data-img="imagesdance/Chhau.jpg"><img src="imagesdance/Chhau.jpg"><h3>Chhau</h3></div>
+    <div class="dance-card" data-title="Kalbelia" data-desc="Rajasthan’s serpent-like dance by the Kalbelia tribe." data-img="imagesdance/kalbelia.jpg"><img src="imagesdance/kalbelia.jpg"><h3>Kalbelia</h3></div>
+    <div class="dance-card" data-title="Rouf" data-desc="Kashmiri women’s dance performed during Eid and spring." data-img="imagesdance/rouf.jpg"><img src="imagesdance/rouf.jpg"><h3>Rouf</h3></div>
+    <div class="dance-card" data-title="Yakshagana" data-desc="Karnataka’s traditional dance-drama with mythological themes." data-img="imagesdance/Yakshagana-2.jpg"><img src="imagesdance/Yakshagana-2.jpg"><h3>Yakshagana</h3></div>
+    <div class="dance-card" data-title="Cheraw" data-desc="Mizoram’s bamboo dance showing coordination and rhythm." data-img="imagesdance/cheraw.jpg"><img src="imagesdance/cheraw.jpg"><h3>Cheraw</h3></div>
+    <div class="dance-card" data-title="Thang Ta" data-desc="Manipur’s martial art dance showcasing weaponry and skill." data-img="imagesdance/Thangta.jpg"><img src="imagesdance/Thangta.jpg"><h3>Thang Ta</h3></div>
+  </section>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal" id="dance-modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img src="" alt="Dance Image" class="modal-image" />
+      <h2 class="modal-title"></h2>
+      <p class="modal-desc"></p>
+    </div>
+  </div>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+</body>
+</html>

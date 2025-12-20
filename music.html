@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Music | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+  :root{
+    --deep-maroon:#4a1a0a;
+    --gold:#f5c542;
+    --sandstone:#d8b88a;
+    --light-bg:#fff9f0;
+    --text-dark:#2d1b0f;
+    --shadow:rgba(0,0,0,0.15);
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Poppins",sans-serif;
+    background:var(--light-bg);
+    color:var(--text-dark);
+  }
+
+  /* HEADER */
+  header{
+    background:linear-gradient(90deg,var(--deep-maroon),var(--gold));
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 24px;
+    box-shadow:0 3px 10px var(--shadow);
+    position:sticky;top:0;z-index:1000;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo img{
+    width:45px;height:45px;border-radius:50%;border:2px solid var(--gold);
+  }
+  .logo span{color:#fff;font-weight:700;font-size:1.2rem;}
+  nav{display:flex;gap:16px;align-items:center;}
+  nav a, .dropbtn{
+    color:#fff;text-decoration:none;font-weight:600;
+    background:transparent;border:none;cursor:pointer;
+    padding:6px 10px;border-radius:6px;
+    transition:all .3s;
+  }
+  nav a:hover, .dropbtn:hover{
+    color:var(--gold);
+    background-color:rgba(255,255,255,0.1);
+  }
+  .dropdown{position:relative;}
+  .dropdown-content{
+    display:none;position:absolute;top:100%;
+    background:#fff8ef;border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    overflow:hidden;min-width:160px;
+  }
+  .dropdown-content a{
+    color:var(--deep-maroon);
+    padding:10px 14px;display:block;
+  }
+  .dropdown-content a:hover{
+    background:var(--gold);
+    color:var(--deep-maroon);
+  }
+  .dropdown:hover .dropdown-content{display:block;}
+
+  /* HERO */
+  .hero-box{
+    width:92%;max-width:1100px;margin:26px auto;
+    background:#fff8e7;padding:28px;border-radius:var(--radius);
+    box-shadow:0 6px 18px var(--shadow);text-align:center;
+  }
+  .hero-box h2{
+    color:var(--deep-maroon);font-family:"Merriweather",serif;
+    font-size:1.8rem;margin-bottom:8px;
+  }
+  .hero-box p{max-width:900px;margin:auto;line-height:1.6;color:#444;}
+
+  /* GRID */
+  .section-title{
+    width:92%;max-width:1100px;margin:18px auto 8px;
+    color:var(--deep-maroon);font-size:1.4rem;font-weight:700;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;margin:12px auto 50px;
+    width:92%;max-width:1100px;
+  }
+  .tile{
+    background:#fff;border-radius:var(--radius);
+    overflow:hidden;cursor:pointer;
+    box-shadow:0 6px 18px var(--shadow);
+    border:3px solid var(--gold);
+    transition:all .25s ease;display:flex;flex-direction:column;
+  }
+  .tile:hover{transform:translateY(-6px);}
+  .tile img{
+    width:100%;height:170px;object-fit:cover;
+    border-bottom:3px solid #e8d1a1;
+  }
+  .tile .tile-title{
+    text-align:center;padding:10px;
+    background:linear-gradient(90deg,var(--deep-maroon),var(--gold));
+    color:#fff;font-weight:700;
+  }
+
+  /* MODAL */
+  .modal{
+    position:fixed;inset:0;display:none;
+    align-items:center;justify-content:center;
+    background:rgba(0,0,0,0.65);z-index:2000;
+  }
+  .modal.open{display:flex;}
+  .modal-content{
+    background:#fff8f0;border-radius:12px;
+    max-width:900px;width:92%;box-shadow:0 14px 40px rgba(0,0,0,0.5);
+    overflow:hidden;position:relative;animation:fadeIn .4s ease;
+  }
+  @keyframes fadeIn{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
+  .modal-image{
+    width:100%;max-height:420px;object-fit:cover;display:block;
+  }
+  .modal-close{
+    position:absolute;top:12px;right:12px;
+    background:rgba(255,255,255,0.9);border:none;
+    border-radius:50%;width:36px;height:36px;
+    font-size:1.4rem;cursor:pointer;
+  }
+  .modal-body{padding:18px;}
+  .modal-body h2{color:var(--deep-maroon);margin-bottom:8px;}
+  .modal-body p{color:#333;line-height:1.6;}
+
+  footer{
+    text-align:center;padding:18px;
+    background:linear-gradient(90deg,var(--deep-maroon),var(--gold));
+    color:#fff;
+  }
+
+  @media (max-width:720px){
+    .tile img{height:140px;}
+  }
+  </style>
+</head>
+<body>
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <section class="hero-box">
+    <h2>Music of India — Threads of Sound</h2>
+    <p>Indian music spans classical, folk, and devotional traditions. Click on any instrument below to see its details and image.</p>
+  </section>
+
+  <h3 class="section-title">Instruments</h3>
+  <section class="grid" id="instrumentsGrid">
+    <!-- All 22 instruments -->
+    <div class="tile music-tile" data-title="Sitar" data-desc="Long-necked string instrument used in Hindustani classical music." data-img="imagesmusic/sitar.jpg"><img src="imagesmusic/sitar.jpg"><div class="tile-title">Sitar</div></div>
+    <div class="tile music-tile" data-title="Tabla" data-desc="A pair of hand drums central to North Indian music." data-img="imagesmusic/tabla.jpg"><img src="imagesmusic/tabla.jpg"><div class="tile-title">Tabla</div></div>
+    <div class="tile music-tile" data-title="Veena" data-desc="Ancient plucked string instrument prominent in Carnatic music." data-img="imagesmusic/eena.jpg"><img src="imagesmusic/eena.jpg"><div class="tile-title">Veena</div></div>
+    <div class="tile music-tile" data-title="Sarod" data-desc="Fretless string instrument used in Hindustani classical music." data-img="imagesmusic/Sarod.jpg"><img src="imagesmusic/Sarod.jpg"><div class="tile-title">Sarod</div></div>
+    <div class="tile music-tile" data-title="Santoor" data-desc="Hammered string instrument from Kashmir." data-img="imagesmusic/santoor folk.jpg"><img src="imagesmusic/santoor folk.jpg"><div class="tile-title">Santoor</div></div>
+    <div class="tile music-tile" data-title="Shehnai" data-desc="Double-reed wind instrument used in auspicious ceremonies." data-img="imagesmusic/shehnai.jpg"><img src="imagesmusic/shehnai.jpg"><div class="tile-title">Shehnai</div></div>
+    <div class="tile music-tile" data-title="Bansuri" data-desc="Transverse bamboo flute used in Indian classical and folk music." data-img="imagesmusic/bansuri.jpg"><img src="imagesmusic/bansuri.jpg"><div class="tile-title">Bansuri</div></div>
+    <div class="tile music-tile" data-title="Mridangam" data-desc="Double-headed drum central to Carnatic rhythm." data-img="imagesmusic/mridangam.jpg"><img src="imagesmusic/mridangam.jpg"><div class="tile-title">Mridangam</div></div>
+    <div class="tile music-tile" data-title="Dhol" data-desc="Loud double-sided drum used in Punjabi and festive music." data-img="imagesmusic/dhol.jpg"><img src="imagesmusic/dhol.jpg"><div class="tile-title">Dhol</div></div>
+    <div class="tile music-tile" data-title="Pakhawaj" data-desc="Barrel-shaped drum predecessor of the tabla." data-img="imagesmusic/pakhavaj.jpg"><img src="imagesmusic/pakhavaj.jpg"><div class="tile-title">Pakhawaj</div></div>
+    <div class="tile music-tile" data-title="Ghatam" data-desc="Clay pot percussion used in South Indian music." data-img="imagesmusic/ghatam.jpg"><img src="imagesmusic/ghatam.jpg"><div class="tile-title">Ghatam</div></div>
+    <div class="tile music-tile" data-title="Tanpura" data-desc="Long-necked drone instrument providing harmonic support." data-img="imagesmusic/tanpura.jpg"><img src="imagesmusic/tanpura.jpg"><div class="tile-title">Tanpura</div></div>
+    <div class="tile music-tile" data-title="Harmonium" data-desc="Portable keyboard instrument used widely in devotional music." data-img="imagesmusic/harmonium.jpg"><img src="imagesmusic/harmonium.jpg"><div class="tile-title">Harmonium</div></div>
+    <div class="tile music-tile" data-title="Ektara" data-desc="Single-stringed drone instrument used by folk singers." data-img="imagesmusic/ektara.jpg"><img src="imagesmusic/ektara.jpg"><div class="tile-title">Ektara</div></div>
+    <div class="tile music-tile" data-title="Nadaswaram" data-desc="South Indian double reed instrument used in temples and weddings." data-img="imagesmusic/nadaswaram.jpg"><img src="imagesmusic/nadaswaram.jpg"><div class="tile-title">Nadaswaram</div></div>
+    <div class="tile music-tile" data-title="Khanjira" data-desc="South Indian frame drum used alongside mridangam." data-img="imagesmusic/khanjira.jpg"><img src="imagesmusic/khanjira.jpg"><div class="tile-title">Khanjira</div></div>
+    <div class="tile music-tile" data-title="Dotara" data-desc="String instrument used in Bengali folk music." data-img="imagesmusic/dotara.jpg"><img src="imagesmusic/dotara.jpg"><div class="tile-title">Dotara</div></div>
+    <div class="tile music-tile" data-title="Rabab" data-desc="Plucked instrument used in Kashmiri and Afghan-influenced music." data-img="imagesmusic/rababbb.jpeg"><img src="imagesmusic/rababbb.jpeg"><div class="tile-title">Rabab</div></div>
+    <div class="tile music-tile" data-title="Tavil" data-desc="Drum used in South Indian temple ensembles." data-img="imagesmusic/tavil.jpg"><img src="imagesmusic/tavil.jpg"><div class="tile-title">Tavil</div></div>
+    <div class="tile music-tile" data-title="Sarangi" data-desc="Bowed string instrument with a haunting, vocal-like tone." data-img="imagesmusic/sarangi.jpg"><img src="imagesmusic/sarangi.jpg"><div class="tile-title">Sarangi</div></div>
+    <div class="tile music-tile" data-title="Kanjira" data-desc="Small frame drum used in percussion ensembles." data-img="imagesmusic/kanjira.jpg"><img src="imagesmusic/kanjira.jpg"><div class="tile-title">Kanjira</div></div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal" id="musicModal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img class="modal-image" src="" alt="">
+      <div class="modal-body">
+        <h2 id="modalTitle">Instrument Title</h2>
+        <p id="modalDesc">Description goes here...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <script>
+  // MODAL FUNCTIONALITY
+  document.addEventListener("DOMContentLoaded",()=>{
+    const modal=document.getElementById("musicModal");
+    const img=modal.querySelector(".modal-image");
+    const title=modal.querySelector("#modalTitle");
+    const desc=modal.querySelector("#modalDesc");
+    const closeBtn=modal.querySelector(".modal-close");
+
+    document.querySelectorAll(".music-tile").forEach(tile=>{
+      tile.addEventListener("click",()=>{
+        img.src=tile.dataset.img;
+        img.alt=tile.dataset.title;
+        title.textContent=tile.dataset.title;
+        desc.textContent=tile.dataset.desc;
+        modal.classList.add("open");
+        document.body.style.overflow="hidden";
+      });
+    });
+    closeBtn.addEventListener("click",()=>{
+      modal.classList.remove("open");
+      document.body.style.overflow="";
+    });
+    modal.addEventListener("click",e=>{
+      if(e.target===modal){
+        modal.classList.remove("open");
+        document.body.style.overflow="";
+      }
+    });
+    window.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){
+        modal.classList.remove("open");
+        document.body.style.overflow="";
+      }
+    });
+  });
+  </script>
+</body>
+</html>

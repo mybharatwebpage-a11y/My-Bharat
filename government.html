@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Government of India | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f5ef;
+      color: #2b0a06;
+    }
+    header {
+      background: linear-gradient(90deg, #2b0a06, #5c2e07);
+      padding: 15px 40px;
+      color: #d9a441;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    nav a {
+      color: #f8f5ef;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #d9a441;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: #f5c54220;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #2b0a06;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #2b0a06;
+      border-bottom: 2px solid #d9a441;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    p {
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .info-card {
+      background: #fffaf0;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .info-card h3 {
+      margin-top: 0;
+      color: #2b0a06;
+    }
+    footer {
+      background: #2b0a06;
+      color: #d9a441;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <section class="hero">
+    <h1>Government of India</h1>
+    <p>The Government of the Republic of India is a <strong>federal parliamentary democratic republic</strong>, where the Prime Minister is the head of government and the President is the ceremonial head of state.</p>
+  </section>
+
+  <section>
+    <h2>Central Government Structure</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Executive</h3>
+        <p>The executive branch is headed by the <strong>President</strong>, but real executive power lies with the <strong>Prime Minister</strong> and the <strong>Council of Ministers</strong>.</p>
+      </div>
+      <div class="info-card">
+        <h3>Legislative</h3>
+        <p>India has a <strong>bicameral Parliament</strong>: the <em>Lok Sabha</em> (House of the People) and the <em>Rajya Sabha</em> (Council of States).</p>
+      </div>
+      <div class="info-card">
+        <h3>Judiciary</h3>
+        <p>The <strong>Supreme Court of India</strong> is the highest court in the land, followed by High Courts in each state, ensuring constitutionality and justice.</p>
+      </div>
+      <div class="info-card">
+        <h3>Federalism</h3>
+        <p>India is a <strong>federal republic</strong>, with powers shared between the <strong>central government</strong> and the <strong>state governments</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Central Ruling Party</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Bharatiya Janata Party (BJP)</h3>
+        <p>The <strong>BJP</strong> is the current ruling party at the Centre. Led by Prime Minister <strong>Narendra Modi</strong>, it focuses on nationalism, economic development, and governance reforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Major Political Parties in India</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Bharatiya Janata Party (BJP)</h3>
+        <p>Right-wing political party, currently leading the central government.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Indian National Congress (INC)</h3>
+        <p>Centre-left party, historically a major force in India’s independence and subsequent governments.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Aam Aadmi Party (AAP)</h3>
+        <p>Known for its focus on anti-corruption, governance, and social welfare. Based in Delhi and Punjab.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Communist Party of India (Marxist) – CPI(M)</h3>
+        <p>Left-wing party with strong rootedness in states like Kerala and West Bengal (historically).</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Communist Party of India (CPI)</h3>
+        <p>One of the oldest communist parties in India, advocating for labor rights and socialist principles.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Bahujan Samaj Party (BSP)</h3>
+        <p>Works for the political representation and upliftment of marginalized communities, particularly Dalits.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Nationalist Congress Party (NCP)</h3>
+        <p>A centrist party, influential in Maharashtra, formed after splitting from INC.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Trinamool Congress (TMC)</h3>
+        <p>A major regional party in West Bengal with significant national visibility.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Dravida Munnetra Kazhagam (DMK)</h3>
+        <p>A dominant Dravidian party in Tamil Nadu, advocating for social equity and regional development.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>All India Anna Dravida Munnetra Kazhagam (AIADMK)</h3>
+        <p>Another influential Tamil Nadu party with a strong political history.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Janata Dal (United) – JD(U)</h3>
+        <p>Prominent party in Bihar, often allied with the BJP-led National Democratic Alliance (NDA).</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Rashtriya Janata Dal (RJD)</h3>
+        <p>A key player in Bihar politics, with roots in grassroots mobilization and social justice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | My Bharat</title>
+
+  <!-- Global Styles -->
+  <style>
+    :root{
+      --bg: #faf7f2;
+      --card: #fffaf0;
+      --accent: #d9a441;
+      --brand: #2b0a06;
+      --muted: #6a4936;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --light-text: #ffffff;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--brand);
+      line-height:1.6;
+    }
+
+    main{
+      max-width:1100px;
+      margin:26px auto;
+      padding:18px;
+    }
+
+    h1{ margin-top:0; font-size:1.8rem; }
+    h2{
+      margin-top:0;
+      font-size:1.3rem;
+      margin-bottom:12px;
+      color:var(--brand);
+      border-bottom:2px solid var(--accent);
+      display:inline-block;
+      padding-bottom:5px;
+    }
+    p{ margin-bottom:12px; color:var(--muted); }
+
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      box-shadow:0 10px 30px rgba(15,10,7,0.04);
+      margin-bottom:20px;
+    }
+
+    .contact-info ul{ list-style:none; padding:0; }
+    .contact-info li{ margin-bottom:8px; color:var(--muted); }
+    .contact-info a{ color:var(--brand); text-decoration:none; }
+    .contact-info a:hover{ color:var(--accent); }
+
+    iframe{
+      border-radius:12px;
+      border:none;
+      width:100%;
+      min-height:600px;
+    }
+
+    :focus{
+      outline:3px solid rgba(217,164,65,0.25);
+      outline-offset:3px;
+    }
+
+    @media(max-width:520px){
+      header{ flex-direction:column; align-items:flex-start; }
+      header nav{ margin-left:0 !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🔷 HEADER STYLE (Corrected & placed above header) -->
+<style>
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* FIXED */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  nav a, .dropbtn{
+    color:var(--light-text);
+    font-weight:500;
+    text-decoration:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:10px 16px;
+    border-radius:6px;
+    font-size:1.05rem;
+    transition:0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover{
+    color:var(--accent);
+    background:rgba(255,255,255,0.08);
+  }
+
+  .dropdown{ position:relative; }
+  .dropdown-content{
+    display:none;
+    position:absolute;
+    right:0;
+    background:#fffaf0;
+    min-width:180px;
+    border-radius:6px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+    padding:6px 0;
+    z-index:3000;
+  }
+
+  .dropdown-content a{
+    display:block;
+    padding:10px 14px;
+    color:#4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content{
+    display:block;
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+
+    <a href="states.html">States</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+
+  </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <section class="card">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear your feedback! Use the form below to submit your remarks, which will go directly to our Gmail.</p>
+  </section>
+
+  <section class="card contact-info">
+    <h2>Our Contact Details</h2>
+    <ul>
+      <li><strong>Email:</strong> mybharatwebpage@gmail.com</li>
+      <li><strong>Website:</strong> <a href="index.html">www.mybharat.com</a></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Feedback / Remarks</h2>
+    <p>Submit your feedback below. All submissions will reach our Gmail instantly.</p>
+
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScobZirRoylG0Vi9HdAxdHN6LICcZBoG-xlSQNG-e9JUpc_Kg/viewform?usp=dialog"></iframe>
+  </section>
+
+</main>
+
+<!-- FOOTER STYLES -->
+<style>
+  footer{
+    width:100%;
+    background:linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding:20px 0;
+    margin-top:40px;
+    color:var(--accent);
+  }
+
+  .footer-container{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    padding:0 20px;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    text-align:center;
+  }
+
+  footer a{
+    color:#ffd567 !important;
+    text-decoration:none !important;
+    font-weight:600;
+    transition:0.3s;
+  }
+
+  footer a:hover{
+    color:#ffeb9c !important;
+    text-shadow:0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
