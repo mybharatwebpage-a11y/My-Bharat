@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>States & Union Territories | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <style>
+    /* page-specific tweaks */
+    :root{
+      --accent:#f5c542;
+      --maroon:#4a1a0a;
+      --card-bg:#fffaf1;
+      --shadow: rgba(0,0,0,0.12);
+      --bg: #fff9f0;
+      --header-grad-start:#2b0a06;
+      --header-grad-end:#5c2e07;
+    }
+    html,body{height:100%}
+    body {
+      margin:0;
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color:#2d1b0f;
+    }
+
+  
+
+
+
+    /* hero & search */
+    .intro{max-width:1100px;margin:26px auto 6px;padding:20px;text-align:center}
+    .intro h2{font-family:'Merriweather',serif;color:var(--maroon);margin:6px 0;font-size:1.8rem}
+    .intro p{color:#333;margin:6px auto 12px;max-width:900px}
+    .search-bar{margin-top:12px;padding:10px 12px;width:360px;max-width:92%;border-radius:8px;border:1px solid #d9c6a0;font-size:1rem}
+
+    /* grid */
+    .states-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;width:92%;margin:28px auto 60px}
+    .state-card{background:var(--card-bg);border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 6px 18px var(--shadow);transition:transform .22s,box-shadow .22s;border:3px solid var(--accent);display:flex;flex-direction:column}
+    .state-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.18)}
+    .state-card img{width:100%;height:150px;object-fit:cover;display:block}
+    .state-card h3{margin:10px;padding:8px 10px;text-align:center;background:linear-gradient(90deg,var(--maroon),var(--accent));color:#fff;border-radius:8px;font-size:1rem}
+
+    /* modal */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:9999}
+    .modal.open{display:flex}
+    .modal-content{background:#fff8f0;border-radius:12px;width:92%;max-width:820px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.4);position:relative}
+    .modal-image{width:100%;display:block;max-height:420px;object-fit:cover}
+    .modal-close{position:absolute;top:14px;right:14px;z-index:40;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,0.15)}
+    .modal-close:hover{background:var(--accent);color:#fff;transform:scale(1.05)}
+    .modal-info{padding:18px 22px 26px;text-align:left;color:#333}
+    .modal-info h2{margin:0 0 8px;color:var(--maroon)}
+    .modal-info p{margin:8px 0;line-height:1.5}
+    .modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+    .modal-grid div{font-size:0.95rem}
+    .label{font-weight:700;color:var(--maroon);margin-right:6px}
+
+    /* responsive */
+    @media (max-width:720px){
+      .modal-grid{grid-template-columns:1fr}
+      .state-card img{height:140px}
+      .modal-image{max-height:260px}
+      .intro h2{font-size:1.4rem}
+    }
+  </style>
+</head>
+<body class="states-page">
+
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>States & Union Territories of India</h2>
+    <p>Click any tile to view quick facts: capital, ruling govt, famous food, dance, languages and major festivals.</p>
+    <input id="stateSearch" class="search-bar" type="search" placeholder="Search states or keywords (e.g. 'Tamil', 'Bihu', 'biryani')" />
+  </section>
+
+  <section class="states-grid" id="statesGrid">
+    <!-- STATES (all 28 + 8 UTs). Fill images under images/ folder or change paths. -->
+    <!-- 1 Andhra Pradesh -->
+    <div class="state-card" data-title="Andhra Pradesh" data-capital="Amaravati" data-govt="YSR Congress Party (CM: Y. S. Jagan Mohan Reddy)" data-food="Pesarattu, Gongura Pachadi" data-dance="Kuchipudi" data-lang="Telugu, Urdu" data-festivals="Sankranti, Ugadi" data-facts="Long coastline; Tirupati temple" data-img="andhra.jpg">
+      <img src="andhra.jpg" alt="Andhra Pradesh">
+      <h3>Andhra Pradesh</h3>
+    </div>
+
+    <!-- 2 Arunachal Pradesh -->
+    <div class="state-card" data-title="Arunachal Pradesh" data-capital="Itanagar" data-govt="BJP-led (state govt)" data-food="Thukpa, Bamboo shoot dishes" data-dance="Yak Dance, Folk tribal dances" data-lang="Various tribal languages, English" data-festivals="Losar, Solung" data-facts="Border with China; rich tribal diversity" data-img="arunachal.jpeg">
+      <img src="arunachal.jpeg" alt="Arunachal Pradesh">
+      <h3>Arunachal Pradesh</h3>
+    </div>
+
+    <!-- 3 Assam -->
+    <div class="state-card" data-title="Assam" data-capital="Dispur" data-govt="BJP-led (state govt)" data-food="Assamese thali, Pitha" data-dance="Bihu" data-lang="Assamese, Bengali, Bodo" data-festivals="Bihu" data-facts="Tea gardens; Kaziranga NP" data-img="assam.jpg">
+      <img src="assam.jpg" alt="Assam">
+      <h3>Assam</h3>
+    </div>
+
+    <!-- 4 Bihar -->
+    <div class="state-card" data-title="Bihar" data-capital="Patna" data-govt="National Democratic Alliance (state govt)" data-food="Litti Chokha, Sattu" data-dance="Bidesia, folk dances" data-lang="Hindi, Maithili, Bhojpuri" data-festivals="Chhath, Holi" data-facts="Nalanda, Bodh Gaya" data-img="bihari.jpg">
+      <img src="bihari.jpg" alt="Bihar">
+      <h3>Bihar</h3>
+    </div>
+
+    <!-- 5 Chhattisgarh -->
+    <div class="state-card" data-title="Chhattisgarh" data-capital="Raipur" data-govt="BJP-led (state govt)" data-food="Chilla, Dubki Kadhi" data-dance="Pandwani, tribal dances" data-lang="Hindi, Chhattisgarhi" data-festivals="Bastar Dussehra, Hareli" data-facts="Tribal heritage; minerals" data-img="chhatisgarh.jpg">
+      <img src="chhatisgarh.jpg" alt="Chhattisgarh">
+      <h3>Chhattisgarh</h3>
+    </div>
+
+    <!-- 6 Goa -->
+    <div class="state-card" data-title="Goa" data-capital="Panaji" data-govt="BJP-led / coalition" data-food="Fish curry rice, Bebinca" data-dance="Folk dances, mando" data-lang="Konkani, Marathi" data-festivals="Carnival, Shigmo" data-facts="Beaches, Indo-Portuguese heritage" data-img="goa.jpg">
+      <img src="goa.jpg" alt="Goa">
+      <h3>Goa</h3>
+    </div>
+
+    <!-- 7 Gujarat -->
+    <div class="state-card" data-title="Gujarat" data-capital="Gandhinagar" data-govt="BJP-led (state govt)" data-food="Dhokla, Fafda" data-dance="Garba, Dandiya" data-lang="Gujarati" data-festivals="Navratri, Uttarayan" data-facts="Rann of Kutch; Sabarmati" data-img="gujarat.jpeg">
+      <img src="gujarat.jpeg" alt="Gujarat">
+      <h3>Gujarat</h3>
+    </div>
+
+    <!-- 8 Haryana -->
+    <div class="state-card" data-title="Haryana" data-capital="Chandigarh (shared)" data-govt="BJP-led (state govt)" data-food="Bajra roti, Lassi" data-dance="Ghoomar, folk dances" data-lang="Hindi, Haryanvi" data-festivals="Teej, Holi" data-facts="Green Revolution role; close to Delhi" data-img="haryana.jpg">
+      <img src="haryana.jpg" alt="Haryana">
+      <h3>Haryana</h3>
+    </div>
+
+    <!-- 9 Himachal Pradesh -->
+    <div class="state-card" data-title="Himachal Pradesh" data-capital="Shimla" data-govt="BJP-led/state govt" data-food="Tudkiya Bhat, Sidu" data-dance="Nati" data-lang="Hindi, Pahari dialects" data-festivals="Kullu Dussehra, Losar" data-facts="Hill stations: Shimla, Manali" data-img="himachal.jpg">
+      <img src="himachal.jpg" alt="Himachal Pradesh">
+      <h3>Himachal Pradesh</h3>
+    </div>
+
+    <!-- 10 Jharkhand -->
+    <div class="state-card" data-title="Jharkhand" data-capital="Ranchi" data-govt="BJP-led/state govt" data-food="Litti Chokha variations, Dhuska" data-dance="Chhau, tribal dances" data-lang="Hindi, Santali" data-festivals="Sohrai, Sarhul" data-facts="Mineral-rich; tribal cultures" data-img="jharkhand.jpg">
+      <img src="jharkhand.jpg" alt="Jharkhand">
+      <h3>Jharkhand</h3>
+    </div>
+
+    <!-- 11 Karnataka -->
+    <div class="state-card" data-title="Karnataka" data-capital="Bengaluru" data-govt="BJP-led/state govt" data-food="Bisi bele bath, Mysore Pak" data-dance="Yakshagana, Bharatanatyam (SOUTH)" data-lang="Kannada" data-festivals="Dasara (Mysore), Ugadi" data-facts="Bengaluru: IT hub" data-img="karnataka.jpg">
+      <img src="karnataka.jpg" alt="Karnataka">
+      <h3>Karnataka</h3>
+    </div>
+
+    <!-- 12 Kerala -->
+    <div class="state-card" data-title="Kerala" data-capital="Thiruvananthapuram" data-govt="Left Democratic Front / state govt" data-food="Sadya (Onam feast), Appam" data-dance="Kathakali, Mohiniyattam" data-lang="Malayalam" data-festivals="Onam, Vishu" data-facts="Backwaters, Ayurveda" data-img="kerala.jpg">
+      <img src="kerala.jpg" alt="Kerala">
+      <h3>Kerala</h3>
+    </div>
+
+    <!-- 13 Madhya Pradesh -->
+    <div class="state-card" data-title="Madhya Pradesh" data-capital="Bhopal" data-govt="BJP-led/state govt" data-food="Poha, Bhutte Ka Kees" data-dance="Bharatnatyam (influence) and tribal dances" data-lang="Hindi and regional dialects" data-festivals="Diwali, Holi" data-facts="Khajuraho, national parks" data-img="Madhya.jpg">
+      <img src="Madhya.jpg" alt="Madhya Pradesh">
+      <h3>Madhya Pradesh</h3>
+    </div>
+
+    <!-- 14 Maharashtra -->
+    <div class="state-card" data-title="Maharashtra" data-capital="Mumbai (state capital Mumbai)" data-govt="BJP & allies / state govt" data-food="Vada Pav, Misal Pav" data-dance="Lavani, Tamasha" data-lang="Marathi" data-festivals="Ganesh Chaturthi, Gudi Padwa" data-facts="Mumbai: film & finance hub" data-img="maharashtra.jpeg">
+      <img src="maharashtra.jpeg" alt="Maharashtra">
+      <h3>Maharashtra</h3>
+    </div>
+
+    <!-- 15 Manipur -->
+    <div class="state-card" data-title="Manipur" data-capital="Imphal" data-govt="State govt (coalition/BJP alliances vary)" data-food="Eromba, Nga-thongba" data-dance="Manipuri classical dance" data-lang="Meitei (Manipuri), tribal languages" data-festivals="Lai Haraoba, Yaoshang" data-facts="Loktak Lake phumdis" data-img="manipur.jpg">
+      <img src="manipur.jpg" alt="Manipur">
+      <h3>Manipur</h3>
+    </div>
+
+    <!-- 16 Meghalaya -->
+    <div class="state-card" data-title="Meghalaya" data-capital="Shillong" data-govt="State govt (coalitions vary)" data-food="Jadoh, Tungrymbai" data-dance="Khasi & Garo folk dances" data-lang="Khasi, Garo, English" data-festivals="Wangala" data-facts="Living root bridges; heavy rainfall" data-img="meghalaya.jpg">
+      <img src="meghalaya.jpg" alt="Meghalaya">
+      <h3>Meghalaya</h3>
+    </div>
+
+    <!-- 17 Mizoram -->
+    <div class="state-card" data-title="Mizoram" data-capital="Aizawl" data-govt="State govt (regional parties/BJP alliances vary)" data-food="Bai, Vawksa rep" data-dance="Cheraw, folk dances" data-lang="Mizo (Duhlian)" data-festivals="Chapchar Kut" data-facts="High literacy; strong community life" data-img="mizoram.jpg">
+      <img src="mizoram.jpg" alt="Mizoram">
+      <h3>Mizoram</h3>
+    </div>
+
+    <!-- 18 Nagaland -->
+    <div class="state-card" data-title="Nagaland" data-capital="Kohima" data-govt="State govt (regional parties)" data-food="Smoked meats, rice dishes" data-dance="Naga tribal dances" data-lang="Many tribal languages; English common" data-festivals="Hornbill Festival" data-facts="Rich tribal culture & shawls" data-img="nagaland.jpg">
+      <img src="nagaland.jpg" alt="Nagaland">
+      <h3>Nagaland</h3>
+    </div>
+
+    <!-- 19 Odisha -->
+    <div class="state-card" data-title="Odisha" data-capital="Bhubaneswar" data-govt="BJD-led/state govt" data-food="Pakhala, Dalma" data-dance="Odissi" data-lang="Odia" data-festivals="Ratha Yatra, Durga Puja" data-facts="Konark Sun Temple; Jagannath culture" data-img="odisha.jpg">
+      <img src="odisha.jpg" alt="Odisha">
+      <h3>Odisha</h3>
+    </div>
+
+    <!-- 20 Punjab -->
+    <div class="state-card" data-title="Punjab" data-capital="Chandigarh (shared)" data-govt="State govt (regional/BJP alliances vary)" data-food="Makki di Roti & Sarson da Saag, Amritsari Kulcha" data-dance="Bhangra, Giddha" data-lang="Punjabi" data-festivals="Baisakhi, Lohri" data-facts="Sikh heritage; agriculture powerhouse" data-img="punjab.jpg">
+      <img src="punjab.jpg" alt="Punjab">
+      <h3>Punjab</h3>
+    </div>
+
+    <!-- 21 Rajasthan -->
+    <div class="state-card" data-title="Rajasthan" data-capital="Jaipur" data-govt="BJP-led/state govt" data-food="Dal Baati Churma, Laal Maas" data-dance="Ghoomar, Kalbelia" data-lang="Hindi, Rajasthani dialects" data-festivals="Pushkar Fair, Teej" data-facts="Desert, forts & palaces" data-img="rajasthan.jpg">
+      <img src="rajasthan.jpg" alt="Rajasthan">
+      <h3>Rajasthan</h3>
+    </div>
+
+    <!-- 22 Sikkim -->
+    <div class="state-card" data-title="Sikkim" data-capital="Gangtok" data-govt="State govt (SDF/coalition vary)" data-food="Momos, Thukpa" data-dance="Tibetan-Bhutanese dances" data-lang="Nepali, Bhutia, Lepcha" data-festivals="Losar, Bumchu" data-facts="High Himalayan biodiversity" data-img="sikkim.jpg">
+      <img src="sikkim.jpg" alt="Sikkim">
+      <h3>Sikkim</h3>
+    </div>
+
+    <!-- 23 Tamil Nadu -->
+    <div class="state-card" data-title="Tamil Nadu" data-capital="Chennai" data-govt="DMK-led/state govt" data-food="Idli, Dosa, Chettinad cuisine" data-dance="Bharatanatyam" data-lang="Tamil" data-festivals="Pongal" data-facts="Ancient temples & classical arts" data-img="Tamil-Nadu.jpg">
+      <img src="Tamil-Nadu.jpg" alt="Tamil Nadu">
+      <h3>Tamil Nadu</h3>
+    </div>
+
+    <!-- 24 Telangana -->
+    <div class="state-card" data-title="Telangana" data-capital="Hyderabad" data-govt="BRS/Telangana Rashtra Samithi (state govt)" data-food="Hyderabadi Biryani, Haleem" data-dance="Perini Sivatandavam, folk dances" data-lang="Telugu, Urdu" data-festivals="Bonalu, Bathukamma" data-facts="Hyderabad: IT & historic centre" data-img="telangana.jpeg">
+      <img src="telangana.jpeg" alt="Telangana">
+      <h3>Telangana</h3>
+    </div>
+
+    <!-- 25 Tripura -->
+    <div class="state-card" data-title="Tripura" data-capital="Agartala" data-govt="State govt (regional/coalition vary)" data-food="Mui Borok dishes, rice preparations" data-dance="Hojagiri" data-lang="Bengali, Kokborok" data-festivals="Kharchi, Garia Puja" data-facts="Royal palaces & tribal culture" data-img="tripura.jpeg">
+      <img src="tripura.jpeg" alt="Tripura">
+      <h3>Tripura</h3>
+    </div>
+
+    <!-- 26 Uttar Pradesh -->
+    <div class="state-card" data-title="Uttar Pradesh" data-capital="Lucknow" data-govt="BJP-led/state govt" data-food="Awadhi cuisine: Kebabs, Biryani" data-dance="Kathak (classical)" data-lang="Hindi, Urdu" data-festivals="Diwali, Holi, Eid" data-facts="Taj Mahal; Varanasi ghats" data-img="uttarpradesh.jpeg">
+      <img src="uttarpradesh.jpeg" alt="Uttar Pradesh">
+      <h3>Uttar Pradesh</h3>
+    </div>
+
+    <!-- 27 Uttarakhand -->
+    <div class="state-card" data-title="Uttarakhand" data-capital="Dehradun" data-govt="State govt (BJP-led/coalition vary)" data-food="Aloo ke Gutke, Bal Mithai" data-dance="Garhwali & Kumaoni folk dances" data-lang="Hindi, Garhwali, Kumaoni" data-festivals="Kumbh Mela, local fairs" data-facts="Pilgrimage centres & mountains" data-img="uttarakhand.jpeg">
+      <img src="uttarakhand.jpeg" alt="Uttarakhand">
+      <h3>Uttarakhand</h3>
+    </div>
+
+    <!-- 28 West Bengal -->
+    <div class="state-card" data-title="West Bengal" data-capital="Kolkata" data-govt="State govt (TMC-led)" data-food="Rosogolla, Mishti Doi, Fish Curry" data-dance="Rabindra Nritya, folk dances" data-lang="Bengali" data-festivals="Durga Puja, Kali Puja" data-facts="Kolkata: cultural & intellectual hub" data-img="westbengal.jpeg">
+      <img src="westbengal.jpeg" alt="West Bengal">
+      <h3>West Bengal</h3>
+    </div>
+
+    <!-- UNION TERRITORIES -->
+    <div class="state-card" data-title="Andaman & Nicobar Islands" data-capital="Port Blair" data-govt="Administered by Lieutenant Governor" data-food="Seafood, coconut-based dishes" data-dance="Local island folk dances" data-lang="Hindi, English, indigenous languages" data-festivals="Local island festivals" data-facts="Cellular Jail; coral reefs" data-img="andaman.jpeg">
+      <img src="andaman.jpeg" alt="Andaman & Nicobar">
+      <h3>Andaman & Nicobar</h3>
+    </div>
+
+    <div class="state-card" data-title="Chandigarh" data-capital="Chandigarh" data-govt="Administered by UT Administrator" data-food="Punjabi & North Indian cuisine" data-dance="Punjabi folk dances" data-lang="Hindi, Punjabi, English" data-festivals="Local celebrations & national holidays" data-facts="Le Corbusier planning; Rock Garden" data-img="chandigarh.jpeg">
+      <img src="chandigarh.jpeg" alt="Chandigarh">
+      <h3>Chandigarh</h3>
+    </div>
+
+    <div class="state-card" data-title="Dadra & Nagar Haveli and Daman & Diu" data-capital="Dadra & Nagar Haveli: Silvassa; Daman: Daman" data-govt="Administered by Lieutenant Governor" data-food="Seafood, tribal cuisine" data-dance="Local folk dances" data-lang="Gujarati, Marathi, Hindi" data-festivals="Local tribal festivals" data-facts="Merged UT with enclaves" data-img="dadar.jpeg">
+      <img src="dadar.jpeg" alt="D&NH & D&D">
+      <h3>D&NH & D&D</h3>
+    </div>
+
+    <div class="state-card" data-title="Delhi (NCT)" data-capital="New Delhi" data-govt="NCT with Lieutenant Governor and elected govt" data-food="Street food: chaat, kebabs" data-dance="Fusion & folk" data-lang="Hindi, English, Punjabi" data-festivals="Republic Day, Diwali" data-facts="Seat of national institutions" data-img="delhi.jpeg">
+      <img src="delhi.jpeg" alt="Delhi">
+      <h3>Delhi (NCT)</h3>
+    </div>
+
+    <div class="state-card" data-title="Jammu & Kashmir" data-capital="Srinagar (summer), Jammu (winter)" data-govt="Union Territory admin by Lieutenant Governor" data-food="Rogan josh, Kahwa" data-dance="Rouf, Wue" data-lang="Kashmiri, Dogri, Urdu" data-festivals="Baisakhi, Eid" data-facts="Dal Lake; handicrafts" data-img="jammu.jpeg">
+      <img src="jammu.jpeg" alt="Jammu & Kashmir">
+      <h3>Jammu & Kashmir</h3>
+    </div>
+
+    <div class="state-card" data-title="Ladakh" data-capital="Leh" data-govt="Union Territory admin by Lieutenant Governor" data-food="Thukpa, Skyu" data-dance="Monastery cham dances" data-lang="Ladakhi, Tibetan dialects" data-festivals="Losar, Hemis" data-facts="High-altitude desert & monasteries" data-img="leh.jpeg">
+      <img src="leh.jpeg" alt="Ladakh">
+      <h3>Ladakh</h3>
+    </div>
+
+    <div class="state-card" data-title="Lakshadweep" data-capital="Kavaratti" data-govt="Administered by Lieutenant Governor" data-food="Seafood & coconut-based recipes" data-dance="Island folk dances" data-lang="Malayalam, Mahl" data-festivals="Island festivals & national days" data-facts="Coral atolls; marine biodiversity" data-img="lakshawadeep.jpeg">
+      <img src="lakshawadeep.jpeg" alt="Lakshadweep">
+      <h3>Lakshadweep</h3>
+    </div>
+
+    <div class="state-card" data-title="Puducherry" data-capital="Puducherry" data-govt="Union territory with elected legislature & LG" data-food="French-influenced Creole cuisine" data-dance="Bharatanatyam & local folk" data-lang="Tamil, French influence" data-festivals="Puducherry Heritage Festival" data-facts="French Quarter & Auroville" data-img="pundicherry.jpeg">
+      <img src="pundicherry.jpeg" alt="Puducherry">
+      <h3>Puducherry</h3>
+    </div>
+
+  </section>
+</main>
+
+<!-- MODAL -->
+<div id="stateModal" class="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="position:relative;">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <img id="modal-img" class="modal-image" src="" alt="">
+    <div class="modal-info">
+      <h2 id="modal-title"></h2>
+      <p id="modal-info"></p>
+      <div class="modal-grid">
+        <div><span class="label">Capital:</span> <span id="modal-capital"></span></div>
+        <div><span class="label">Ruling Govt / CM:</span> <span id="modal-govt"></span></div>
+        <div><span class="label">Famous Food:</span> <span id="modal-food"></span></div>
+        <div><span class="label">Dance:</span> <span id="modal-dance"></span></div>
+        <div><span class="label">Language(s):</span> <span id="modal-lang"></span></div>
+        <div><span class="label">Festivals:</span> <span id="modal-festivals"></span></div>
+      </div>
+      <p style="margin-top:12px"><strong>Quick facts:</strong> <span id="modal-facts"></span></p>
+    </div>
+  </div>
+</div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+<!-- INLINE JS (search + modal + dropdown accessibility) -->
+<script>
+(function(){
+  // SEARCH
+  const search = document.getElementById('stateSearch');
+  const tiles = Array.from(document.querySelectorAll('.state-card'));
+  if (search) {
+    search.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      tiles.forEach(t => {
+        const title = (t.dataset.title || '').toLowerCase();
+        const tags = ((t.dataset.info||'') + ' ' + (t.dataset.culture||'') + ' ' + (t.dataset.food||'') + ' ' + (t.dataset.lang||'') + ' ' + (t.dataset.festivals||'') + ' ' + (t.dataset.facts||'')).toLowerCase();
+        const show = !q || title.includes(q) || tags.includes(q);
+        t.style.display = show ? '' : 'none';
+      });
+    });
+  }
+
+  // MODAL elements
+  const modal = document.getElementById('stateModal');
+  const modalContent = modal.querySelector('.modal-content');
+  const closeBtn = modal.querySelector('.modal-close');
+  const imgEl = document.getElementById('modal-img');
+  const titleEl = document.getElementById('modal-title');
+  const infoEl = document.getElementById('modal-info');
+  const capitalEl = document.getElementById('modal-capital');
+  const govtEl = document.getElementById('modal-govt');
+  const foodEl = document.getElementById('modal-food');
+  const danceEl = document.getElementById('modal-dance');
+  const langEl = document.getElementById('modal-lang');
+  const festEl = document.getElementById('modal-festivals');
+  const factsEl = document.getElementById('modal-facts');
+
+  function open(data){
+    const src = (data.img && data.img.trim() !== '') ? data.img : (data.fallbackImg || '');
+    imgEl.src = src;
+    imgEl.alt = data.title || 'Image';
+    titleEl.textContent = data.title || '';
+    infoEl.textContent = data.info || '';
+    capitalEl.textContent = data.capital || '';
+    govtEl.textContent = data.govt || '';
+    foodEl.textContent = data.food || '';
+    danceEl.textContent = data.dance || '';
+    langEl.textContent = data.lang || '';
+    festEl.textContent = data.festivals || '';
+    factsEl.textContent = data.facts || '';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function close(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  // Attach click to tiles
+  tiles.forEach(card=>{
+    card.addEventListener('click', ()=> {
+      const imgElement = card.querySelector('img');
+      open({
+        title: card.dataset.title,
+        capital: card.dataset.capital || '',
+        govt: card.dataset.govt || '',
+        food: card.dataset.food || '',
+        dance: card.dataset.dance || '',
+        lang: card.dataset.lang || '',
+        festivals: card.dataset.festivals || '',
+        facts: card.dataset.facts || '',
+        img: card.dataset.img || '',
+        fallbackImg: imgElement ? imgElement.src : ''
+      });
+    });
+    // keyboard accessibility
+    card.tabIndex = 0;
+    card.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+  });
+
+  // close handlers
+  closeBtn.addEventListener('click', close);
+  window.addEventListener('keydown', (e)=> { if(e.key === 'Escape') close(); });
+  // close when clicking outside modal-content
+  modal.addEventListener('click', (e)=> { if(!modalContent.contains(e.target)) close(); });
+  // prevent modal-content clicks from closing
+  modalContent.addEventListener('click', (e)=> e.stopPropagation());
+
+  // dropdown keyboard support: show on focus
+  document.querySelectorAll('.dropdown').forEach(dd=>{
+    const btn = dd.querySelector('.dropbtn');
+    btn.addEventListener('focus', ()=> dd.classList.add('open'));
+    btn.addEventListener('blur', ()=> setTimeout(()=> dd.classList.remove('open'), 150));
+  });
+
+})();
+</script>
+</body>
+</html>
