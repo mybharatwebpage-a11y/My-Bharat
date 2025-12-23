@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festivals of India | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+
+  <!-- 🌟 ROOT VARIABLES -->
+  <style>
+    :root {
+      --primary-bg: #2b0a06;
+      --accent: #ffd567;
+      --light-text: #ffffff;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: #faf7f2;
+      color: #2b0a06;
+    }
+
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: white;
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    nav.navbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a, .dropbtn {
+      color: var(--light-text);
+      font-weight: 500;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      transition: 0.25s;
+    }
+
+    nav a:hover, .dropbtn:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: #fffaf0;
+      min-width: 180px;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      padding: 6px 0;
+      z-index: 3000;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 10px 14px;
+      color: #4b2e05;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .hero-box {
+      background-color: #fff8e6;
+      border: 2px solid #f4b400;
+      border-radius: 16px;
+      margin: 2rem auto;
+      padding: 2rem;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .hero-box h2 {
+      color: #c47f00;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .hero-box p {
+      font-size: 1.1rem;
+      color: #333;
+      margin-top: 1rem;
+    }
+
+    .festival-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap: 1.5rem;
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .festival-card {
+      background: #fffaf0;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+
+    .festival-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .festival-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .festival-card .caption {
+      padding: 0.75rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #2b0a06;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 4000;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #fffaf0;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 90%;
+      padding: 1rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .modal-image {
+      width: 100%;
+      border-radius: 10px;
+      max-height: 400px;
+      object-fit: cover;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      color: #2b0a06;
+      margin: 0;
+    }
+    .modal-desc {
+      color: #555;
+      margin: 0;
+    }
+
+    footer {
+      width: 100%;
+      background: linear-gradient(90deg, #2b0a06, #5c2e07);
+      padding: 20px 0;
+      color: var(--accent);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="hero-box">
+  <h2>🎊 Festivals: The Colors of India 🎆</h2>
+  <p>Festivals in India reflect its cultural richness and spiritual diversity. Every celebration unites people in joy, color, and togetherness.</p>
+</section>
+
+<section class="content">
+  
+  <div class="festival-grid">
+    <div class="festival-card" data-title="Diwali" data-desc="The Festival of Lights, celebrating the victory of light over darkness and good over evil." data-img="diwali.jpg"><img src="diwali.jpg" alt="Diwali"><div class="caption">Diwali</div></div>
+    <div class="festival-card" data-title="Holi" data-desc="The Festival of Colors marking the arrival of spring with joy, color, and unity." data-img="holi.jpg"><img src="holi.jpg" alt="Holi"><div class="caption">Holi</div></div>
+    <div class="festival-card" data-title="Eid al-Fitr" data-desc="A festival celebrated by Muslims marking the end of Ramadan with prayers and feasts." data-img="eid.jpg"><img src="eid.jpg" alt="Eid al-Fitr"><div class="caption">Eid al-Fitr</div></div>
+    <div class="festival-card" data-title="Christmas" data-desc="Celebrating the birth of Jesus Christ with joy, lights, and giving." data-img="christmas.jpg"><img src="christmas.jpg" alt="Christmas"><div class="caption">Christmas</div></div>
+    <div class="festival-card" data-title="Durga Puja" data-desc="West Bengal’s grand celebration of Goddess Durga’s victory over Mahishasura." data-img="durgapuja.jpg"><img src="durgapuja.jpeg" alt="Durga Puja"><div class="caption">Durga Puja</div></div>
+    <div class="festival-card" data-title="Navratri" data-desc="Nine nights of devotion, dance, and celebration of feminine energy." data-img="navratri.jpg"><img src="navratri.jpeg" alt="Navratri"><div class="caption">Navratri</div></div>
+    <div class="festival-card" data-title="Ganesh Chaturthi" data-desc="Celebrates the birth of Lord Ganesha with music, dance, and immersion rituals." data-img="ganeshchaturthi.jpg"><img src="ganeshchaturthi.jpg" alt="Ganesh Chaturthi"><div class="caption">Ganesh Chaturthi</div></div>
+    <div class="festival-card" data-title="Onam" data-desc="Kerala’s harvest festival marking the homecoming of King Mahabali." data-img="onam.jpg"><img src="onam.jpg" alt="Onam"><div class="caption">Onam</div></div>
+    <div class="festival-card" data-title="Pongal" data-desc="Tamil Nadu’s harvest festival thanking the Sun God for prosperity." data-img="pongal.jpg"><img src="pongal.jpg" alt="Pongal"><div class="caption">Pongal</div></div>
+    <div class="festival-card" data-title="Baisakhi" data-desc="Punjab’s vibrant harvest festival and the Sikh New Year." data-img="baisakhi.jpg"><img src="baisakhi.jpeg" alt="Baisakhi"><div class="caption">Baisakhi</div></div>
+    <div class="festival-card" data-title="Makar Sankranti" data-desc="Celebrated with kite flying and traditional sweets as the Sun enters Capricorn." data-img="makarsankranti.jpg"><img src="sankranti.jpeg" alt="Makar Sankranti"><div class="caption">Makar Sankranti</div></div>
+    <div class="festival-card" data-title="Raksha Bandhan" data-desc="Celebrating the sacred bond between brothers and sisters." data-img="rakhi.jpg"><img src="rakshabandhan.jpeg" alt="Raksha Bandhan"><div class="caption">Raksha Bandhan</div></div>
+    <div class="festival-card" data-title="Janmashtami" data-desc="The birthday of Lord Krishna, celebrated with fasting, singing, and Dahi Handi." data-img="janmashtami.jpg"><img src="janmashtami.jpeg" alt="Janmashtami"><div class="caption">Janmashtami</div></div>
+    <div class="festival-card" data-title="Mahashivratri" data-desc="A night of devotion and meditation honoring Lord Shiva." data-img="shivratri.jpg"><img src="mahashivratri.jpeg" alt="Mahashivratri"><div class="caption">Mahashivratri</div></div>
+    <div class="festival-card" data-title="Bihu" data-desc="Assam’s harvest festival marked by dance, feasts, and music." data-img="bihu.jpg"><img src="bihu.jpeg" alt="Bihu"><div class="caption">Bihu</div></div>
+    <div class="festival-card" data-title="Lohri" data-desc="Punjabi festival celebrating the end of winter with bonfires and songs." data-img="lohri.jpg"><img src="lohri.jpeg" alt="Lohri"><div class="caption">Lohri</div></div>
+    <div class="festival-card" data-title="Kumbh Mela" data-desc="The world’s largest spiritual gathering held every 12 years." data-img="kumbhmela.jpg"><img src="kumbhmela.jpeg" alt="Kumbh Mela"><div class="caption">Kumbh Mela</div></div>
+    <div class="festival-card" data-title="Gudi Padwa" data-desc="Maharashtrian New Year marking the onset of spring." data-img="gudipadwa.jpg"><img src="gudipadwa.jpeg" alt="Gudi Padwa"><div class="caption">Gudi Padwa</div></div>
+    <div class="festival-card" data-title="Karva Chauth" data-desc="A festival where married women fast for the well-being of their husbands." data-img="karvachauth.jpg"><img src="ksrvachouth.jpeg" alt="Karva Chauth"><div class="caption">Karva Chauth</div></div>
+    <div class="festival-card" data-title="Eid al-Adha" data-desc="Festival of Sacrifice celebrated by Muslims with prayers and feasts." data-img="eidadha.jpg"><img src="eidi.jpeg" alt="Eid al-Adha"><div class="caption">Eid al-Adha</div></div>
+    <div class="festival-card" data-title="Buddha Purnima" data-desc="Celebrates the birth, enlightenment, and nirvana of Lord Buddha." data-img="buddhapurnima.jpg"><img src="budhapurnima.jpeg" alt="Buddha Purnima"><div class="caption">Buddha Purnima</div></div>
+    <div class="festival-card" data-title="Vishu" data-desc="Kerala’s festival marking the beginning of a new year with Vishukkani and feasts." data-img="vishu.jpg"><img src="vishu.jpeg" alt="Vishu"><div class="caption">Vishu</div></div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="festival-modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <img class="modal-image" src="" alt="">
+    <h2 class="modal-title"></h2>
+    <p class="modal-desc"></p>
+  </div>
+</div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+<script>
+  // Modal functionality
+  const cards = document.querySelectorAll('.festival-card');
+  const modal = document.getElementById('festival-modal');
+  const modalImage = modal.querySelector('.modal-image');
+  const modalTitle = modal.querySelector('.modal-title');
+  const modalDesc = modal.querySelector('.modal-desc');
+  const modalClose = modal.querySelector('.modal-close');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      modal.classList.add('active');
+      modalImage.src = card.dataset.img;
+      modalTitle.textContent = card.dataset.title;
+      modalDesc.textContent = card.dataset.desc;
+    });
+  });
+
+  modalClose.addEventListener('click', () => modal.classList.remove('active'));
+  modal.addEventListener('click', e => {
+    if(e.target === modal) modal.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
