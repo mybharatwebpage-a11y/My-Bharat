@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tourism — West India | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* INLINE STYLES — West */
+    :root{--bg:#fff9f0;--maroon:#4a1a0a;--gold:#d9a441;--card:#fff8f0;--shadow:rgba(0,0,0,0.12);--maxw:1200px;--font:"Poppins",sans-serif}
+    *{box-sizing:border-box}
+    body{font-family:var(--font);background:var(--bg);color:#222;margin:0}
+    header{background:linear-gradient(90deg,#2b0a06,#5c2e07);padding:10px 20px;position:sticky;top:0;z-index:1000}
+    .nav-wrapper{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo img{width:52px;height:52px;border-radius:8px;border:2px solid var(--gold);background:#fff;padding:2px}
+    nav{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    .container{max-width:var(--maxw);margin:22px auto;padding:0 18px}
+    .hero{background:linear-gradient(180deg,#fff8ec,#fff2e0);padding:22px;border-radius:12px;text-align:center}
+    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:14px 0;flex-wrap:wrap}
+    .search-bar{padding:10px;border-radius:8px;border:1px solid #e6d0a1;width:320px;max-width:100%}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:12px}
+    .card{background:var(--card);border-radius:12px;overflow:hidden;cursor:pointer;border:3px solid rgba(217,164,65,0.12);box-shadow:0 6px 20px var(--shadow);transition:transform .18s}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:150px;object-fit:cover;display:block}
+    .caption{padding:10px;text-align:center;background:linear-gradient(90deg,#4a1a0a,#d9a441);color:#fff;font-weight:700}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.65);z-index:3000;padding:20px}
+    .modal.open{display:flex}
+    .modal-content{background:#fff8f0;border-radius:12px;max-width:900px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);position:relative}
+    .modal-image{width:100%;max-height:420px;object-fit:cover;display:block}
+    .modal-body{padding:16px}
+    .modal-body h2{color:var(--maroon);margin:0 0 8px}
+    .modal-body p{margin:8px 0;color:#333;line-height:1.5}
+    .modal-close{position:absolute;top:12px;right:12px;background:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,0.12)}
+    @media(max-width:640px){ .card img{height:130px} }
+  </style>
+</head>
+<body>
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+
+    <a href="states.html">States</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Discover West India — 40 Must-Visit Places</h1>
+      <p>Click any tile to enlarge and read a short description. Replace placeholder images in <code>images/tourism/west/</code>.</p>
+    </section>
+
+    <div class="controls">
+      <input id="search" class="search-bar" placeholder="Search places or keywords">
+      <div class="legend">Region: West India — 40 places</div>
+    </div>
+
+    <section class="grid" id="grid">
+      <!-- 40 West India places -->
+      <div class="card" tabindex="0" data-title="Mumbai" data-state="Maharashtra" data-type="City" data-desc="Financial capital — Gateway of India, Marine Drive." 
+      data-img="imagestourism/mumbai.jpg">
+        <img src="imagestourism/mumbai.jpg" alt="Mumbai">
+        <div class="caption">Mumbai</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pune" data-state="Maharashtra" data-type="City & Culture" data-desc="Historical Pune, cultural hubs and forts."
+      data-img="imagestourism/pune.jpg">
+        <img src="imagestourism/pune.jpg" alt="Pune">
+        <div class="caption">Pune</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Aurangabad (Ajanta/Ellora)" data-state="Maharashtra" data-type="Caves" data-desc="Ajanta & Ellora cave complexes — UNESCO heritage." 
+      data-img="imagestourism/ajjanta ellora.jpg">
+        <img src="imagestourism/ajjanta ellora.jpg" alt="Ajanta Ellora">
+        <div class="caption">Ajanta & Ellora</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Nashik" data-state="Maharashtra" data-type="Pilgrimage & Wine" data-desc="Trimbakeshwar, vineyards and Kumbh site."
+       data-img="imagestourism/nashik.jpg">
+        <img src="imagestourism/nashik.jpg" alt="Nashik">
+        <div class="caption">Nashik</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Mahabaleshwar" data-state="Maharashtra" data-type="Hill Station" data-desc="Popular hill station with viewpoints and strawberries."
+       data-img="imagestourism/mahabaleshwar.jpg">
+        <img src="imagestourism/mahabaleshwar.jpg" alt="Mahabaleshwar">
+        <div class="caption">Mahabaleshwar</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Goa (North & South)" data-state="Goa" data-type="Beaches & Nightlife" data-desc="Beaches, Portuguese heritage, forts and cuisine." 
+      data-img="imagestourism/goa.jpg">
+        <img src="imagestourism/goa.jpg" alt="Goa">
+        <div class="caption">Goa</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pune Ajinkya & Sinhagad" data-state="Maharashtra" data-type="Fort" data-desc="Historic forts and trekking trails." 
+      data-img="imagestourism/sinhagad.jpg">
+        <img src="imagestourism/sinhagad.jpg" alt="Sinhagad">
+        <div class="caption">Sinhagad Fort</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Ahmedabad" data-state="Gujarat" data-type="City & Heritage" data-desc="Sabarmati Ashram, old city and textiles."
+       data-img="imagestourism/ahmedabad.jpg">
+        <img src="imagestourism/ahmedabad.jpg" alt="Ahmedabad">
+        <div class="caption">Ahmedabad</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Gir National Park" data-state="Gujarat" data-type="Wildlife" data-desc="Asiatic lions and dry deciduous forests."
+       data-img="imagestourism/gir.jpg">
+        <img src="imagestourism/gir.jpg" alt="Gir">
+        <div class="caption">Gir National Park</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Dwarka" data-state="Gujarat" data-type="Pilgrimage & Coast" data-desc="Ancient port city and Krishna temple."
+       data-img="imagestourism/dwaraka.jpg">
+        <img src="imagestourism/dwaraka.jpg" alt="Dwarka">
+        <div class="caption">Dwarka</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Rann of Kutch" data-state="Gujarat" data-type="Salt Desert" data-desc="White salt marsh, Rann Utsav and cultural fairs."
+       data-img="imagestourism/rann of kutch.jpg">
+        <img src="imagestourism/rann of kutch.jpg" alt="Rann of Kutch">
+        <div class="caption">Rann of Kutch</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Somnath" data-state="Gujarat" data-type="Temple" data-desc="One of the revered Jyotirlinga temples." 
+      data-img="imagestourism/somnath.jpg">
+        <img src="imagestourism/somnath.jpg" alt="Somnath">
+        <div class="caption">Somnath</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Dwarka Ranchhod" data-state="Gujarat" data-type="Heritage" data-desc="Coastal temples and pilgrimage." 
+      data-img="imagestourism/dwaraka2.jpg">
+        <img src="imagestourism/dwaraka2.jpg" alt="Dwarka">
+        <div class="caption">Dwarka (more)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Udaipur (Rajasthan) — western edge" data-state="Rajasthan" data-type="Palaces" data-desc="Lake City with palaces and luxury hotels."
+       data-img="imagestourism/udaipur.jpg">
+        <img src="imagestourism/udaipur.jpg" alt="Udaipur">
+        <div class="caption">Udaipur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Jaisalmer (western deserts)" data-state="Rajasthan" data-type="Desert Fort" data-desc="Desert safaris and historic fort." 
+      data-img="imagestourism/jaisalmer.jpeg">
+        <img src="imagestourism/jaisalmer.jpeg" alt="Jaisalmer">
+        <div class="caption">Jaisalmer</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Jodhpur" data-state="Rajasthan" data-type="Fort City" data-desc="Blue City with Mehrangarh Fort." 
+      data-img="imagestourism/jodhpur.jpeg">
+        <img src="imagestourism/jodhpur.jpeg" alt="Jodhpur">
+        <div class="caption">Jodhpur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pushkar (Rajasthan)" data-state="Rajasthan" data-type="Festival & Pilgrimage" data-desc="Camel fair and sacred lake." 
+      data-img="imagestourism/pushkar.jpg">
+        <img src="imagestourism/pushkar.jpg" alt="Pushkar">
+        <div class="caption">Pushkar</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Ranthambore (Rajasthan — west edge)" data-state="Rajasthan" data-type="Wildlife" data-desc="Tiger reserve and safari circuits." 
+      data-img="imagestourism/ranthambore.jpeg">
+        <img src="imagestourism/ranthambore.jpeg" alt="Ranthambore">
+        <div class="caption">Ranthambore</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Mount Abu" data-state="Rajasthan" data-type="Hill Station" data-desc="Rajasthan's only hill station with Dilwara Temples." 
+      data-img="imagestourism/mount abu.jpg">
+        <img src="imagestourism/mount abu.jpg" alt="Mount Abu">
+        <div class="caption">Mount Abu</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kutch (Bhuj & villages)" data-state="Gujarat" data-type="Culture & Crafts" data-desc="Handicrafts, Kutchi culture and desert landscapes."
+       data-img="imagestourism/bhuj.jpg">
+        <img src="imagestourism/bhuj.jpg" alt="Bhuj">
+        <div class="caption">Bhuj & Kutch</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Mumbai Elephanta Caves" data-state="Maharashtra" data-type="Heritage" data-desc="UNESCO cave temples on Elephanta Island."
+       data-img="imagestourism/elephanta.jpg">
+        <img src="imagestourism/elephanta.jpg" alt="Elephanta">
+        <div class="caption">Elephanta Caves</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Khandala & Lonavala" data-state="Maharashtra" data-type="Hills" data-desc="Weekend hill stations near Mumbai/Pune."
+       data-img="imagestourism/lonavala.jpg">
+        <img src="imagestourism/lonavala.jpg" alt="Lonavala">
+        <div class="caption">Lonavala & Khandala</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Sula Vineyards" data-state="Maharashtra" data-type="Wine Tourism" data-desc="Vineyard tours and wine tasting near Nashik."
+       data-img="imagestourism/sula.jpg">
+        <img src="imagestourism/sula.jpg" alt="Sula">
+        <div class="caption">Sula Vineyards</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Vadodara (Baroda)" data-state="Gujarat" data-type="Heritage" data-desc="Laxmi Vilas Palace and museums." 
+      data-img="imagestourism/vadodara.jpg">
+        <img src="imagestourism/vadodara.jpg" alt="Vadodara">
+        <div class="caption">Vadodara</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Surat" data-state="Gujarat" data-type="City & Textiles" data-desc="Textile industry and coastal food culture." 
+      data-img="magestourism/surat.jpg">
+        <img src="imagestourism/surat.jpg" alt="Surat">
+        <div class="caption">Surat</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Alibaug" data-state="Maharashtra" data-type="Beaches" data-desc="Popular beach getaway near Mumbai."
+       data-img="imagestourism/alibaug.jpg">
+        <img src="imagestourism/alibaug.jpg" alt="Alibaug">
+        <div class="caption">Alibaug</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Tarkarli" data-state="Maharashtra" data-type="Beaches & Diving" data-desc="Clear waters and scuba opportunities."
+       data-img="imagestourism/tarkarli.jpg">
+        <img src="imagestourism/tarkarli.jpg" alt="Tarkarli">
+        <div class="caption">Tarkarli</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kolhapur" data-state="Maharashtra" data-type="Heritage & Cuisine" data-desc="Mahalaxmi Temple and local cuisine (jhnger)."
+       data-img="imagestourism/kolhapur.jpg">
+        <img src="imagestourism/kolhapur.jpg" alt="Kolhapur">
+        <div class="caption">Kolhapur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Bhavnagar & Palitana" data-state="Gujarat" data-type="Pilgrimage" data-desc="Palitana temples on the hills — Jain pilgrimage." 
+      data-img="imagestourism/palitana.jpg">
+        <img src="imagestourism/palitana.jpg" alt="palitana">
+        <div class="caption">Palitana</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kumbhalgarh" data-state="Rajasthan" data-type="Fort" data-desc="Massive fort wall and wildlife nearby." 
+      data-img="imagestourism/kumbhalgarh.jpg">
+        <img src="imagestourism/kumbhalgarh.jpg"alt="Kumbhalgarh">
+        <div class="caption">Kumbhalgarh</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Sasan Gir (more)" data-state="Gujarat" data-type="Wildlife" data-desc="Asiatic lions and local eco-tours." 
+      data-img="imagestourism/gir.jpg">
+        <img src="imagestourism/gir.jpg"alt="gir">
+        <div class="caption">Gir (more)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Rajkot & Junagadh" data-state="Gujarat" data-type="History" data-desc="Historic sites and Gir proximity." 
+      data-img="imagestourism/rajkot.jpg">
+        <img src="imagestourism/rajkot.jpg" alt="Rajkot">
+        <div class="caption">Rajkot & Junagadh</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Sawai Madhopur & Ranthambore (W Rajasthan)" data-state="Rajasthan" data-type="Wildlife" data-desc="Ranthambore tiger safaris and forts." 
+      data-img="imagestourism/sawai madhopur.jpg">
+        <img src="imagestourism/sawai madhopur.jpg" alt="Sawai Madhopur">
+        <div class="caption">Sawai Madhopur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Bardoli & heritage" data-state="Gujarat" data-type="History & Gandhi" data-desc="Sites linked to the Satyagraha and heritage walks."
+       data-img="imagestourism/bardoli.jpg">
+        <img src="imagestourism/bardoli.jpg" alt="Bardoli">
+        <div class="caption">Bardoli</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Junnar & ancient caves" data-state="Maharashtra" data-type="Caves" data-desc="Ancient caves and historic trade routes." 
+      data-img="imagestourism/junnar.jpg">
+        <img src="imagestourism/junnar.jpg" alt="Junnar">
+        <div class="caption">Junnar</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Sakleshpur (Coffee & Hills)" data-state="Karnataka" data-type="Hills" data-desc="Western Ghats hill station with coffee estates."
+       data-img="imagestourism/sakleshpur.jpg">
+        <img src="imagestourism/sakleshpur.jpg" alt="Sakleshpur">
+        <div class="caption">Sakleshpur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Palanpur & heritage circuits" data-state="Gujarat" data-type="Heritage" data-desc="Regional heritage, temples and forts." 
+      data-img="imagestourism/palanpur.jpg">
+        <img src="imagestourism/palanpur.jpg" alt="Palanpur">
+        <div class="caption">Palanpur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Velas (turtle festival)" data_state="Maharashtra" data-type="Conservation" data-desc="Olive Ridley turtle nesting site and conservation." 
+      data-img="imagestourism/velas.jpg">
+        <img src="imagestourism/velas.jpg" alt="Velas">
+        <div class="caption">Velas (Turtle Nesting)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Polo forest (Sultanabad)" data-state="Gujarat" data-type="Forest & Adventure" data-desc="Scattered ruins, forest treks and nature."
+       data-img="imagestourism/polo forest..jpg">
+        <img src="imagestourism/polo forest..jpg" alt="Polo forest">
+        <div class="caption">Polo Forest</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Heritage lanes (various towns)" data-state="West India" data-type="Walks" data-desc="Explore old city lanes, bazaars and crafts." 
+      data-img="imagestourism/heritage lanes.jpg">
+        <img src="imagestourism/heritage lanes.jpg" alt="Heritage lanes">
+        <div class="caption">Heritage Lanes (various)</div>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <img class="modal-image" src="" alt="">
+      <div class="modal-body">
+        <h2 id="mTitle"></h2>
+        <p id="mStateType"></p>
+        <p id="mDesc"></p>
+      </div>
+    </div>
+  </div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('modal');
+      const modalImg = modal.querySelector('.modal-image');
+      const closeBtn = modal.querySelector('.modal-close');
+      const mTitle = document.getElementById('mTitle');
+      const mStateType = document.getElementById('mStateType');
+      const mDesc = document.getElementById('mDesc');
+      const cards = Array.from(document.querySelectorAll('.card'));
+      const search = document.getElementById('search');
+
+      function openCard(card){
+        const title = card.dataset.title || '';
+        const state = card.dataset.state || '';
+        const type = card.dataset.type || '';
+        const desc = card.dataset.desc || '';
+        const img = (card.dataset.img && card.dataset.img.trim()!=='') ? card.dataset.img : (card.querySelector('img')?.src || '');
+        modalImg.src = img;
+        modalImg.alt = title;
+        mTitle.textContent = title;
+        mStateType.textContent = (state ? state + ' • ' : '') + (type ? type : '');
+        mDesc.textContent = desc;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+
+      cards.forEach(c => {
+        c.addEventListener('click', ()=> openCard(c));
+        c.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openCard(c); }});
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+      window.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
+
+      if(search){
+        search.addEventListener('input', ()=> {
+          const q = search.value.trim().toLowerCase();
+          cards.forEach(c=>{
+            const title = (c.dataset.title||'').toLowerCase();
+            const tags = ((c.dataset.desc||'') + ' ' + (c.dataset.state||'') + ' ' + (c.dataset.type||'')).toLowerCase();
+            const show = !q || title.includes(q) || tags.includes(q);
+            c.style.display = show ? '' : 'none';
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

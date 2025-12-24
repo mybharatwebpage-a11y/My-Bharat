@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>North Indian Cuisine | My Bharat</title>
+
+  <!-- ===== INLINE THEME (copied/adapted from main page) ===== -->
+  <style>
+  :root {
+    --primary-bg: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #f8f5ef;
+    --hover-bg: #f5c54220;
+    --font-main: "Poppins", sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:var(--font-main);
+    background:#fffdf7;
+    color:var(--primary-bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 40px;
+    transition: background 0.3s ease;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 10px #00000055;
+    object-fit:cover;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+  }
+
+  .navbar a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background-color: var(--hover-bg);
+    text-shadow: 0 0 6px var(--accent);
+  }
+
+  /* DROPDOWNS */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fffaf0;
+    min-width: 170px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+  }
+
+  .dropdown-content a {
+    color: #4a1a0a;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  .dropdown-content a:hover {
+    background-color: var(--accent);
+    color: var(--primary-bg);
+    font-weight: 600;
+  }
+
+  /* show dropdown on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* HERO */
+  .hero-box {
+    background-color: #fff8e6;
+    border: 2px solid #f4b400;
+    border-radius: 16px;
+    margin: 2rem auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .hero-box h2 {
+    color: #c47f00;
+    font-size: 2rem;
+    margin:0 0 8px;
+  }
+  .hero-box p { margin:0; color:#5e3008; }
+
+  /* GRID */
+  .cuisine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    max-width:1100px;
+    margin: 0 auto 40px;
+  }
+
+  .cuisine-card {
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .cuisine-card:hover {
+    transform: scale(1.03);
+  }
+
+  .cuisine-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display:block;
+  }
+
+  .caption {
+    background: var(--accent);
+    color: var(--primary-bg);
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal.show { display: flex; }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-bg);
+    cursor: pointer;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .modal-info {
+    padding: 20px;
+  }
+
+  .modal-info h2 {
+    color: var(--accent);
+    margin:0 0 8px;
+  }
+
+  .modal-info p { margin:0; color:#4b2311; }
+
+  footer {
+    background: var(--primary-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header { padding: 10px 18px; }
+    .nav-wrapper { flex-direction: column; align-items:flex-start; gap:10px; }
+    .hero-box { margin: 1rem; padding: 1.2rem; }
+    .cuisine-card img { height: 150px; }
+    .modal-image { height: 220px; }
+  }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER STYLES -->
+<style id="header-style">
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+
+    <a href="states.html">States</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <!-- HERO -->
+  <section class="hero-box" role="region" aria-labelledby="north-hero">
+    <h2 id="north-hero">🌾 North Indian Cuisine</h2>
+    <p>Hearty, aromatic and rich — tastes from Punjab, Kashmir, Rajasthan, Uttar Pradesh and beyond. Mostly vegetarian with classic non-veg favorites included.</p>
+  </section>
+
+  <!-- GRID -->
+  <section>
+    <h2 style="text-align:center; color:#b35a00; margin-top:12px;">North Indian Specialties</h2>
+    <div class="cuisine-grid" role="list">
+      <!-- 40 dishes (mostly veg) -->
+      <div class="cuisine-card" data-title="Butter Chicken" data-desc="Creamy tomato gravy with tender chicken pieces." 
+      data-img="imagescuisine/butter chicken.jpg">
+      <img src="imagescuisine/butter chicken.jpg" alt="Butter Chicken"><div class="caption">Butter Chicken</div></div>
+
+      <div class="cuisine-card" data-title="Dal Makhani" data-desc="Slow-cooked black lentils with cream and spices." 
+      data-img="imagescuisine/da makhani.jpg">
+      <img src="imagescuisine/da makhani.jpg" alt="Dal Makhani"><div class="caption">Dal Makhani</div></div>
+
+      <div class="cuisine-card" data-title="Chole Bhature" data-desc="Spicy chickpeas served with deep-fried bhature." 
+      data-img="imagescuisine/chole bathure.jpg">
+      <img src="imagescuisine/chole bathure.jpg" alt="Chole Bhature"><div class="caption">Chole Bhature</div></div>
+
+      <div class="cuisine-card" data-title="Rogan Josh" data-desc="Kashmiri lamb curry in a rich red gravy." 
+      data-img="imagescuisine/rogan josh.jpg">
+      <img src="imagescuisine/rogan josh.jpg" alt="Rogan Josh"><div class="caption">Rogan Josh</div></div>
+
+      <div class="cuisine-card" data-title="Paneer Butter Masala" data-desc="Soft paneer cubes in buttery tomato gravy." 
+      data-img="imagescuisine/panner butter masala.jpg">
+      <img src="imagescuisine/panner butter masala.jpg" alt="Paneer Butter Masala"><div class="caption">Paneer Butter Masala</div></div>
+
+      <div class="cuisine-card" data-title="Amritsari Kulcha" data-desc="Stuffed, crisp kulcha from Amritsar." 
+      data-img="imagescuisine/amritsari kulcha.jpg">
+      <img src="imagescuisine/amritsari kulcha.jpg" alt="Amritsari Kulcha"><div class="caption">Amritsari Kulcha</div></div>
+
+      <div class="cuisine-card" data-title="Rajma Chawal" data-desc="Red kidney beans cooked in rich gravy with rice."
+      data-img="imagescuisine/rajma chawal.jpg">
+      <img src="imagescuisine/rajma chawal.jpg" alt="Rajma Chawal"><div class="caption">Rajma Chawal</div></div>
+
+      <div class="cuisine-card" data-title="Aloo Paratha" data-desc="Stuffed flatbread filled with spiced potato." 
+      data-img="imagescuisine/aloo paratha.jpg">
+      <img src="imagescuisine/aloo paratha.jpg" alt="Aloo Paratha"><div class="caption">Aloo Paratha</div></div>
+
+      <div class="cuisine-card" data-title="Kadhai Paneer" data-desc="Paneer sautéed with bell peppers and spices." 
+      data-img="imagescuisine/kadai panner.jpg">
+      <img src="imagescuisine/kadai panner.jpg" alt="Kadhai Paneer"><div class="caption">Kadhai Paneer</div></div>
+
+      <div class="cuisine-card" data-title="Malai Kofta" data-desc="Vegetable and paneer dumplings in creamy gravy." 
+      data-img="imagescuisine/malai kofta.jpg">
+      <img src="imagescuisine/malai kofta.jpg" alt="Malai Kofta"><div class="caption">Malai Kofta</div></div>
+
+      <div class="cuisine-card" data-title="Tandoori Chicken" data-desc="Yogurt-marinated chicken roasted in tandoor." 
+      data-img="imagescuisine/tandoori chicken.jpg">
+      <img src="imagescuisine/tandoori chicken.jpg" alt="Tandoori Chicken"><div class="caption">Tandoori Chicken</div></div>
+
+      <div class="cuisine-card" data-title="Shahi Paneer" data-desc="Royal, creamy paneer curry with nuts and spices." 
+      data-img="north12.jpg">
+      <img src="imagescuisine/shahi panner.jpg" alt="Shahi Paneer"><div class="caption">Shahi Paneer</div></div>
+
+      <div class="cuisine-card" data-title="Palak Paneer" data-desc="Paneer in smooth spinach gravy."
+      data-img="imagescuisine/palak paneer.jpg">
+      <img src="imagescuisine/palak paneer.jpg" alt="Palak Paneer"><div class="caption">Palak Paneer</div></div>
+
+      <div class="cuisine-card" data-title="Chicken Tikka" data-desc="Spiced boneless chicken pieces, roasted." 
+      data-img="imagescuisine/chicken tikka.jpg">
+      <img src="imagescuisine/chicken tikka.jpg" alt="Chicken Tikka"><div class="caption">Chicken Tikka</div></div>
+
+      <div class="cuisine-card" data-title="Mutton Korma" data-desc="Delicate mutton curry in creamy, spiced sauce." 
+      data-img="north15.jpg">
+      <img src="imagescuisine/mutton korma.jpg" alt="Mutton Korma"><div class="caption">Mutton Korma</div></div>
+
+      <div class="cuisine-card" data-title="Bhindi Masala" data-desc="Spiced okra sautéed with onions and tomatoes." 
+      data-img="imagescuisine/bhindi masala.jp">
+      <img src="imagescuisine/bhindi masala.jpg" alt="Bhindi Masala"><div class="caption">Bhindi Masala</div></div>
+
+      <div class="cuisine-card" data-title="Baingan Bharta" data-desc="Smoky mashed eggplant tempered with spices." 
+      data-img="imagescuisine/bauigan bharta.jpg">
+      <img src="imagescuisine/bauigan bharta.jpg" alt="Baingan Bharta"><div class="caption">Baingan Bharta</div></div>
+
+      <div class="cuisine-card" data-title="Pindi Chole" data-desc="Dry-style Punjabi chickpeas with robust spices." 
+      data-img="imagescuisine/pindi chole.jpg">
+      <img src="imagescuisine/pindi chole.jpg" alt="Pindi Chole"><div class="caption">Pindi Chole</div></div>
+
+      <div class="cuisine-card" data-title="Nihari" data-desc="Slow-cooked meat stew traditionally eaten at breakfast."
+      data-img="imagescuisine/nihari.jpg">
+      <img src="imagescuisine/nihari.jpg" alt="Nihari"><div class="caption">Nihari</div></div>
+
+      <div class="cuisine-card" data-title="Sarson ka Saag" data-desc="Mustard greens cooked and tempered, served with makki roti." 
+      data-img="imagescuisine/sarson ka saag.jpg">
+      <img src="imagescuisine/sarson ka saag.jpg" alt="Sarson ka Saag"><div class="caption">Sarson ka Saag</div></div>
+
+      <div class="cuisine-card" data-title="Makki di Roti" data-desc="Flatbread made from cornmeal, served with saag." 
+      data-img="imagescuisine/makki di roti.jpg">
+      <img src="imagescuisine/makki di roti.jpg" alt="Makki di Roti"><div class="caption">Makki di Roti</div></div>
+
+      <div class="cuisine-card" data-title="Dal Tadka" data-desc="Yellow lentils finished with tempering of garlic, cumin and ghee." 
+      data-img="imagescuisine/dal tadka.jpg">
+      <img src="imagescuisine/dal tadka.jpg" alt="Dal Tadka"><div class="caption">Dal Tadka</div></div>
+
+      <div class="cuisine-card" data-title="Aloo Tikki" data-desc="Crispy spiced potato patties — street favorite." 
+      data-img="north23.jpg">
+      <img src="imagescuisine/aloo tikki.jpg" alt="Aloo Tikki"><div class="caption">Aloo Tikki</div></div>
+
+      <div class="cuisine-card" data-title="Ghewar" data-desc="Festive honeycombed sweet from Rajasthan." 
+      data-img="imagescuisine/GHEWAR.jpg">
+      <img src="imagescuisine/GHEWAR.jpg" alt="Ghewar"><div class="caption">Ghewar</div></div>
+
+      <div class="cuisine-card" data-title="Rabri" data-desc="Thickened sweetened milk — rich dessert." 
+      data-img="imagescuisine/rabri.jpg">
+      <img src="imagescuisine/rabri.jpg" alt="Rabri"><div class="caption">Rabri</div></div>
+
+      <div class="cuisine-card" data-title="Litti Chokha" data-desc="Roasted wheat balls served with mashed spiced vegetables." 
+      data-img="imagescuisine/litti chokha.jpg">
+      <img src="imagescuisine/litti chokha.jpg" alt="Litti Chokha"><div class="caption">Litti Chokha</div></div>
+
+      <div class="cuisine-card" data-title="Kashmiri Dum Aloo" data-desc="Baby potatoes in Kashmiri-style red gravy." 
+      data-img="imagescuisine/Kashmiri Dum Aloo.jpg">
+      <img src="imagescuisine/Kashmiri Dum Aloo.jpg" alt="Kashmiri Dum Aloo"><div class="caption">Kashmiri Dum Aloo</div></div>
+
+      <div class="cuisine-card" data-title="Kashmiri Yakhni" data-desc="Mild aromatic mutton or lamb curry in yogurt-based stock." 
+      data-img="imagescuisine/Kashmiri Yakhni.jpg">
+      <img src="imagescuisine/Kashmiri Yakhni.jpg" alt="Kashmiri Yakhni"><div class="caption">Kashmiri Yakhni</div></div>
+
+      <div class="cuisine-card" data-title="Kalaadi Kulcha" data-desc="Kashmiri cheese stuffed bread (unique regional delight)." 
+      data-img="imagescuisine/Kalaadi Kulcha.jpg">
+      <img src="imagescuisine/Kalaadi Kulcha.jpg" alt="Kalaadi Kulcha"><div class="caption">Kalaadi Kulcha</div></div>
+
+      <div class="cuisine-card" data-title="Gajar ka Halwa" data-desc="Carrot pudding slow-cooked with ghee and milk." 
+      data-img="north30.jpg">
+      <img src="imagescuisine/Gajar ka Halwa.jpg" alt="Gajar ka Halwa"><div class="caption">Gajar ka Halwa</div></div>
+
+      <div class="cuisine-card" data-title="Kheer" data-desc="Classic rice pudding flavored with cardamom and nuts."
+      data-img="imagescuisine/Kheer.jpg">
+      <img src="imagescuisine/Kheer.jpg" alt="Kheer"><div class="caption">Kheer</div></div>
+
+      <div class="cuisine-card" data-title="Paneer Lababdar" data-desc="Creamy tomato-onion gravy with soft paneer." 
+      data-img="imagescuisine/Paneer Lababdar.jpg">
+      <img src="imagescuisine/Paneer Lababdar.jpg" alt="Paneer Lababdar"><div class="caption">Paneer Lababdar</div></div>
+
+      <div class="cuisine-card" data-title="Chicken Korma" data-desc="Delicate, mildly spiced chicken curry with nuts."
+      data-img="imagescuisine/Chicken Korma.jp">
+      <img src="imagescuisine/Chicken Korma.jpg" alt="Chicken Korma"><div class="caption">Chicken Korma</div></div>
+
+      <div class="cuisine-card" data-title="Methi Malai Matar" data-desc="Fenugreek leaves, peas and cream in mildly spiced gravy." 
+      data-img="imagescuisine/Methi Malai Matar.jpg">
+      <img src="imagescuisine/Methi Malai Matar.jpg" alt="Methi Malai Matar"><div class="caption">Methi Malai Matar</div></div>
+
+      <div class="cuisine-card" data-title="Mutton Biryani (Awadhi style)" data-desc="Fragrant layered rice with spiced mutton." 
+      data-img="imagescuisine/Mutton Biryani.jpg">
+      <img src="imagescuisine/Mutton Biryani.jpg" alt="Mutton Biryani"><div class="caption">Mutton Biryani</div></div>
+
+      <div class="cuisine-card" data-title="Chicken Changezi" data-desc="Creamy, slightly tangy Mughlai-style chicken." 
+      data-img="north36.jpg">
+      <img src="imagescuisine/Chicken Changezi.jpg" alt="Chicken Changezi"><div class="caption">Chicken Changezi</div></div>
+
+      <div class="cuisine-card" data-title="Bedmi Puri" data-desc="Lentil-stuffed deep-fried puri — breakfast specialty." 
+      data-img="imagescuisine/bedmipuri.jpg">
+      <img src="imagescuisine/bedmipuri.jpg" alt="Bedmi Puri"><div class="caption">Bedmi Puri</div></div>
+
+      <div class="cuisine-card" data-title="Moong Dal Halwa" data-desc="Rich, ghee-based sweet made from split yellow lentils." 
+      data-img="imagescuisine/Moong Dal Halwa.jpg">
+      <img src="imagescuisine/Moong Dal Halwa.jpg" alt="Moong Dal Halwa"><div class="caption">Moong Dal Halwa</div></div>
+
+      <div class="cuisine-card" data-title="Khasta Kachori" data-desc="Crispy, flaky kachori with savory filling."
+       data-img="imagescuisine/khastakachori.jpg">
+       <img src="imagescuisine/khastakachori.jpg" alt="Khasta Kachori"><div class="caption">Khasta Kachori</div></div>
+
+      <div class="cuisine-card" data-title="Samosa" data-desc="Fried pastry filled with spiced potatoes and peas."
+       data-img="imagescuisine/samosaa.jpg">
+       <img src="imagescuisine/samosaa.jpg" alt="Samosa"><div class="caption">Samosa</div></div>
+
+    </div>
+  </section>
+
+  <!-- MODAL (same structure & JS as original) -->
+  <div class="modal" id="cuisine-modal" aria-hidden="true" role="dialog" aria-label="Dish details">
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <img class="modal-image" src="" alt="">
+      <div class="modal-info">
+        <h2 class="modal-title"></h2>
+        <p class="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <!-- INLINE JS (hooking cards to modal — identical to your original page) -->
+  <script>
+  (function(){
+    const modal = document.getElementById('cuisine-modal');
+    const modalImage = modal.querySelector('.modal-image');
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalDesc = modal.querySelector('.modal-desc');
+    const modalClose = modal.querySelector('.modal-close');
+
+    document.querySelectorAll('.cuisine-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modalImage.src = card.dataset.img || '';
+        modalImage.alt = card.dataset.title || '';
+        modalTitle.textContent = card.dataset.title || '';
+        modalDesc.textContent = card.dataset.desc || '';
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.classList.contains('show')) {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

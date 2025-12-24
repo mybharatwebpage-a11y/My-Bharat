@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South Indian Cuisine | My Bharat</title>
+
+  <!-- ===== INLINE CSS (MATCHES YOUR MAIN THEME) ===== -->
+  <style>
+  :root {
+    --primary-bg: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #f8f5ef;
+    --hover-bg: #f5c54220;
+    --font-main: "Poppins", sans-serif;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 40px;
+    transition: background 0.3s ease;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 10px #00000055;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+  }
+
+  .navbar a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background-color: var(--hover-bg);
+    text-shadow: 0 0 6px var(--accent);
+  }
+
+  /* DROPDOWN */
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fffaf0;
+    min-width: 170px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+  }
+
+  .dropdown-content a {
+    color: #4a1a0a;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  .dropdown-content a:hover {
+    background-color: var(--accent);
+    color: var(--primary-bg);
+    font-weight: 600;
+  }
+
+  .dropdown:hover .dropdown-content { display: block; }
+
+  /* HERO */
+  .hero-box {
+    background-color: #fff8e6;
+    border: 2px solid #f4b400;
+    border-radius: 16px;
+    margin: 2rem auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .hero-box h2 {
+    color: #c47f00;
+    font-size: 2rem;
+  }
+
+  /* GRID */
+  .cuisine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .cuisine-card {
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+  }
+
+  .cuisine-card:hover { transform: scale(1.03); }
+
+  .cuisine-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .caption {
+    background: var(--accent);
+    color: var(--primary-bg);
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal.show { display: flex; }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-bg);
+    cursor: pointer;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .modal-info { padding: 20px; }
+  .modal-info h2 { color: var(--accent); }
+
+  footer {
+    background: var(--primary-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .nav-wrapper { flex-direction: column; align-items: flex-start; }
+    .navbar { flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  }
+  </style>
+</head>
+
+<body>
+
+!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero-box">
+  <h2>🌴 Authentic South Indian Cuisine 🍛</h2>
+  <p>
+    South India brings together the rich culinary heritage of Tamil Nadu, Kerala, Karnataka,
+    Telangana, and Andhra Pradesh. From crisp dosas to fragrant curries, the region celebrates
+    bold flavors, coconut aromas, and centuries-old cooking traditions.
+  </p>
+</section>
+
+<!-- GRID OF 40 SOUTH INDIAN DISHES -->
+<section>
+  <h2 style="text-align:center; color:#b35a00;">Famous South Indian Dishes</h2>
+
+  <div class="cuisine-grid">
+
+    <!-- 40 dishes -->
+    <!-- 1 -->
+    <div class="cuisine-card" data-title="Masala Dosa" data-desc="Crispy dosa filled with spiced potato masala."
+     data-img="imagescuisine/masala dosa.jfif">
+      <img src="imagescuisine/masala dosa.jfif"><div class="caption">Masala Dosa</div></div>
+
+    <!-- 2 -->
+    <div class="cuisine-card" data-title="Idli Sambar" data-desc="Soft idlis served with hot sambar and chutney." 
+    data-img="imagescuisine/idli sambar.jfif">
+      <img src="imagescuisine/idli sambar.jfif"><div class="caption">Idli Sambar</div></div>
+
+    <!-- 3 -->
+    <div class="cuisine-card" data-title="Medu Vada" data-desc="Crispy lentil doughnuts served with chutney." 
+    data-img="imagescuisine/medu vada.jfif">
+      <img src="imagescuisine/medu vada.jfif"><div class="caption">Medu Vada</div></div>
+
+    <!-- 4 -->
+    <div class="cuisine-card" data-title="Pongal" data-desc="Comforting rice-lentil dish tempered with spices." 
+    data-img="imagescuisine/pongal.jfif">
+      <img src="imagescuisine/pongal.jfif"><div class="caption">Pongal</div></div>
+
+    <!-- 5 -->
+    <div class="cuisine-card" data-title="Upma" data-desc="Semolina breakfast dish with veggies." 
+    data-img="imagescuisine/Upma.jfif">
+      <img src="imagescuisine/Upma.jfif"><div class="caption">Upma</div></div>
+
+    <!-- 6 -->
+    <div class="cuisine-card" data-title="Rasam" data-desc="Tangy tamarind-based soup with spices." 
+    data-img="imagescuisine/rasam.jfif">
+      <img src="imagescuisine/rasam.jfif"><div class="caption">Rasam</div></div>
+
+    <!-- 7 -->
+    <div class="cuisine-card" data-title="Bisibele Bath" data-desc="Rice-lentil Karnataka specialty cooked with spices." 
+    data-img="imagescuisine/bisi bele bath.jfif">
+      <img src="imagescuisine/bisi bele bath.jfif"><div class="caption">Bisibele Bath</div></div>
+
+    <!-- 8 -->
+    <div class="cuisine-card" data-title="Appam" data-desc="Soft Kerala pancakes made with fermented batter." 
+    data-img="imagescuisine/appam.jfif">
+      <img src="imagescuisine/appam.jfif"><div class="caption">Appam</div></div>
+
+    <!-- 9 -->
+    <div class="cuisine-card" data-title="Puttu Kadala" data-desc="Steamed rice cylinders served with chickpea curry." 
+    data-img="imagescuisine/puttu kadala.jfif">
+      <img src="imagescuisine/puttu kadala.jfif"><div class="caption">Puttu Kadala</div></div>
+
+    <!-- 10 -->
+    <div class="cuisine-card" data-title="Chettinad Chicken" data-desc="Fiery Tamil Nadu chicken curry." 
+    data-img="imagescuisine/Chicken Chettinad Biryani.jfif">
+      <img src="imagescuisine/Chicken Chettinad Biryani.jfif"><div class="caption">Chettinad Chicken</div></div>
+
+    <!-- 11 -->
+    <div class="cuisine-card" data-title="Vegetable Kurma" data-desc="South Indian mixed vegetable curry." 
+    data-img="imagescuisine/Vegetable Kurma.jfif">
+      <img src="imagescuisine/Vegetable Kurma.jfif"><div class="caption">Vegetable Kurma</div></div>
+
+    <!-- 12 -->
+    <div class="cuisine-card" data-title="Mysore Masala Dosa" data-desc="Dosa with spicy red chutney." 
+    data-img="imagescuisine/Mysore Masala Dosa.jfif">
+      <img src="imagescuisine/Mysore Masala Dosa.jfif"><div class="caption">Mysore Masala Dosa</div></div>
+
+    <!-- 13 -->
+    <div class="cuisine-card" data-title="Pesarattu" data-desc="Green gram dosa from Andhra." 
+    data-img="imagescuisine/Pesarattu.jfif">
+      <img src="imagescuisine/Pesarattu.jfif"><div class="caption">Pesarattu</div></div>
+
+    <!-- 14 -->
+    <div class="cuisine-card" data-title="Chicken 65" data-desc="Crispy fried spicy chicken." 
+    data-img="imagescuisine/chicken 65.jfif">
+      <img src="imagescuisine/chicken 65.jfif"><div class="caption">Chicken 65</div></div>
+
+    <!-- 15 -->
+    <div class="cuisine-card" data-title="Avial" data-desc="Kerala dish of mixed vegetables in coconut gravy." 
+    data-img="imagescuisine/Avial.jfif">
+      <img src="imagescuisine/Avial.jfif"><div class="caption">Avial</div></div>
+
+    <!-- 16 -->
+    <div class="cuisine-card" data-title="Sambar Rice" data-desc="Rice cooked with sambar and ghee." 
+    data-img="imagescuisine/Sambar Rice.jfif">
+      <img src="imagescuisine/Sambar Rice.jfif"><div class="caption">Sambar Rice</div></div>
+
+    <!-- 17 -->
+    <div class="cuisine-card" data-title="Idiyappam" data-desc="Steamed rice noodles from Tamil Nadu." 
+    data-img="imagescuisine/idiyappam.jfif">
+      <img src="imagescuisine/idiyappam.jfif"><div class="caption">Idiyappam</div></div>
+
+    <!-- 18 -->
+    <div class="cuisine-card" data-title="Mutton Sukka" data-desc="Dry spiced mutton preparation." 
+    data-img="imagescuisine/Mutton Sukka.jfif">
+      <img src="imagescuisine/Mutton Sukka.jfif"><div class="caption">Mutton Sukka</div></div>
+
+    <!-- 19 -->
+    <div class="cuisine-card" data-title="Puliyodarai" data-desc="Tangy tamarind rice."
+     data-img="imagescuisine/Puliyodarai.jfif">
+      <img src="imagescuisine/Puliyodarai.jfif"><div class="caption">Puliyodarai</div></div>
+
+    <!-- 20 -->
+    <div class="cuisine-card" data-title="Curd Rice" data-desc="South India's favorite comfort food." 
+    data-img="imagescuisine/curd rice.jfif">
+      <img src="imagescuisine/curd rice.jfif"><div class="caption">Curd Rice</div></div>
+
+    <!-- 21 -->
+    <div class="cuisine-card" data-title="Mango Pickle" data-desc="Traditional Andhra-style pickle." 
+    data-img="imagescuisine/mongo pickle.jfif">
+      <img src="imagescuisine/mongo pickle.jfif"><div class="caption">Mango Pickle</div></div>
+
+    <!-- 22 -->
+    <div class="cuisine-card" data-title="Neer Dosa" data-desc="Soft coastal Karnataka crepes." 
+    data-img="imagescuisine/Neer Dosa.jfif">
+      <img src="imagescuisine/Neer Dosa.jfif"><div class="caption">Neer Dosa</div></div>
+
+    <!-- 23 -->
+    <div class="cuisine-card" data-title="Fish Molee" data-desc="Kerala coconut milk fish curry." 
+    data-img="imagescuisine/fish molee.jfif">
+      <img src="imagescuisine/fish molee.jfif"><div class="caption">Fish Molee</div></div>
+
+    <!-- 24 -->
+    <div class="cuisine-card" data-title="Ada Pradhaman" data-desc="Kerala sweet pudding made with jaggery." 
+    data-img="imagescuisine/Ada Pradhaman.jfif">
+      <img src="imagescuisine/Ada Pradhaman.jfif"><div class="caption">Ada Pradhaman</div></div>
+
+    <!-- 25 -->
+    <div class="cuisine-card" data-title="Rava Dosa" data-desc="Thin crispy dosa made from semolina." 
+    data-img="imagescuisine/Rava Dosa.jfif">
+      <img src="imagescuisine/Rava Dosa.jfif"><div class="caption">Rava Dosa</div></div>
+
+    <!-- 26 -->
+    <div class="cuisine-card" data-title="Tomato Rice" data-desc="Rice cooked with spiced tomato gravy." 
+    data-img="imagescuisine/Tomato Rice.jfif">
+      <img src="imagescuisine/Tomato Rice.jfif"><div class="caption">Tomato Rice</div></div>
+
+    <!-- 27 -->
+    <div class="cuisine-card" data-title="Kara Kuzhambu" data-desc="Spicy Tamil Nadu tamarind curry." 
+    data-img="imagescuisine/Kara Kuzhambu.jfif">
+      <img src="imagescuisine/Kara Kuzhambu.jfif"><div class="caption">Kara Kuzhambu</div></div>
+
+    <!-- 28 -->
+    <div class="cuisine-card" data-title="Malabar Parotta" data-desc="Flaky layered bread from Kerala." 
+    data-img="imagescuisine/Malabar Parotta.jfif">
+      <img src="imagescuisine/Malabar Parotta.jfif"><div class="caption">Malabar Parotta</div></div>
+
+    <!-- 29 -->
+    <div class="cuisine-card" data-title="Chicken Chettinad Biryani" data-desc="Highly aromatic Chettinad-style biryani." 
+    data-img="imagescuisine/Chicken Chettinad Biryani.jfif">
+      <img src="imagescuisine/Chicken Chettinad Biryani.jfif"><div class="caption">Chicken Chettinad Biryani</div></div>
+
+    <!-- 30 -->
+    <div class="cuisine-card" data-title="Kootu" data-desc="Mild vegetable-lentil curry." 
+    data-img="imagescuisine/kottu.jfif">
+      <img src="imagescuisine/kottu.jfif"><div class="caption">Kootu</div></div>
+
+    <!-- 31 -->
+    <div class="cuisine-card" data-title="Kappa Biryani" data-desc="Kerala tapioca biryani." 
+    data-img="imagescuisine/Kappa Biryani.jfif">
+      <img src="imagescuisine/Kappa Biryani.jfif"><div class="caption">Kappa Biryani</div></div>
+
+    <!-- 32 -->
+    <div class="cuisine-card" data-title="Gongura Pickle" data-desc="Tangy Andhra roselle-leaf pickle." 
+    data-img="imagescuisine/gongura pickle.jfif">
+      <img src="imagescuisine/gongura pickle.jfif"><div class="caption">Gongura Pickle</div></div>
+
+    <!-- 33 -->
+    <div class="cuisine-card" data-title="Paal Payasam" data-desc="Kerala milk rice pudding." 
+    data-img="imagescuisine/paal payasam.jfif">
+      <img src="imagescuisine/paal payasam.jfif"><div class="caption">Paal Payasam</div></div>
+
+    <!-- 34 -->
+    <div class="cuisine-card" data-title="Mutton Biryani (Hyderabadi)" data-desc="World-famous Hyderabadi biryani." 
+    data-img="imagescuisine/Hyderabadi Mutton Biryani.jfif">
+      <img src="imagescuisine/Hyderabadi Mutton Biryani.jfif"><div class="caption">Hyderabadi Mutton Biryani</div></div>
+
+    <!-- 35 -->
+    <div class="cuisine-card" data-title="Sundal" data-desc="Steamed legumes with coconut." 
+    data-img="imagescuisine/Sundal.jfif">
+      <img src="imagescuisine/Sundal.jfif"><div class="caption">Sundal</div></div>
+
+    <!-- 36 -->
+    <div class="cuisine-card" data-title="Paniyaram" data-desc="Crispy golden dumplings from dosa batter." 
+    data-img="imagescuisine/Paniyaram.jfif">
+      <img src="imagescuisine/Paniyaram.jfif"><div class="caption">Paniyaram</div></div>
+
+    <!-- 37 -->
+    <div class="cuisine-card" data-title="Kozhikode Biryani" data-desc="Kerala style fragrant biryani." 
+    data-img="imagescuisine/Kozhikode Biryani.jfif">
+      <img src="imagescuisine/Kozhikode Biryani.jfif"><div class="caption">Kozhikode Biryani</div></div>
+
+    <!-- 38 -->
+    <div class="cuisine-card" data-title="Thattu Dosa" data-desc="Small thick dosa served with chutney." 
+    data-img="imagescuisine/Thattu  dosa.jfif">
+      <img src="imagescuisine/Thattu  dosa.jfif"><div class="caption">Thattu Dosa</div></div>
+
+    <!-- 39 -->
+    <div class="cuisine-card" data-title="Mysore Pak" data-desc="Ghee-rich Karnataka sweet." 
+    data-img="imagescuisine/Mysore Pak.jfif">
+      <img src="imagescuisine/Mysore Pak.jfif"><div class="caption">Mysore Pak</div></div>
+
+    <!-- 40 -->
+    <div class="cuisine-card" data-title="Unniyappam" data-desc="Sweet Kerala banana fritters." 
+    data-img="imagescuisine/unniyappam.jfif">
+      <img src="imagescuisine/unniyappam.jfif"><div class="caption">Unniyappam</div></div>
+
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="cuisine-modal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <img class="modal-image" src="" alt="">
+    <div class="modal-info">
+      <h2 class="modal-title"></h2>
+      <p class="modal-desc"></p>
+    </div>
+  </div>
+</div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+<!-- JS -->
+<script>
+const modal = document.getElementById('cuisine-modal');
+const modalImage = modal.querySelector('.modal-image');
+const modalTitle = modal.querySelector('.modal-title');
+const modalDesc = modal.querySelector('.modal-desc');
+
+document.querySelectorAll('.cuisine-card').forEach(card => {
+  card.addEventListener('click', () => {
+    modalImage.src = card.dataset.img;
+    modalTitle.textContent = card.dataset.title;
+    modalDesc.textContent = card.dataset.desc;
+    modal.classList.add('show');
+  });
+});
+
+document.querySelector('.modal-close').addEventListener('click', () => {
+  modal.classList.remove('show');
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) modal.classList.remove('show');
+});
+</script>
+
+</body>
+</html>
