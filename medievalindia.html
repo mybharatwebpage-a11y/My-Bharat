@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medieval India</title>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fffaf0; color:#4a1a0a; }
+  header { background:#4a1a0a; color:#ffd700; padding:15px; text-align:center; font-size:1.8em; font-weight:bold; }
+  .container { max-width:1200px; margin:20px auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:15px; }
+  .card { background:#fff8f0; border:2px solid #d9a441; border-radius:12px; overflow:hidden; cursor:pointer; transition: transform 0.2s; }
+  .card:hover { transform: translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+  .card img { width:100%; height:140px; object-fit:cover; }
+  .card-content { padding:10px; }
+  .card-content h3 { margin:0 0 5px 0; font-size:1.1em; color:#4a1a0a; }
+  .card-content p { font-size:0.9em; color:#6b4a3a; }
+  /* Modal */
+  .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.5); }
+  .modal-content { background:#fff8f0; margin:5% auto; padding:20px; border:2px solid #d9a441; border-radius:12px; max-width:600px; position:relative; }
+  .modal-content img { width:100%; max-height:300px; object-fit:cover; margin-bottom:15px; border-radius:8px; }
+  .close { position:absolute; top:10px; right:15px; color:#4a1a0a; font-size:1.5em; font-weight:bold; cursor:pointer; }
+</style>
+</head>
+<body>
+ <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container">
+
+  <!-- 30 Cards -->
+  <div class="card" onclick="openModal(0)"><img src="IMAGESHISTORY/delhi sultanate.jpg" alt="Delhi Sultanate"><div class="card-content"><h3>Delhi Sultanate</h3><p>1206–1526 CE</p></div></div>
+  <div class="card" onclick="openModal(1)"><img src="IMAGESHISTORY/Mughal Empire.jpg" alt="Mughal Empire"><div class="card-content"><h3>Mughal Empire</h3><p>1526–1857 CE</p></div></div>
+  <div class="card" onclick="openModal(2)"><img src="IMAGESHISTORY/Akbar the Great.jpg" alt="Akbar the Great"><div class="card-content"><h3>Akbar the Great</h3><p>1556–1605 CE</p></div></div>
+  <div class="card" onclick="openModal(3)"><img src="IMAGESHISTORY/Shivaji Maharaj.jpg" alt="Shivaji Maharaj"><div class="card-content"><h3>Shivaji Maharaj</h3><p>Founder of Maratha Empire, 1674 CE</p></div></div>
+  <div class="card" onclick="openModal(4)"><img src="IMAGESHISTORY/Vijayanagara Empire.jpg" alt="Vijayanagara Empire"><div class="card-content"><h3>Vijayanagara Empire</h3><p>1336–1646 CE</p></div></div>
+  <div class="card" onclick="openModal(5)"><img src="IMAGESHISTORY/Bahmani Sultanate.jpg" alt="Bahmani Sultanate"><div class="card-content"><h3>Bahmani Sultanate</h3><p>1347–1527 CE</p></div></div>
+  <div class="card" onclick="openModal(6)"><img src="IMAGESHISTORY/Sufism in India.jpg" alt="Sufism in India"><div class="card-content"><h3>Sufism in India</h3><p>Spiritual and cultural influence during medieval times.</p></div></div>
+  <div class="card" onclick="openModal(7)"><img src="IMAGESHISTORY/Mughal Architecture.jpg" alt="Mughal Architecture"><div class="card-content"><h3>Mughal Architecture</h3><p>Famous monuments like Taj Mahal, Red Fort, and Fatehpur Sikri.</p></div></div>
+  <div class="card" onclick="openModal(8)"><img src="IMAGESHISTORY/Akbar Reforms.jpg" alt="Akbar Reforms"><div class="card-content"><h3>Akbar Reforms</h3><p>Religious tolerance, land reforms, and administrative innovations.</p></div></div>
+  <div class="card" onclick="openModal(9)"><img src="IMAGESHISTORY/Maratha Confederacy.jpg" alt="Maratha Confederacy"><div class="card-content"><h3>Maratha Confederacy</h3><p>Powerful regional state challenging Mughals.</p></div></div>
+  <div class="card" onclick="openModal(10)"><img src="IMAGESHISTORY/Festivals & Culture.jpg" alt="Festivals & Culture"><div class="card-content"><h3>Festivals & Culture</h3><p>Medieval India saw diverse festivals, arts, and music.</p></div></div>
+  <div class="card" onclick="openModal(11)"><img src="IMAGESHISTORY/Regional Sultanate.jpg" alt="Regional Sultanates"><div class="card-content"><h3>Regional Sultanates</h3><p>Delhi, Bengal, Gujarat, Malwa, Jaunpur Sultanates emerged.</p></div></div>
+  <div class="card" onclick="openModal(12)"><img src="IMAGESHISTORY/Temple Art.jpg" alt="Temple Art"><div class="card-content"><h3>Temple Art</h3><p>Hoysala, Chola, and Vijayanagara temples flourished.</p></div></div>
+  <div class="card" onclick="openModal(13)"><img src="IMAGESHISTORY/Miniature Painting.jpg" alt="Miniature Painting"><div class="card-content"><h3>Miniature Painting</h3><p>Rich artistic traditions in Mughal, Rajput, and Deccan courts.</p></div></div>
+  <div class="card" onclick="openModal(14)"><img src="IMAGESHISTORY/Trade & Commerce.jpg" alt="Trade & Commerce"><div class="card-content"><h3>Trade & Commerce</h3><p>Growth of cities, markets, and overseas trade.</p></div></div>
+  <div class="card" onclick="openModal(15)"><img src="IMAGESHISTORY/Agriculture.jpg" alt="Agriculture"><div class="card-content"><h3>Agriculture</h3><p>New crops, irrigation techniques, and land revenue systems developed.</p></div></div>
+  <div class="card" onclick="openModal(16)"><img src="IMAGESHISTORY/Language & Literature.jpg" alt="Language & Literature"><div class="card-content"><h3>Language & Literature</h3><p>Persian, Sanskrit, and regional languages thrived in literature.</p></div></div>
+  <div class="card" onclick="openModal(17)"><img src="IMAGESHISTORY/religion.jpg" alt="Religion"><div class="card-content"><h3>Religion</h3><p>Hinduism, Islam, Jainism, Sikhism influenced medieval society.</p></div></div>
+  <div class="card" onclick="openModal(18)"><img src="IMAGESHISTORY/Forts.jpg" alt="Forts"><div class="card-content"><h3>Forts</h3><p>Red Fort, Golconda, Chittorgarh – defensive and architectural marvels.</p></div></div>
+  <div class="card" onclick="openModal(19)"><img src="IMAGESHISTORY/Mughal Gardens.jpg" alt="Mughal Gardens"><div class="card-content"><h3>Mughal Gardens</h3><p>Charbagh layout with symmetry and water features.</p></div></div>
+  <div class="card" onclick="openModal(20)"><img src="IMAGESHISTORY/Women in Medieval India.jpg" alt="Women in Medieval India"><div class="card-content"><h3>Women in Medieval India</h3><p>Roles in royalty, arts, religion, and households.</p></div></div>
+  <div class="card" onclick="openModal(21)"><img src="IMAGESHISTORY/Education.jpg" alt="Education"><div class="card-content"><h3>Education</h3><p>Madrasas, pathshalas, and universities preserved learning.</p></div></div>
+  <div class="card" onclick="openModal(22)"><img src="IMAGESHISTORY/Daily Life.jpg" alt="Daily Life"><div class="card-content"><h3>Daily Life</h3><p>Varied food, clothing, festivals, and trade-based economy.</p></div></div>
+  <div class="card" onclick="openModal(23)"><img src="IMAGESHISTORY/Music & Arts.jpg" alt="Music & Arts"><div class="card-content"><h3>Music & Arts</h3><p>Classical music, instruments, dance, and visual arts flourished.</p></div></div>
+  <div class="card" onclick="openModal(24)"><img src="IMAGESHISTORY/Architecture.jpg" alt="Architecture"><div class="card-content"><h3>Architecture</h3><p>Blend of Islamic and Hindu styles produced unique structures.</p></div></div>
+  <div class="card" onclick="openModal(25)"><img src="IMAGESHISTORY/Maratha Wars.jpg" alt="Maratha Wars"><div class="card-content"><h3>Maratha Wars</h3><p>Conflicts with Mughals and regional powers reshaped politics.</p></div></div>
+  <div class="card" onclick="openModal(26)"><img src="IMAGESHISTORY/Sikhism.jpg" alt="Sikhism"><div class="card-content"><h3>Sikhism</h3><p>Founded by Guru Nanak, promoting equality and devotion.</p></div></div>
+  <div class="card" onclick="openModal(27)"><img src="IMAGESHISTORY/Medieval Coinage.jpg" alt="Medieval Coinage"><div class="card-content"><h3>Medieval Coinage</h3><p>Gold, silver, and copper coins indicated trade and wealth.</p></div></div>
+  <div class="card" onclick="openModal(28)"><img src="IMAGESHISTORY/Urban Centers.jpg" alt="Urban Centers"><div class="card-content"><h3>Urban Centers</h3><p>Trade hubs like Delhi, Agra, Vijayanagara flourished.</p></div></div>
+  <div class="card" onclick="openModal(29)"><img src="IMAGESHISTORY/Cultural Exchange.jpg" alt="Cultural Exchange"><div class="card-content"><h3>Cultural Exchange</h3><p>Indian culture influenced Central Asia, Southeast Asia, and vice versa.</p></div></div>
+</div>
+
+<!-- 30 Modals with images -->
+<div id="modal0" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(0)">&times;</span><h2>Delhi Sultanate</h2><img src="IMAGESHISTORY/delhi sultanate.jpg" alt="Delhi Sultanate"><p>The Delhi Sultanate ruled northern India for over three centuries, establishing Islamic governance and culture.</p></div></div>
+<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(1)">&times;</span><h2>Mughal Empire</h2><img src="IMAGESHISTORY/Mughal Empire.jpg" alt="Mughal Empire"><p>The Mughal Empire united most of India, fostering art, architecture, and centralized administration.</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(2)">&times;</span><h2>Akbar the Great</h2><img src="IMAGESHISTORY/Akbar the Great.jpg" alt="Akbar the Great"><p>Akbar promoted religious tolerance, administrative reforms, and cultural integration.</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(3)">&times;</span><h2>Shivaji Maharaj</h2><img src="IMAGESHISTORY/Shivaji Maharaj.jpg" alt="Shivaji Maharaj"><p>Founder of Maratha Empire, known for guerrilla warfare and strong forts.</p></div></div>
+<div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(4)">&times;</span><h2>Vijayanagara Empire</h2><img src="IMAGESHISTORY/Vijayanagara Empire.jpg" alt="Vijayanagara Empire"><p>South Indian empire known for trade, temples, and resistance to invasions.</p></div></div>
+<div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(5)">&times;</span><h2>Bahmani Sultanate</h2><img src="IMAGESHISTORY/Bahmani Sultanate.jpg" alt="Bahmani Sultanate"><p>Important Deccan Sultanate with cultural and architectural influence.</p></div></div>
+<div id="modal6" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(6)">&times;</span><h2>Sufism in India</h2><img src="IMAGESHISTORY/Sufism in India.jpg" alt="Sufism in India"><p>Sufism influenced culture, spirituality, music, and literature.</p></div></div>
+<div id="modal7" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(7)">&times;</span><h2>Mughal Architecture</h2><img src="IMAGESHISTORY/Mughal Architecture.jpg" alt="Mughal Architecture"><p>Blend of Persian and Indian styles produced iconic buildings.</p></div></div>
+<div id="modal8" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(8)">&times;</span><h2>Akbar Reforms</h2><img src="IMAGESHISTORY/Akbar Reforms.jpg" alt="Akbar Reforms"><p>Land revenue reforms, legal reforms, and integration of diverse communities.</p></div></div>
+<div id="modal9" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(9)">&times;</span><h2>Maratha Confederacy</h2><img src="IMAGESHISTORY/Maratha Confederacy.jpg" alt="Maratha Confederacy"><p>Confederation of Maratha chiefs dominating large parts of India.</p></div></div>
+
+<div id="modal10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(10)">&times;</span><h2>Festivals & Culture</h2><img src="IMAGESHISTORY/Festivals & Culture.jpg" alt="Festivals & Culture"><p>Medieval India saw diverse festivals, arts, and music.</p></div></div>
+<div id="modal11" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(11)">&times;</span><h2>Regional Sultanates</h2><img src="IMAGESHISTORY/Regional Sultanate.jpg" alt="Regional Sultanates"><p>Delhi, Bengal, Gujarat, Malwa, Jaunpur Sultanates emerged.</p></div></div>
+<div id="modal12" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(12)">&times;</span><h2>Temple Art</h2><img src="IMAGESHISTORY/Temple Art.jpg" alt="Temple Art"><p>Hoysala, Chola, and Vijayanagara temples flourished.</p></div></div>
+<div id="modal13" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(13)">&times;</span><h2>Miniature Painting</h2><img src="IMAGESHISTORY/Miniature Painting.jpg" alt="Miniature Painting"><p>Rich artistic traditions in Mughal, Rajput, and Deccan courts.</p></div></div>
+<div id="modal14" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(14)">&times;</span><h2>Trade & Commerce</h2><img src="IMAGESHISTORY/Trade & Commerce.jpg" alt="Trade & Commerce"><p>Growth of cities, markets, and overseas trade.</p></div></div>
+<div id="modal15" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(15)">&times;</span><h2>Agriculture</h2><img src="IMAGESHISTORY/Agriculture.jpg" alt="Agriculture"><p>New crops, irrigation techniques, and land revenue systems developed.</p></div></div>
+<div id="modal16" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(16)">&times;</span><h2>Language & Literature</h2><img src="IMAGESHISTORY/Language & Literature.jpg" alt="Language & Literature"><p>Persian, Sanskrit, and regional languages thrived in literature.</p></div></div>
+<div id="modal17" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(17)">&times;</span><h2>Religion</h2><img src="IMAGESHISTORY/religion.jpg" alt="Religion"><p>Hinduism, Islam, Jainism, Sikhism influenced medieval society.</p></div></div>
+<div id="modal18" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(18)">&times;</span><h2>Forts</h2><img src="IMAGESHISTORY/Forts.jpg" alt="Forts"><p>Red Fort, Golconda, Chittorgarh – defensive and architectural marvels.</p></div></div>
+<div id="modal19" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(19)">&times;</span><h2>Mughal Gardens</h2><img src="IMAGESHISTORY/Mughal Gardens.jpg" alt="Mughal Gardens"><p>Charbagh layout with symmetry and water features.</p></div></div>
+<div id="modal20" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(20)">&times;</span><h2>Women in Medieval India</h2><img src="IMAGESHISTORY/Women in Medieval India.jpg" alt="Women in Medieval India"><p>Roles in royalty, arts, religion, and households.</p></div></div>
+<div id="modal21" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(21)">&times;</span><h2>Education</h2><img src="IMAGESHISTORY/Education.jpg" alt="Education"><p>Madrasas, pathshalas, and universities preserved learning.</p></div></div>
+<div id="modal22" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(22)">&times;</span><h2>Daily Life</h2><img src="IMAGESHISTORY/Daily Life.jpg" alt="Daily Life"><p>Varied food, clothing, festivals, and trade-based economy.</p></div></div>
+<div id="modal23" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(23)">&times;</span><h2>Music & Arts</h2><img src="IMAGESHISTORY/Music & Arts.jpg" alt="Music & Arts"><p>Classical music, instruments, dance, and visual arts flourished.</p></div></div>
+<div id="modal24" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(24)">&times;</span><h2>Architecture</h2><img src="IMAGESHISTORY/Architecture.jpg" alt="Architecture"><p>Blend of Islamic and Hindu styles produced unique structures.</p></div></div>
+<div id="modal25" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(25)">&times;</span><h2>Maratha Wars</h2><img src="IMAGESHISTORY/Maratha Wars.jpg" alt="Maratha Wars"><p>Conflicts with Mughals and regional powers reshaped politics.</p></div></div>
+<div id="modal26" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(26)">&times;</span><h2>Sikhism</h2><img src="IMAGESHISTORY/Sikhism.jpg" alt="Sikhism"><p>Founded by Guru Nanak, promoting equality and devotion.</p></div></div>
+<div id="modal27" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(27)">&times;</span><h2>Medieval Coinage</h2><img src="IMAGESHISTORY/Medieval Coinage.jpg" alt="Medieval Coinage"><p>Gold, silver, and copper coins indicated trade and wealth.</p></div></div>
+<div id="modal28" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(28)">&times;</span><h2>Urban Centers</h2><img src="IMAGESHISTORY/Urban Centers.jpg" alt="Urban Centers"><p>Trade hubs like Delhi, Agra, Vijayanagara flourished.</p></div></div>
+<div id="modal29" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(29)">&times;</span><h2>Cultural Exchange</h2><img src="IMAGESHISTORY/Cultural Exchange.jpg" alt="Cultural Exchange"><p>Indian culture influenced Central Asia, Southeast Asia, and vice versa.</p></div></div>
+
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+<script>
+function openModal(i) { document.getElementById('modal'+i).style.display='block'; }
+function closeModal(i) { document.getElementById('modal'+i).style.display='none'; }
+window.onclick = function(event) { for(let i=0;i<30;i++){ if(event.target==document.getElementById('modal'+i)) closeModal(i); } }
+</script>
+</body>
+</html>

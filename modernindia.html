@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern India</title>
+<style>
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  /* Global Styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:0;
+    background:#fffaf0;
+    color:#4a1a0a;
+  }
+
+  /* Header */
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Container & Cards */
+  .container {
+    max-width:1200px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:15px;
+  }
+
+  .card {
+    background:#fff8f0;
+    border:2px solid #d9a441;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .card img {
+    width:100%;
+    height:140px;
+    object-fit:cover;
+  }
+
+  .card-content {
+    padding:10px;
+  }
+
+  .card-content h3 {
+    margin:0 0 5px 0;
+    font-size:1.1em;
+    color:#4a1a0a;
+  }
+
+  .card-content p {
+    font-size:0.9em;
+    color:#6b4a3a;
+  }
+
+  /* Modal */
+  .modal {
+    display:none;
+    position:fixed;
+    z-index:1000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    background:rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background:#fff8f0;
+    margin:5% auto;
+    padding:20px;
+    border:2px solid #d9a441;
+    border-radius:12px;
+    max-width:600px;
+    position:relative;
+  }
+
+  .modal-content img {
+    width:100%;
+    height:auto;
+    margin-bottom:10px;
+    border-radius:8px;
+  }
+
+  .close {
+    position:absolute;
+    top:10px;
+    right:15px;
+    color:#4a1a0a;
+    font-size:1.5em;
+    font-weight:bold;
+    cursor:pointer;
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- 30 Cards -->
+  <div class="card" onclick="openModal(0)">
+    <img src="IMAGESHISTORY/Indian Rebellion 1857.jpg" alt="1857 Rebellion">
+    <div class="card-content"><h3>Indian Rebellion 1857</h3><p>First major uprising against British rule.</p></div>
+  </div>
+  <div class="card" onclick="openModal(1)">
+    <img src="IMAGESHISTORY/Indian National Congress.jpg" alt="Indian National Congress">
+    <div class="card-content"><h3>Indian National Congress</h3><p>Founded in 1885 to fight for independence.</p></div>
+  </div>
+  <div class="card" onclick="openModal(2)">
+    <img src="IMAGESHISTORY/Muslim League.jpg" alt="Muslim League">
+    <div class="card-content"><h3>Muslim League</h3><p>Founded in 1906, played major role in creation of Pakistan.</p></div>
+  </div>
+  <div class="card" onclick="openModal(3)">
+    <img src="IMAGESHISTORY/Mahatma Gandhi.jpg" alt="Mahatma Gandhi">
+    <div class="card-content"><h3>Mahatma Gandhi</h3><p>Leader of non-violent freedom movement.</p></div>
+  </div>
+  <div class="card" onclick="openModal(4)">
+    <img src="IMAGESHISTORY/Non-Cooperation Movement.jpg" alt="Non-Cooperation Movement">
+    <div class="card-content"><h3>Non-Cooperation Movement</h3><p>1920–22, mass protest led by Gandhi.</p></div>
+  </div>
+  <div class="card" onclick="openModal(5)">
+    <img src="IMAGESHISTORY/Civil Disobedience.jpg" alt="Civil Disobedience">
+    <div class="card-content"><h3>Civil Disobedience</h3><p>1930–34, Salt March and resistance to British laws.</p></div>
+  </div>
+  <div class="card" onclick="openModal(6)">
+    <img src="IMAGESHISTORY/Quit India Movement.jpg" alt="Quit India Movement">
+    <div class="card-content"><h3>Quit India Movement</h3><p>1942 call for British withdrawal during WWII.</p></div>
+  </div>
+  <div class="card" onclick="openModal(7)">
+    <img src="IMAGESHISTORY/Independence 1947.jpg" alt="Independence 1947">
+    <div class="card-content"><h3>Independence 1947</h3><p>India became independent on 15 August 1947.</p></div>
+  </div>
+  <div class="card" onclick="openModal(8)">
+    <img src="IMAGESHISTORY/Partition of India.jpg" alt="Partition of India">
+    <div class="card-content"><h3>Partition of India</h3><p>Division of India and Pakistan, large-scale migration.</p></div>
+  </div>
+  <div class="card" onclick="openModal(9)">
+    <img src="IMAGESHISTORY/Indian Constitution.jpg" alt="Indian Constitution">
+    <div class="card-content"><h3>Indian Constitution</h3><p>Adopted in 1950, making India a democratic republic.</p></div>
+  </div>
+  <div class="card" onclick="openModal(10)">
+    <img src="IMAGESHISTORY/Jawaharlal Nehru.jpg" alt="Jawaharlal Nehru">
+    <div class="card-content"><h3>Jawaharlal Nehru</h3><p>India’s first Prime Minister, led post-independence development.</p></div>
+  </div>
+  <div class="card" onclick="openModal(11)">
+    <img src="IMAGESHISTORY/Green Revolutio.jpg" alt="Green Revolution">
+    <div class="card-content"><h3>Green Revolution</h3><p>Modern agriculture and self-sufficiency in food grains.</p></div>
+  </div>
+  <div class="card" onclick="openModal(12)">
+    <img src="IMAGESHISTORY/Space Program.jpg" alt="Space Program">
+    <div class="card-content"><h3>Space Program</h3><p>ISRO launched satellites, modernizing technology and science.</p></div>
+  </div>
+  <div class="card" onclick="openModal(13)">
+    <img src="IMAGESHISTORY/economic reforms.jpg" alt="Economic Reforms">
+    <div class="card-content"><h3>Economic Reforms</h3><p>1991 liberalization transformed India’s economy.</p></div>
+  </div>
+  <div class="card" onclick="openModal(14)">
+    <img src="IMAGESHISTORY/Indira Gandhi.jpg" alt="Indira Gandhi">
+    <div class="card-content"><h3>Indira Gandhi</h3><p>Prime Minister known for centralization and Green Revolution.</p></div>
+  </div>
+  <div class="card" onclick="openModal(15)">
+    <img src="IMAGESHISTORY/Kashmir Conflict.jpg" alt="Kashmir Conflict">
+    <div class="card-content"><h3>Kashmir Conflict</h3><p>Post-independence territorial disputes and wars with Pakistan.</p></div>
+  </div>
+  <div class="card" onclick="openModal(16)">
+    <img src="IMAGESHISTORY/Democracy.jpg" alt="Democracy">
+    <div class="card-content"><h3>Democracy</h3><p>Regular elections, free press, and democratic institutions.</p></div>
+  </div>
+  <div class="card" onclick="openModal(17)">
+    <img src="IMAGESHISTORY/Science & Technology.jpg" alt="Science & Technology">
+    <div class="card-content"><h3>Science & Technology</h3><p>Advancements in IT, nuclear energy, and space research.</p></div>
+  </div>
+  <div class="card" onclick="openModal(18)">
+    <img src="IMAGESHISTORY/Education.jpg" alt="Education">
+    <div class="card-content"><h3>Education</h3><p>Expansion of schools, universities, and literacy programs.</p></div>
+  </div>
+  <div class="card" onclick="openModal(19)">
+    <img src="IMAGESHISTORY/Railways & Transport.jpg" alt="Railways & Transport">
+    <div class="card-content"><h3>Railways & Transport</h3><p>Modern infrastructure connecting cities and trade centers.</p></div>
+  </div>
+  <div class="card" onclick="openModal(20)">
+    <img src="IMAGESHISTORY/Women Rights.jpg" alt="Women Rights">
+    <div class="card-content"><h3>Women Rights</h3><p>Legal reforms and social movements improved gender equality.</p></div>
+  </div>
+  <div class="card" onclick="openModal(21)">
+    <img src="IMAGESHISTORY/Cultural Movements.jpg" alt="Cultural Movements">
+    <div class="card-content"><h3>Cultural Movements</h3><p>Art, cinema, literature, and music flourished post-independence.</p></div>
+  </div>
+  <div class="card" onclick="openModal(22)">
+    <img src="IMAGESHISTORY/Political Parties.jpg" alt="Political Parties">
+    <div class="card-content"><h3>Political Parties</h3><p>Democratic multiparty system shaped Indian politics.</p></div>
+  </div>
+  <div class="card" onclick="openModal(23)">
+    <img src="IMAGESHISTORY/Green Energy.jpg" alt="Green Energy">
+    <div class="card-content"><h3>Green Energy</h3><p>Renewable energy programs for sustainable development.</p></div>
+  </div>
+  <div class="card" onclick="openModal(24)">
+    <img src="IMAGESHISTORY/Industrialization.jpg" alt="Industrialization">
+    <div class="card-content"><h3>Industrialization</h3><p>Growth of manufacturing, IT, and service sectors.</p></div>
+  </div>
+  <div class="card" onclick="openModal(25)">
+    <img src="IMAGESHISTORY/Digital India.jpg" alt="Digital India">
+    <div class="card-content"><h3>Digital India</h3><p>Promoting technology, e-governance, and connectivity nationwide.</p></div>
+  </div>
+  <div class="card" onclick="openModal(26)">
+    <img src="IMAGESHISTORY/space missions.jpg" alt="Space Missions">
+    <div class="card-content"><h3>Space Missions</h3><p>Mangalyaan, Chandrayaan, and satellite launches for progress.</p></div>
+  </div>
+  <div class="card" onclick="openModal(27)">
+    <img src="IMAGESHISTORY/Olympics & Sports.jpg" alt="Olympics & Sports">
+    <div class="card-content"><h3>Olympics & Sports</h3><p>India excelled in hockey, cricket, and emerging sports achievements.</p></div>
+  </div>
+  <div class="card" onclick="openModal(28)">
+    <img src="IMAGESHISTORY/Global Influence.jpg" alt="Global Influence">
+    <div class="card-content"><h3>Global Influence</h3><p>India became an important player in world economy and diplomacy.</p></div>
+  </div>
+  <div class="card" onclick="openModal(29)">
+    <img src="IMAGESHISTORY/Modern Cities.jpg" alt="Modern Cities">
+    <div class="card-content"><h3>Modern Cities</h3><p>Urbanization and metro cities developed with modern infrastructure.</p></div>
+  </div>
+</div>
+<!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+<!-- Modals 0 to 29 -->
+<div id="modal0" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(0)">&times;</span><img src="IMAGESHISTORY/Indian Rebellion 1857.jpg"><h2>Indian Rebellion 1857</h2><p>Also known as the First War of Independence, it marked the start of a widespread revolt against British rule.</p></div></div>
+<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(1)">&times;</span><img src="IMAGESHISTORY/Indian National Congress.jpg"><h2>Indian National Congress</h2><p>Founded in 1885, the Congress led India’s struggle for independence through political and social reforms.</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(2)">&times;</span><img src="IMAGESHISTORY/Muslim League.jpg"><h2>Muslim League</h2><p>Established in 1906, it advocated for Muslim rights, ultimately leading to the creation of Pakistan.</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(3)">&times;</span><img src="IMAGESHISTORY/Mahatma Gandhi.jpg"><h2>Mahatma Gandhi</h2><p>Leader of India’s non-violent independence movement, promoting civil disobedience and unity.</p></div></div>
+<div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(4)">&times;</span><img src="IMAGESHISTORY/Non-Cooperation Movement.jpg"><h2>Non-Cooperation Movement</h2><p>Massive protest movement (1920–22) led by Gandhi to boycott British institutions.</p></div></div>
+<div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(5)">&times;</span><img src="IMAGESHISTORY/Civil Disobedience.jpg"><h2>Civil Disobedience</h2><p>Campaign to peacefully resist British laws, highlighted by the Salt March of 1930.</p></div></div>
+<div id="modal6" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(6)">&times;</span><img src="IMAGESHISTORY/Quit India Movement.jpg"><h2>Quit India Movement</h2><p>1942 movement demanding immediate British withdrawal during World War II.</p></div></div>
+<div id="modal7" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(7)">&times;</span><img src="IMAGESHISTORY/Independence 1947.jpg"><h2>Independence 1947</h2><p>India gained freedom from British rule on 15 August 1947, ending colonial domination.</p></div></div>
+<div id="modal8" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(8)">&times;</span><img src="IMAGESHISTORY/Partition of India.jpg"><h2>Partition of India</h2><p>Division into India and Pakistan caused large-scale migration and communal violence.</p></div></div>
+<div id="modal9" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(9)">&times;</span><img src="IMAGESHISTORY/Indian Constitution.jpg"><h2>Indian Constitution</h2><p>Adopted in 1950, establishing India as a sovereign, democratic republic.</p></div></div>
+<div id="modal10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(10)">&times;</span><img src="IMAGESHISTORY/Jawaharlal Nehru.jpg"><h2>Jawaharlal Nehru</h2><p>India’s first Prime Minister, led post-independence development and modernization.</p></div></div>
+<div id="modal11" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(11)">&times;</span><img src="IMAGESHISTORY/Green Revolutio.jpg"><h2>Green Revolution</h2><p>Introduced high-yield crops and modern farming techniques, ensuring food security.</p></div></div>
+<div id="modal12" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(12)">&times;</span><img src="IMAGESHISTORY/Space Program.jpg"><h2>Space Program</h2><p>ISRO launched satellites like Aryabhata and Chandrayaan, advancing technology and research.</p></div></div>
+<div id="modal13" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(13)">&times;</span><img src="IMAGESHISTORY/economic reforms.jpg"><h2>Economic Reforms</h2><p>1991 liberalization transformed the economy, boosting trade, industry, and foreign investment.</p></div></div>
+<div id="modal14" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(14)">&times;</span><img src="IMAGESHISTORY/Indira Gandhi.jpg"><h2>Indira Gandhi</h2><p>Led India as Prime Minister, implemented Green Revolution and centralization policies.</p></div></div>
+<div id="modal15" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(15)">&times;</span><img src="IMAGESHISTORY/Kashmir Conflict.jpg"><h2>Kashmir Conflict</h2><p>Territorial disputes with Pakistan led to wars and ongoing political tension.</p></div></div>
+<div id="modal16" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(16)">&times;</span><img src="IMAGESHISTORY/Democracy.jpg"><h2>Democracy</h2><p>India developed a stable democracy with free elections, judicial independence, and civil liberties.</p></div></div>
+<div id="modal17" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(17)">&times;</span><img src="IMAGESHISTORY/Science & Technology.jpg"><h2>Science & Technology</h2><p>Progress in IT, nuclear energy, and biotechnology strengthened India's global position.</p></div></div>
+<div id="modal18" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(18)">&times;</span><img src="IMAGESHISTORY/Education.jpg"><h2>Education</h2><p>Expansion of literacy programs, universities, and modern educational institutions.</p></div></div>
+<div id="modal19" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(19)">&times;</span><img src="IMAGESHISTORY/Railways & Transport.jpg"><h2>Railways & Transport</h2><p>Modern railways, highways, and airports improved connectivity and trade.</p></div></div>
+<div id="modal20" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(20)">&times;</span><img src="IMAGESHISTORY/Women Rights.jpg"><h2>Women Rights</h2><p>Legal reforms and social movements improved gender equality and opportunities.</p></div></div>
+<div id="modal21" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(21)">&times;</span><img src="IMAGESHISTORY/Cultural Movements.jpg"><h2>Cultural Movements</h2><p>Art, cinema, literature, and music flourished after independence, creating a unique identity.</p></div></div>
+<div id="modal22" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(22)">&times;</span><img src="IMAGESHISTORY/Political Parties.jpg"><h2>Political Parties</h2><p>India's multiparty democracy shaped policies, governance, and regional representation.</p></div></div>
+<div id="modal23" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(23)">&times;</span><img src="IMAGESHISTORY/Green Energy.jpg"><h2>Green Energy</h2><p>Renewable energy initiatives like solar and wind reduced dependence on fossil fuels.</p></div></div>
+<div id="modal24" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(24)">&times;</span><img src="IMAGESHISTORY/Industrialization.jpg"><h2>Industrialization</h2><p>Growth in manufacturing, IT, and service sectors accelerated economic development.</p></div></div>
+<div id="modal25" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(25)">&times;</span><img src="IMAGESHISTORY/Digital India.jpg"><h2>Digital India</h2><p>Promotion of technology, e-governance, and nationwide connectivity transformed society.</p></div></div>
+<div id="modal26" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(26)">&times;</span><img src="IMAGESHISTORY/space missions.jpg"><h2>Space Missions</h2><p>Mangalyaan, Chandrayaan, and satellite launches enhanced India's scientific capabilities.</p></div></div>
+<div id="modal27" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(27)">&times;</span><img src="IMAGESHISTORY/Olympics & Sports.jpg"><h2>Olympics & Sports</h2><p>India excelled in hockey, cricket, and developed emerging sports talent internationally.</p></div></div>
+<div id="modal28" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(28)">&times;</span><img src="IMAGESHISTORY/Global Influence.jpg"><h2>Global Influence</h2><p>India emerged as a key player in world economy, diplomacy, and international forums.</p></div></div>
+<div id="modal29" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(29)">&times;</span><img src="IMAGESHISTORY/Modern Cities.jpg"><h2>Modern Cities</h2><p>Urbanization and metro cities grew with modern infrastructure and amenities.</p></div></div>
+
+<script>
+function openModal(i) { document.getElementById('modal'+i).style.display='block'; }
+function closeModal(i) { document.getElementById('modal'+i).style.display='none'; }
+window.onclick = function(event) { for(let i=0;i<30;i++){ if(event.target==document.getElementById('modal'+i)) closeModal(i); } }
+</script>
+</body>
+</html>
