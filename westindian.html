@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>West Indian Cuisine | My Bharat</title>
+
+  <!-- ===== INLINE THEME (matches your North/South/East pages) ===== -->
+  <style>
+  :root {
+    --primary-bg: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #f8f5ef;
+    --hover-bg: #f5c54220;
+    --font-main: "Poppins", sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:var(--font-main);
+    background:#fffdf7;
+    color:var(--primary-bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 40px;
+    transition: background 0.3s ease;
+  }
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 10px #00000055;
+    object-fit:cover;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .navbar a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+  }
+
+  .navbar a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background-color: var(--hover-bg);
+    text-shadow: 0 0 6px var(--accent);
+  }
+
+  /* DROPDOWNS */
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fffaf0;
+    min-width: 170px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+  }
+
+  .dropdown-content a {
+    color: #4a1a0a;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+
+  .dropdown-content a:hover {
+    background-color: var(--accent);
+    color: var(--primary-bg);
+    font-weight: 600;
+  }
+
+  .dropdown:hover .dropdown-content { display: block; }
+
+  /* HERO */
+  .hero-box {
+    background-color: #fff8e6;
+    border: 2px solid #f4b400;
+    border-radius: 16px;
+    margin: 2rem auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .hero-box h2 {
+    color: #c47f00;
+    font-size: 2rem;
+    margin:0 0 8px;
+  }
+  .hero-box p { margin:0; color:#5e3008; }
+
+  /* GRID */
+  .cuisine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    max-width:1100px;
+    margin: 0 auto 40px;
+  }
+
+  .cuisine-card {
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .cuisine-card:hover { transform: scale(1.03); }
+
+  .cuisine-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display:block;
+  }
+
+  .caption {
+    background: var(--accent);
+    color: var(--primary-bg);
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal.show { display: flex; }
+
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-bg);
+    cursor: pointer;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .modal-info {
+    padding: 20px;
+  }
+
+  .modal-info h2 {
+    color: var(--accent);
+    margin:0 0 8px;
+  }
+
+  .modal-info p { margin:0; color:#4b2311; }
+
+  footer {
+    background: var(--primary-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header { padding: 10px 18px; }
+    .nav-wrapper { flex-direction: column; align-items:flex-start; gap:10px; }
+    .hero-box { margin: 1rem; padding: 1.2rem; }
+    .cuisine-card img { height: 150px; }
+    .modal-image { height: 220px; }
+  }
+  </style>
+</head>
+
+<body>
+ <!-- HEADER STYLES -->
+<style id="header-style">
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-bg), #5c2e07);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+</style>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+
+    <a href="states.html">States</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+  <!-- HERO -->
+  <section class="hero-box" role="region" aria-labelledby="west-hero">
+    <h2 id="west-hero">🌞 West Indian Cuisine</h2>
+    <p>From Gujarati thalis to Goan seafood and Maharashtrian street food — the West brings tangy, spicy and coastal delights.</p>
+  </section>
+
+  <!-- GRID -->
+  <section>
+    <h2 style="text-align:center; color:#b35a00; margin-top:12px;">West Indian & Rajasthani Specialties</h2>
+    <div class="cuisine-grid" role="list">
+
+      <!-- WEST: 1 - 40 -->
+      <div class="cuisine-card" data-title="Pav Bhaji" data-desc="Spiced mashed vegetables served with buttered pav." 
+      data-img="imagescuisine/pavbhaji.jpeg">
+      <img src="imagescuisine/pavbhaji.jpeg" alt="Pav Bhaji"><div class="caption">Pav Bhaji</div></div>
+
+      <div class="cuisine-card" data-title="Vada Pav" data-desc="Spicy potato fritter in a bun — Mumbai's iconic street food." 
+      data-img="imagescuisine/vadapav.jpeg">
+      <img src="imagescuisine/vadapav.jpeg" alt="Vada Pav"><div class="caption">Vada Pav</div></div>
+
+      <div class="cuisine-card" data-title="Poha" data-desc="Flattened rice with mustard seeds, peanuts and curry leaves." 
+      data-img="imagescuisine/poha.jpeg">
+      <img src="imagescuisine/poha.jpeg" alt="Poha"><div class="caption">Poha</div></div>
+
+      <div class="cuisine-card" data-title="Misal Pav" data-desc="Spicy sprouted bean curry served with pav and farsan." 
+      data-img="imagescuisine/misalpav.jpeg">
+      <img src="imagescuisine/misalpav.jpeg" alt="Misal Pav"><div class="caption">Misal Pav</div></div>
+
+      <div class="cuisine-card" data-title="Sabudana Khichdi" data-desc="Sago pearls stir-fried with peanuts and spices." 
+      data-img="imagescuisine/sabudanakhichidi.jpe">
+      <img src="imagescuisine/sabudanakhichidi.jpeg" alt="Sabudana Khichdi"><div class="caption">Sabudana Khichdi</div></div>
+
+      <div class="cuisine-card" data-title="Puran Poli" data-desc="Sweet stuffed flatbread (Maharashtrian classic)." 
+      data-img="imagescuisine/puranpoli.jpeg">
+      <img src="imagescuisine/puranpoli.jpeg" alt="Puran Poli"><div class="caption">Puran Poli</div></div>
+
+      <div class="cuisine-card" data-title="Thepla" data-desc="Gujarati spiced flatbread great for travel." 
+      data-img="imagescuisine/thepla.jpeg">
+      <img src="imagescuisine/thepla.jpeg" alt="Thepla"><div class="caption">Thepla</div></div>
+
+      <div class="cuisine-card" data-title="Undhiyu" data-desc="Mixed vegetable delicacy from Gujarat, often for festivals." 
+      data-img="imagescuisine/undhiyu.jpeg">
+      <img src="imagescuisine/undhiyu.jpeg" alt="Undhiyu"><div class="caption">Undhiyu</div></div>
+
+      <div class="cuisine-card" data-title="Dhokla" data-desc="Steamed fermented gram cake — light and spongy." 
+      data-img="imagescuisine/dhokla.jpeg">
+      <img src="imagescuisine/dhokla.jpeg" alt="Dhokla"><div class="caption">Dhokla</div></div>
+
+      <div class="cuisine-card" data-title="Khandvi" data-desc="Silky gram-flour rolls tempered with coconut and mustard."
+      data-img="imagescuisine/khandvi.jpeg"
+      ><img src="imagescuisine/khandvi.jpeg" alt="Khandvi"><div class="caption">Khandvi</div></div>
+
+      <div class="cuisine-card" data-title="Dabeli" data-desc="Spiced potato mixture in a bun, topped with sev." 
+      data-img="imagescuisine/dabeli.jpeg">
+      <img src="imagescuisine/dabeli.jpeg" alt="Dabeli"><div class="caption">Dabeli</div></div>
+
+      <div class="cuisine-card" data-title="Bhajiya" data-desc="Crispy vegetable fritters — popular snack."
+      data-img="imagescuisine/bhajiya.jpe">
+      <img src="imagescuisine/bhajiya.jpeg" alt="Bhajiya"><div class="caption">Bhajiya</div></div>
+
+      <div class="cuisine-card" data-title="Bombil Fry" data-desc="Bombay duck, lightly spiced and fried — Goan/Mumbai favorite." 
+      data-img="imagescuisine/bombilfry.jpeg">
+      <img src="imagescuisine/bombilfry.jpeg" alt="Bombil Fry"><div class="caption">Bombil Fry</div></div>
+
+      <div class="cuisine-card" data-title="Goan Prawn Curry" data-desc="Coconut and kokum-based prawn curry from Goa." 
+      data-img="imagescuisine/goanprawncurry.jpeg">
+      <img src="imagescuisine/goanprawncurry.jpeg" alt="Goan Prawn Curry"><div class="caption">Goan Prawn Curry</div></div>
+
+      <div class="cuisine-card" data-title="Xacuti" data-desc="Rich Goan curry with roasted spices and coconut." 
+      data-img="imagescuisine/xacuti.jpeg">
+      <img src="imagescuisine/xacuti.jpeg" alt="Xacuti"><div class="caption">Xacuti</div></div>
+
+      <div class="cuisine-card" data-title="Goan Fish Recheado" data-desc="Spicy tangy masala-stuffed fish." 
+      data-img="west16.jpg">
+      <img src="imagescuisine/fishrecheado.jpeg" alt="Fish Recheado"><div class="caption">Fish Recheado</div></div>
+
+      <div class="cuisine-card" data-title="Kadhi (Gujarati)" data-desc="Yogurt-based curry with besan dumplings or pakoras." 
+      data-img="imagescuisine/kadhi.jp">
+      <img src="imagescuisine/kadhi.jpeg" alt="Kadhi"><div class="caption">Kadhi</div></div>
+
+      <div class="cuisine-card" data-title="Sev Usal" data-desc="Maharashtrian curry of sprouts topped with sev." 
+      data-img="imagescuisine/selroti.jpeg">
+      <img src="imagescuisine/selroti.jpeg" alt="Sev Usal"><div class="caption">Sev Usal</div></div>
+
+      <div class="cuisine-card" data-title="Modak" data-desc="Sweet steamed dumplings — favorite of Ganesh Chaturthi." 
+      data-img="imagescuisine/modak.jpeg">
+      <img src="imagescuisine/modak.jpeg" alt="Modak"><div class="caption">Modak</div></div>
+
+      <div class="cuisine-card" data-title="Shrikhand" data-desc="Creamy strained yogurt sweetened and flavoured with saffron." 
+      data-img="imagescuisine/shrikhand.jpeg">
+      <img src="imagescuisine/shrikhand.jpeg" alt="Shrikhand"><div class="caption">Shrikhand</div></div>
+
+      <div class="cuisine-card" data-title="Patra" data-desc="Colocasia leaves smeared with gram paste and steamed/fried." 
+      data-img="imagescuisine/patra.jpeg">
+      <img src="imagescuisine/patra.jpeg" alt="Patra"><div class="caption">Patra</div></div>
+
+      <div class="cuisine-card" data-title="Handvo" data-desc="Savory vegetable and lentil cake from Gujarat." 
+      data-img="imagescuisine/handvo.jpeg">
+      <img src="imagescuisine/handvo.jpeg" alt="Handvo"><div class="caption">Handvo</div></div>
+
+      <div class="cuisine-card" data-title="Misal" data-desc="Spicy misal with sprouts, pav and farsan." 
+      data-img="imagescuisine/misal.jpeg">
+      <img src="imagescuisine/misal.jpeg" alt="Misal"><div class="caption">Misal</div></div>
+
+      <div class="cuisine-card" data-title="Bombay Sandwich" data-desc="Triple-decker veg sandwich with chutneys and masala." 
+      data-img="imagescuisine/bombaysandwich.jpeg">
+      <img src="imagescuisine/bombaysandwich.jpeg" alt="Bombay Sandwich"><div class="caption">Bombay Sandwich</div></div>
+
+      <div class="cuisine-card" data-title="Kebabs" data-desc="Local grilled specialties and street kebabs." 
+      data-img="imagescuisine/kebabs.jpe">
+      <img src="imagescuisine/kebabs.jpeg" alt="Kebabs"><div class="caption">Kebabs</div></div>
+
+      <div class="cuisine-card" data-title="Pav Samosa" data-desc="Samosa stuffed in pav — a bhel-like fusion." 
+      data-img="imagescuisine/pavsamosa.jpeg">
+      <img src="imagescuisine/pavsamosa.jpeg"  alt="Pav Samosa"><div class="caption">Pav Samosa</div></div>
+
+      <div class="cuisine-card" data-title="Sev Puri" data-desc="Crispy puris topped with chutneys and sev." 
+      data-img="imagescuisine/sevpuri.jpeg">
+      <img src="imagescuisine/sevpuri.jpeg" alt="Sev Puri"><div class="caption">Sev Puri</div></div>
+
+      <div class="cuisine-card" data-title="Kadhi Pakoda" data-desc="Yogurt curry with fried gram dumplings." 
+      data-img="imagescuisine/kadhipakoda.jpeg">
+      <img src="imagescuisine/kadhipakoda.jpeg" alt="Kadhi Pakoda"><div class="caption">Kadhi Pakoda</div></div>
+
+      <div class="cuisine-card" data-title="Dhokli" data-desc="Wheat dumplings cooked in spicy dal (Gujarati comfort food)." 
+      data-img="imagescuisine/dhokli.jpeg">
+      <img src="imagescuisine/dhokli.jpeg" alt="Dhokli"><div class="caption">Dhokli</div></div>
+
+      <div class="cuisine-card" data-title="Bombay Duck Fry" data-desc="Goan/Mumbai style fish fry with goda masala." 
+      data-img="imagescuisine/bombayduckfry.jpeg">
+      <img src="imagescuisine/bombayduckfry.jpeg" alt="Bombay Duck Fry"><div class="caption">Bombay Duck Fry</div></div>
+
+      <div class="cuisine-card" data-title="Sol Kadhi" data-desc="Goan coconut and kokum digestive drink/side." 
+      data-img="imagescuisine/solkadhi.jpeg">
+      <img src="imagescuisine/solkadhi.jpeg" alt="Sol Kadhi"><div class="caption">Sol Kadhi</div></div>
+
+      <div class="cuisine-card" data-title="Kokum Curry" data-desc="Tangy kokum-based curry — Konkani coastal taste." 
+      data-img="imagescuisine/kokumcurry.jpeg">
+      <img src="imagescuisine/kokumcurry.jpeg" alt="Kokum Curry"><div class="caption">Kokum Curry</div></div>
+
+      <div class="cuisine-card" data-title="Batata Vada" data-desc="Spicy potato fritter coated in gram batter and fried." 
+      data-img="imagescuisine/batavada.jpeg">
+      <img src="imagescuisine/batavada.jpeg" alt="Batata Vada"><div class="caption">Batata Vada</div></div>
+
+      <div class="cuisine-card" data-title="Khichu" data-desc="Steamed spicy rice flour snack from Gujarat." 
+      data-img="imagescuisine/khichu.jpeg">
+      <img src="imagescuisine/khichu.jpeg" alt="Khichu"><div class="caption">Khichu</div></div>
+
+      <div class="cuisine-card" data-title="Shrimp Balchão" data-desc="Goan spicy sweet-sour shrimp pickle-style curry." 
+      data-img="imagescuisine/shrimpbalchao.jpeg">
+      <img src="imagescuisine/shrimpbalchao.jpeg" alt="Shrimp Balchão"><div class="caption">Shrimp Balchão</div></div>
+
+      <div class="cuisine-card" data-title="Bharli Vangi" data-desc="Stuffed brinjals cooked in flavorful masala." 
+      data-img="imagescuisine/bharlivangi.jpeg">
+      <img src="imagescuisine/bharlivangi.jpeg" alt="Bharli Vangi"><div class="caption">Bharli Vangi</div></div>
+
+      <div class="cuisine-card" data-title="Fafda-Jalebi" data-desc="Gujarati crispy snack with sweet jalebi." 
+      data-img="imagescuisine/fafdajalebi.jpeg">
+      <img src="imagescuisine/fafdajalebi.jpeg" alt="Fafda-Jalebi"><div class="caption">Fafda-Jalebi</div></div>
+
+      <div class="cuisine-card" data-title="Thalipeeth" data-desc="Multi-grain flatbread from Maharashtra." 
+      data-img="imagescuisine/thalipeeth.jpeg">
+      <img src="imagescuisine/thalipeeth.jpeg" alt="Thalipeeth"><div class="caption">Thalipeeth</div></div>
+
+      <div class="cuisine-card" data-title="Ukadiche Modak" data-desc="Steamed sweet rice dumpling — another modak variant."
+      data-img="imagescuisine/ukadhichemodak.jpeg">
+      <img src="imagescuisine/ukadhichemodak.jpeg" alt="Ukadiche Modak"><div class="caption">Ukadiche Modak</div></div>
+
+      <div class="cuisine-card" data-title="Kanda Poha" data-desc="Poha variant with onions, mustard and chillies." 
+      data-img="imagescuisine/kandapoha.jpeg">
+      <img src="imagescuisine/kandapoha.jpeg" alt="Kanda Poha"><div class="caption">Kanda Poha</div></div>
+
+      <!-- RAJASTHANI: 41 - 50 -->
+      <div class="cuisine-card" data-title="Dal Baati Churma" data-desc="Classic Rajasthani platter of baked baati, spicy dal, and sweet churma." 
+      data-img="imagescuisine/daalbatichurma.jpeg">
+      <img src="imagescuisine/daalbatichurma.jpeg" alt="Dal Baati Churma"><div class="caption">Dal Baati Churma</div></div>
+
+      <div class="cuisine-card" data-title="Gatte ki Sabzi" data-desc="Gram flour dumplings cooked in a yogurt-based spicy gravy." 
+      data-img="imagescuisine/gattekisabzi.jpeg">
+      <img src="imagescuisine/gattekisabzi.jpeg" alt="Gatte ki Sabzi"><div class="caption">Gatte ki Sabzi</div></div>
+
+      <div class="cuisine-card" data-title="Ker Sangri" data-desc="Desert-special dish of dried ker berries and sangri beans cooked with spices." 
+      data-img="imagescuisine/laalmaas.jpeg"></div>
+      <img src="imagescuisine/kersangri.jpeg" alt="Ker Sangri"><div class="caption">Ker Sangri</div></div>
+
+      <div class="cuisine-card" data-title="Laal Maas" data-desc="Famous spicy mutton curry prepared with Mathania red chilies." 
+      data-img="imagescuisine/laalmaas.jpeg">
+      <img src="imagescuisine/laalmaas.jpeg" alt="Laal Maas"><div class="caption">Laal Maas</div></div>
+
+      <div class="cuisine-card" data-title="Mohan Maas" data-desc="A rich royal dish of mutton cooked in milk, cream and mild spices." 
+      data-img="imagescuisine/mohanmaas.jpeg">
+      <img src="imagescuisine/mohanmaas.jpeg" alt="Mohan Maas"><div class="caption">Mohan Maas</div></div>
+
+      <div class="cuisine-card" data-title="Pyaz Kachori" data-desc="Crispy fried kachori stuffed with a spicy onion mixture." 
+      data-img="imagescuisine/pyazkachori.jpeg">
+      <img src="imagescuisine/pyazkachori.jpeg" alt="Pyaz Kachori"><div class="caption">Pyaz Kachori</div></div>
+
+      <div class="cuisine-card" data-title="Mirchi Vada" data-desc="Large green chilies stuffed with spiced potato mixture & deep-fried." 
+      data-img="imagescuisine/mirchivada.jpeg">
+      <img src="imagescuisine/mirchivada.jpeg" alt="Mirchi Vada"><div class="caption">Mirchi Vada</div></div>
+
+      <div class="cuisine-card" data-title="Ghevar" data-desc="Honeycomb-textured disc-shaped sweet soaked in sugar syrup." 
+      data-img="imagescuisine/ghevar.jpeg">
+      <img src="imagescuisine/ghevar.jpeg" alt="Ghevar"><div class="caption">Ghevar</div></div>
+
+      <div class="cuisine-card" data-title="Panchmel Dal" data-desc="A protein-rich mix of five dals cooked with ghee & spices." 
+      data-img="imagescuisine/panchemeldaal.jpeg">
+      <img src="imagescuisine/panchemeldaal.jpeg" alt="Panchmel Dal"><div class="caption">Panchmel Dal</div></div>
+
+      <div class="cuisine-card" data-title="Bajra Roti" data-desc="Traditional pearl millet roti enjoyed with garlic chutney." 
+      data-img="imagescuisine/bajraroti.jpeg">
+      <img src="imagescuisine/bajraroti.jpeg" alt="Bajra Roti"><div class="caption">Bajra Roti</div></div>
+
+    </div>
+  </section>
+
+  <!-- SHARED MODAL (used by all cards) -->
+  <div class="modal" id="cuisine-modal" aria-hidden="true" role="dialog" aria-label="Dish details">
+    <div class="modal-content" role="document">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <img class="modal-image" src="" alt="">
+      <div class="modal-info">
+        <h2 class="modal-title"></h2>
+        <p class="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <!-- INLINE JS (identical modal logic used across your site) -->
+  <script>
+  (function(){
+    const modal = document.getElementById('cuisine-modal');
+    const modalImage = modal.querySelector('.modal-image');
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalDesc = modal.querySelector('.modal-desc');
+    const modalClose = modal.querySelector('.modal-close');
+
+    document.querySelectorAll('.cuisine-card').forEach(card => {
+      card.addEventListener('click', () => {
+        modalImage.src = card.dataset.img || '';
+        modalImage.alt = card.dataset.title || '';
+        modalTitle.textContent = card.dataset.title || '';
+        modalDesc.textContent = card.dataset.desc || '';
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+        // shift focus to close button for accessibility
+        modalClose.focus();
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.classList.contains('show')) {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

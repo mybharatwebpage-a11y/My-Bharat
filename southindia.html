@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tourism — South India | My Bharat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* INLINE STYLES (reuse structure but for South) */
+    :root{
+      --bg:#fff9f0; --maroon:#2b4a1a; --gold:#d9a441; --card:#fff8f0; --shadow:rgba(0,0,0,0.12);
+      --maxw:1200px; --font:"Poppins",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{font-family:var(--font);background:var(--bg);color:#222;margin:0}
+    header{background:linear-gradient(90deg,#2b0a06,#5c2e07);padding:10px 20px;position:sticky;top:0;z-index:1000}
+    .nav-wrapper{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .logo img{width:52px;height:52px;border-radius:8px;border:2px solid #d9a441;background:#fff;padding:2px}
+    .logo span{color:#d9a441;font-weight:800;font-size:1.2rem}
+    nav{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    .dropdown{position:relative}
+    .dropdown-content{display:none;position:absolute;top:40px;left:0;background:#fff8f0;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.12);overflow:hidden}
+    .dropdown:hover .dropdown-content{display:block}
+    .dropdown-content a{display:block;padding:8px 12px;color:#4a1a0a;text-decoration:none}
+    .container{max-width:var(--maxw);margin:22px auto;padding:0 18px}
+    .hero{background:linear-gradient(180deg,#fff8ec,#fff2e0);padding:22px;border-radius:12px;border:1px solid rgba(217,164,65,0.12);text-align:center}
+    .controls{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:14px 0;flex-wrap:wrap}
+    .search-bar{padding:10px;border-radius:8px;border:1px solid #e6d0a1;width:320px;max-width:100%}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:12px}
+    .card{background:var(--card);border-radius:12px;overflow:hidden;cursor:pointer;border:3px solid rgba(217,164,65,0.12);box-shadow:0 6px 20px var(--shadow);transition:transform .18s}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:150px;object-fit:cover;display:block}
+    .caption{padding:10px;text-align:center;background:linear-gradient(90deg,#4a1a0a,#d9a441);color:#fff;font-weight:700}
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.65);z-index:3000;padding:20px}
+    .modal.open{display:flex}
+    .modal-content{background:#fff8f0;border-radius:12px;max-width:900px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);position:relative}
+    .modal-image{width:100%;max-height:420px;object-fit:cover;display:block}
+    .modal-body{padding:16px}
+    .modal-body h2{color:#2b4a1a;margin:0 0 8px}
+    .modal-body p{margin:8px 0;color:#333;line-height:1.5}
+    .modal-close{position:absolute;top:12px;right:12px;background:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:1.3rem;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,0.12)}
+    @media(max-width:640px){ .card img{height:130px} }
+  </style>
+</head>
+<body>
+  <!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Art ▾</button>
+      <div class="dropdown-content">
+        <a href="art.html">Art</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="arts@sps.html">Arts at SPS</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Culture ▾</button>
+      <div class="dropdown-content">
+        <a href="dance.html">Dance</a>
+        <a href="music.html">Music</a>
+        <a href="festivals.html">Festivals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Cuisine ▾</button>
+      <div class="dropdown-content">
+        <a href="northindian.html">North Indian</a>
+        <a href="southindian.html">South Indian</a>
+        <a href="eastindian.html">East Indian</a>
+        <a href="westindian.html">West Indian</a>
+      </div>
+    </div>
+    <a href="states.html">States</a>
+    <div class="dropdown">
+      <button class="dropbtn">Tourism ▾</button>
+      <div class="dropdown-content">
+        <a href="northindia.html">North India</a>
+        <a href="southindia.html">South India</a>
+        <a href="eastindia.html">East India</a>
+        <a href="westindia.html">West India</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">History ▾</button>
+      <div class="dropdown-content">
+        <a href="ancientindia.html">Ancient India</a>
+        <a href="medievalindia.html">Medieval India</a>
+        <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">National ▾</button>
+      <div class="dropdown-content">
+        <a href="nationalsymbols.html">National Symbols</a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Explore More ▾</button>
+      <div class="dropdown-content">
+        <a href="facts.html">Facts</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
+        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+        <a href="inventions.html">Our Inventions</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Discover South India — 40 Must-Visit Places</h1>
+      <p>Tiles open a modal with image and details. Replace placeholder images in <code>images/tourism/south/</code>.</p>
+    </section>
+
+    <div class="controls">
+      <input id="search" class="search-bar" placeholder="Search places or keywords">
+      <div class="legend">Region: South India — 40 places</div>
+    </div>
+
+    <section class="grid" id="grid">
+      <!-- 40 South India places (replace images in images/tourism/south/) -->
+      <div class="card" tabindex="0" data-title="Bengaluru" data-state="Karnataka" data-type="City" data-desc="IT hub with parks and palaces." 
+      data-img="imagestourism/bengaluru.jpeg">
+        <img src="imagestourism/bengaluru.jpeg" alt="Bengaluru">
+        <div class="caption">Bengaluru</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Mysore" data-state="Karnataka" data-type="Palace" data-desc="Famous for Mysore Palace and Dasara." 
+      data-img="imagestourism/mysore.jpeg">
+        <img src="imagestourism/mysore.jpeg" alt="Mysore">
+        <div class="caption">Mysore</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Hampi" data-state="Karnataka" data-type="Heritage" data-desc="Vijayanagara ruins and UNESCO sites."
+       data-img="imagestourism/hampi.jpeg">
+        <img src="imagestourism/hampi.jpeg" alt="Hampi">
+        <div class="caption">Hampi</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Hyderabad" data-state="Telangana" data-type="Heritage & Food" data-desc="Charminar, Golconda and famous biryani." 
+      data-img="imagestourism/hyderabad.jpeg">
+        <img src="imagestourism/hyderabad.jpeg" alt="Hyderabad">
+        <div class="caption">Hyderabad</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Visakhapatnam" data-state="Andhra Pradesh" data-type="Coast" data-desc="Coastal city with beaches and caves."
+       data-img="imagestourism/vishakapatnam.jpeg">
+        <img src="imagestourism/vishakapatnam.jpeg" alt="Visakhapatnam">
+        <div class="caption">Visakhapatnam</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Vijayawada" data-state="Andhra Pradesh" data-type="City" data-desc="Krishna River, temples and historic sites."
+      data-img="iimagestourism/vijayawada.jpeg">
+        <img src="imagestourism/vijayawada.jpeg" alt="Vijayawada">
+        <div class="caption">Vijayawada</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Tirupati" data-state="Andhra Pradesh" data-type="Pilgrimage" data-desc="Famous Tirumala Venkateswara Temple."
+       data-img="imagestourism/tirupati.jpeg">
+        <img src="imagestourism/tirupati.jpeg" alt="Tirupati">
+        <div class="caption">Tirupati</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Chennai" data-state="Tamil Nadu" data-type="City" data-desc="Marina Beach, temples and cultural hubs." 
+      data-img="imagestourism/chennai.jpeg">
+        <img src="imagestourism/chennai.jpeg" alt="Chennai">
+        <div class="caption">Chennai</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Mahabalipuram" data-state="Tamil Nadu" data-type="Heritage" data-desc="Shore temples and rock-cut architecture."
+       data-img="imagestourism/mahabalipuram.jpeg">
+        <img src="imagestourism/mahabalipuram.jpeg" alt="Mahabalipuram">
+        <div class="caption">Mahabalipuram</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pondicherry" data-state="Puducherry" data-type="Coastal Town" data-desc="French Quarter, cafes and beaches." 
+      data-img="imagestourism/pondicherry.jpeg">
+        <img src="imagestourism/pondicherry.jpeg" alt="Pondicherry">
+        <div class="caption">Pondicherry</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Madurai" data-state="Tamil Nadu" data-type="Temple City" data-desc="Meenakshi Amman Temple and cultural traditions." 
+      data-img="imagestourism/madurai.jpeg">
+        <img src="imagestourism/madurai.jpeg" alt="Madurai">
+        <div class="caption">Madurai</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Rameswaram" data-state="Tamil Nadu" data-type="Pilgrimage/Island" data-desc="Sacred island with Ramanathaswamy Temple."
+       data-img="imagestourism/rameshwaram.jpeg">
+        <img src="imagestourism/rameshwaram.jpeg" alt="Rameswaram">
+        <div class="caption">Rameswaram</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kanyakumari" data-state="Tamil Nadu" data-type="Coast" data-desc="Southernmost tip of India; sunrise/sunset points." 
+      data-img="imagestourism/kanyakumari.jpeg">
+        <img src="imagestourism/kanyakumari.jpeg" alt="Kanyakumari">
+        <div class="caption">Kanyakumari</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kodaikanal" data-state="Tamil Nadu" data-type="Hill Station" data-desc="Popular hill station with lakes and viewpoints."
+       data-img="imagestourism/kodaikanal.jpeg">
+        <img src="imagestourism/kodaikanal.jpeg" alt="Kodaikanal">
+        <div class="caption">Kodaikanal</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Ooty" data-state="Tamil Nadu" data-type="Hill Station" data-desc="Toy train, botanical gardens and tea gardens." 
+      data-img="imagestourism/ooty.jpeg">
+        <img src="imagestourism/ooty.jpeg" alt="Ooty">
+        <div class="caption">Ooty</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Cochin (Kochi)" data-state="Kerala" data-type="Port City" data-desc="Fort Kochi, Chinese fishing nets and colonial history."
+       data-img="imagestourism/kochi.jpeg">
+        <img src="imagestourism/kochi.jpeg" alt="Kochi">
+        <div class="caption">Kochi</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Alleppey (Alappuzha)" data-state="Kerala" data-type="Backwaters" data-desc="Houseboat cruises through Kerala backwaters." 
+      data-img="imagestourism/allepey.jpeg">
+        <img src="imagestourism/allepey.jpeg" alt="Alleppey">
+        <div class="caption">Alleppey (Backwaters)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Munnar" data-state="Kerala" data-type="Hill Station" data-desc="Tea gardens, rolling hills and cool climate."
+       data-img="imagestourism/munnar.jpeg">
+        <img src="imagestourism/munnar.jpeg" alt="Munnar">
+        <div class="caption">Munnar</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Thiruvananthapuram (Trivandrum)" data-state="Kerala" data-type="Capital" data-desc="Padmanabhaswamy Temple, beaches and museums."
+       data-img="imagestourism/trivandrum.jpeg">
+        <img src="imagestourism/trivandrum.jpeg" alt="Trivandrum">
+        <div class="caption">Thiruvananthapuram</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kozhikode (Calicut)" data-state="Kerala" data-type="Coast" data-desc="Historic trading port and cuisine."
+       data-img="imagestourism/kozhikode.jpeg">
+        <img src="imagestourism/kozhikode.jpeg" alt="Kozhikode">
+        <div class="caption">Kozhikode</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Hogenakkal Falls" data-state="Tamil Nadu" data-type="Waterfall" data-desc="Scenic waterfalls on the Kaveri river."
+       data-img="imagestourism/hogenakkal.jpeg">
+        <img src="imagestourism/hogenakkal.jpeg" alt="Hogenakkal">
+        <div class="caption">Hogenakkal Falls</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Gokarna" data-state="Karnataka" data-type="Beaches & Pilgrimage" data-desc="Quiet beaches and a temple town."
+       data-img="imagestourism/gokarna.jpeg">
+        <img src="imagestourism/gokarna.jpeg" alt="Gokarna">
+        <div class="caption">Gokarna</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pondicherry Ashram & Beaches" data-state="Puducherry" data-type="Spiritual & Coastal" data-desc="Auroville, Promenade Beach and French Quarter." 
+      data-img="imagestourism/puddecherry.jpeg">
+        <img src="imagestourism/puddecherry.jpeg" alt="Puducherry">
+        <div class="caption">Puducherry</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kodagu (Coorg)" data-state="Karnataka" data-type="Hills & Coffee" data-desc="Coffee plantations and lush hills."
+       data-img="imagestourism/coorg.jpeg">
+        <img src="imagestourism/coorg.jpeg" alt="Coorg">
+        <div class="caption">Coorg (Kodagu)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Bekal Fort" data-state="Kerala" data-type="Fort" data-desc="Seaside fort with panoramic views." 
+      data-img="imagestourism/bekalfort.jpeg">
+        <img src="imagestourism/bekalfort.jpeg" alt="Bekal Fort">
+        <div class="caption">Bekal Fort</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Varkala" data-state="Kerala" data-type="Beaches & Cliffs" data-desc="Cliff-side beaches and spiritual vibe."
+       data-img="imagestourism/varkala.jpeg">
+        <img src="imagestourism/varkala.jpeg" alt="Varkala">
+        <div class="caption">Varkala</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kanchipuram" data-state="Tamil Nadu" data-type="Temple Town" data-desc="City of thousand temples and silk sarees." 
+      data-img="imagestourism/kanchipuram.jpeg">
+        <img src="imagestourism/kanchipuram.jpeg" alt="Kanchipuram">
+        <div class="caption">Kanchipuram</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Srirangam" data-state="Tamil Nadu" data-type="Temple Island" data-desc="Large temple complex and Vaishnava centre." 
+      data-img="imagestourism/srinagaram.jpeg">
+        <img src="imagestourism/srinagaram.jpeg" alt="Srirangam">
+        <div class="caption">Srirangam</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Arunachaleswarar (Thiruvannamalai)" data-state="Tamil Nadu" data-type="Pilgrimage" data-desc="Hill temple and spiritual centre." 
+      data-img="imagestourism/thiruvannamalai.jpeg">
+        <img src="imagestourism/thiruvannamalai.jpeg" alt="Thiruvannamalai">
+        <div class="caption">Thiruvannamalai</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Pamban Bridge & Rameswaram" data-state="Tamil Nadu" data-type="Bridge & Island" data-desc="Scenic bridge to Rameswaram island."
+       data-img="imagestourism/rameshwarambridge.jpeg">
+        <img src="imagestourism/rameshwarambridge.jpeg" alt="Pamban Bridge">
+        <div class="caption">Pamban Bridge / Rameswaram</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Lakshadweep (Kavaratti)" data-state="Lakshadweep" data-type="Islands" data-desc="Atolls and coral reefs — remote island getaway."
+       data-img="imagestourism/lakshwadeep.jpeg">
+        <img src="imagestourism/lakshwadeep.jpeg" alt="Lakshadweep">
+        <div class="caption">Lakshadweep</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Nagarhole" data-state="Karnataka" data-type="Wildlife" data-desc="Forest and wildlife reserve with tigers and elephants." 
+      data-img="imagestourism/nagarhole.jpeg">
+        <img src="imagestourism/nagarhole.jpeg" alt="Nagarhole">
+        <div class="caption">Nagarhole</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Bandipur" data-state="Karnataka" data-type="Wildlife" data-desc="Tiger reserve and scenic jungle drives." 
+      data-img="imagestourism/bandipur.jpeg">
+        <img src="imagestourism/bandipur.jpeg" alt="Bandipur">
+        <div class="caption">Bandipur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Yelagiri & Horsley Hills" data-state="Andhra/Tamil" data-type="Hills" data-desc="Offbeat hill stations popular with weekenders." 
+      data-img="imagestourism/horsleyhills.jpeg">
+        <img src="imagestourism/horsleyhills.jpeg" alt="Horsley Hills">
+        <div class="caption">Hilly Retreats</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Kodaikanal (Pillar Falls & Green Valley)" data-state="Tamil Nadu" data-type="Hills" data-desc="Scenic viewpoints and lakes." 
+      data-img="imagestourism/kodaikanalmore.jpeg">
+        <img src="imagestourism/kodaikanalmore.jpeg" alt="Kodaikanal">
+        <div class="caption">Kodaikanal (more)</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Thanjavur (Tanjore)" data-state="Tamil Nadu" data-type="Temple" data-desc="Brihadeeswarar Temple and Chola art."
+       data-img="imagestourism/thanjavur.jpeg">
+        <img src="imagestourism/thanjavur.jpeg" alt="Thanjavur">
+        <div class="caption">Thanjavur</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Wayanad" data-state="Kerala" data-type="Hills" data-desc="Lush hills, wildlife and trekking." 
+      data-img="imagestourism/wayanad.jpeg">
+        <img src="imagestourism/wayanad.jpeg" alt="Wayanad">
+        <div class="caption">Wayanad</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Nagarcoil" data-state="Tamil Nadu" data-type="Coast" data-desc="Coastal town near Kanyakumari with temples." 
+      data-img="imagestourism/nagarcoil.jpeg">
+        <img src="imagestourism/nagarcoil.jpeg" alt="Nagercoil">
+        <div class="caption">Nagercoil</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Palakkad" data-state="Kerala" data-type="Fort & Nature" data-desc="Gateway to Kerala with forts and paddy fields."
+       data-img="imagestourism/pallakad.jpeg">
+        <img src="imagestourism/pallakad.jpeg" alt="Palakkad">
+        <div class="caption">Palakkad</div>
+      </div>
+
+      <div class="card" tabindex="0" data-title="Tirunelveli" data-state="Tamil Nadu" data-type="Heritage" data-desc="Old city with temples and local cuisine." 
+      data-img="imagestourism/Tirunelveli.jpeg">
+        <img src="imagestourism/Tirunelveli.jpeg" alt="Tirunelveli">
+        <div class="caption">Tirunelveli</div>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <img class="modal-image" src="" alt="">
+      <div class="modal-body">
+        <h2 id="mTitle"></h2>
+        <p id="mStateType"></p>
+        <p id="mDesc"></p>
+      </div>
+    </div>
+  </div>
+
+    <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
+</footer>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('modal');
+      const modalImg = modal.querySelector('.modal-image');
+      const closeBtn = modal.querySelector('.modal-close');
+      const mTitle = document.getElementById('mTitle');
+      const mStateType = document.getElementById('mStateType');
+      const mDesc = document.getElementById('mDesc');
+      const cards = Array.from(document.querySelectorAll('.card'));
+      const search = document.getElementById('search');
+
+      function openCard(card){
+        const title = card.dataset.title || '';
+        const state = card.dataset.state || '';
+        const type = card.dataset.type || '';
+        const desc = card.dataset.desc || '';
+        const img = (card.dataset.img && card.dataset.img.trim()!=='') ? card.dataset.img : (card.querySelector('img')?.src || '');
+        modalImg.src = img;
+        modalImg.alt = title;
+        mTitle.textContent = title;
+        mStateType.textContent = (state ? state + ' • ' : '') + (type ? type : '');
+        mDesc.textContent = desc;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeModal(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+
+      cards.forEach(c => {
+        c.addEventListener('click', ()=> openCard(c));
+        c.addEventListener('keydown', (e)=> { if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openCard(c); }});
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=> { if(e.target === modal) closeModal(); });
+      window.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeModal(); });
+
+      if(search){
+        search.addEventListener('input', ()=> {
+          const q = search.value.trim().toLowerCase();
+          cards.forEach(c=>{
+            const title = (c.dataset.title||'').toLowerCase();
+            const tags = ((c.dataset.desc||'') + ' ' + (c.dataset.state||'') + ' ' + (c.dataset.type||'')).toLowerCase();
+            const show = !q || title.includes(q) || tags.includes(q);
+            c.style.display = show ? '' : 'none';
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
