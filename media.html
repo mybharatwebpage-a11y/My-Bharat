@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Culture Posts | My Bharat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --brand:#2b0a06;
+  --accent:#d9a441;
+  --bg:#fff7ec;
+  --card:#fffbe6;
+}
+
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:var(--bg);
+  color:#3b1f05;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,var(--brand),#5c2e07);
+  color:white;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header h1{margin:0;color:var(--accent)}
+
+/* SECTION */
+section{
+  max-width:1200px;
+  margin:40px auto;
+  padding:0 16px;
+}
+.section-title{
+  font-size:2rem;
+  color:var(--brand);
+  margin-bottom:20px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+/* POST CARD */
+.post{
+  background:var(--card);
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+.post img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.post h3{
+  margin:12px 0 6px;
+  color:var(--accent);
+}
+.post p{
+  font-size:.95rem;
+  line-height:1.5;
+}
+
+footer{
+  background:var(--brand);
+  color:var(--accent);
+  padding:20px;
+  text-align:center;
+  margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+    :root {
+      --brand: #2b0a06;
+      --accent: #d9a441;
+      --light-text: #fff;
+    }
+  
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: white;
+    }
+  
+    .logo span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+  
+    nav.navbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    nav a, .dropbtn {
+      color: var(--light-text);
+      font-weight: 500;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      transition: 0.25s;
+    }
+  
+    nav a:hover, .dropbtn:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.08);
+    }
+  
+    .dropdown { position: relative; }
+  
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: #fffaf0;
+      min-width: 180px;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      padding: 6px 0;
+      z-index: 3000;
+    }
+  
+    .dropdown-content a {
+      display: block;
+      padding: 10px 14px;
+      color: #4b2e05;
+    }
+  
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  
+    /* Make month card titles match header accent */
+    .month-head {
+      color: var(--accent);
+    }
+  </style>
+  
+  
+  
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>My Bharat</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">Art ▾</button>
+        <div class="dropdown-content">
+          <a href="art.html">Art</a>
+          <a href="architecture.html">Architecture</a>
+          <a href="arts@sps.html">Arts at SPS</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Culture ▾</button>
+        <div class="dropdown-content">
+          <a href="dance.html">Dance</a>
+          <a href="music.html">Music</a>
+          <a href="festivals.html">Festivals</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Cuisine ▾</button>
+        <div class="dropdown-content">
+          <a href="northindian.html">North Indian</a>
+          <a href="southindian.html">South Indian</a>
+          <a href="eastindian.html">East Indian</a>
+          <a href="westindian.html">West Indian</a>
+        </div>
+      </div>
+      <a href="states.html">States</a>
+      <div class="dropdown">
+        <button class="dropbtn">Tourism ▾</button>
+        <div class="dropdown-content">
+          <a href="northindia.html">North India</a>
+          <a href="southindia.html">South India</a>
+          <a href="eastindia.html">East India</a>
+          <a href="westindia.html">West India</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">History ▾</button>
+        <div class="dropdown-content">
+          <a href="ancientindia.html">Ancient India</a>
+          <a href="medievalindia.html">Medieval India</a>
+          <a href="modernindia.html">Modern India</a>
+          <a href="heritage.html">Heritage</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">National ▾</button>
+        <div class="dropdown-content">
+          <a href="nationalsymbols.html">National Symbols</a>
+          <a href="government.html">Government</a>
+          <a href="nationals.html">Nationals</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Explore More ▾</button>
+        <div class="dropdown-content">
+          <a href="facts.html">Facts</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="ourpm.html">Our P.M</a>
+          <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+          <a href="inventions.html">Our Inventions</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+<section>
+<h2 class="section-title">🧑‍🎨 Approved Cultural Posts</h2>
+<div class="grid" id="posts"></div>
+</section>
+
+<footer>
+© My Bharat | Culture Preserved with Care 🇮🇳
+</footer>
+
+<script>
+/* LOAD APPROVED POSTS */
+const container = document.getElementById("posts");
+const approved = JSON.parse(localStorage.approvedPosts || "[]");
+
+if(approved.length === 0){
+  container.innerHTML = "<p>No approved posts yet.</p>";
+}
+
+approved.forEach(p => {
+  const div = document.createElement("div");
+  div.className = "post";
+  div.innerHTML = `
+    <img src="${p.image}">
+    <h3>${p.title}</h3>
+    <p>${p.desc}</p>
+  `;
+  container.appendChild(div);
+});
+</script>
+
+</body>
+</html>

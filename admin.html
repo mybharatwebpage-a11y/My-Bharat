@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel | My Bharat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --brand:#2b0a06;
+  --accent:#d9a441;
+  --bg:#fff7ec;
+  --card:#fffbe6;
+}
+
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:var(--bg);
+  color:#3b1f05;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,var(--brand),#5c2e07);
+  color:white;
+  padding:14px 24px;
+  text-align:center;
+}
+header h1{margin:0;color:var(--accent)}
+
+/* SECTIONS */
+section{
+  max-width:1000px;
+  margin:40px auto;
+  padding:0 16px;
+}
+.section-title{
+  font-size:2rem;
+  color:var(--brand);
+  margin-bottom:18px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:2px solid var(--accent);
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+/* LOGIN */
+input, button{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-family:inherit;
+}
+
+button{
+  background:var(--accent);
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+
+/* POSTS */
+.post{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:16px;
+  margin-bottom:20px;
+}
+.post img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.actions button{
+  width:auto;
+  margin-right:8px;
+}
+
+/* HIDE DASHBOARD */
+#dashboard{display:none}
+
+footer{
+  background:var(--brand);
+  color:var(--accent);
+  padding:20px;
+  text-align:center;
+  margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+    :root {
+      --brand: #2b0a06;
+      --accent: #d9a441;
+      --light-text: #fff;
+    }
+  
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: white;
+    }
+  
+    .logo span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+  
+    nav.navbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    nav a, .dropbtn {
+      color: var(--light-text);
+      font-weight: 500;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      transition: 0.25s;
+    }
+  
+    nav a:hover, .dropbtn:hover {
+      color: var(--accent);
+      background: rgba(255,255,255,0.08);
+    }
+  
+    .dropdown { position: relative; }
+  
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: #fffaf0;
+      min-width: 180px;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      padding: 6px 0;
+      z-index: 3000;
+    }
+  
+    .dropdown-content a {
+      display: block;
+      padding: 10px 14px;
+      color: #4b2e05;
+    }
+  
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  
+    /* Make month card titles match header accent */
+    .month-head {
+      color: var(--accent);
+    }
+  </style>
+  
+  
+  
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <span>My Bharat</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">Art ▾</button>
+        <div class="dropdown-content">
+          <a href="art.html">Art</a>
+          <a href="architecture.html">Architecture</a>
+          <a href="arts@sps.html">Arts at SPS</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Culture ▾</button>
+        <div class="dropdown-content">
+          <a href="dance.html">Dance</a>
+          <a href="music.html">Music</a>
+          <a href="festivals.html">Festivals</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Cuisine ▾</button>
+        <div class="dropdown-content">
+          <a href="northindian.html">North Indian</a>
+          <a href="southindian.html">South Indian</a>
+          <a href="eastindian.html">East Indian</a>
+          <a href="westindian.html">West Indian</a>
+        </div>
+      </div>
+      <a href="states.html">States</a>
+      <div class="dropdown">
+        <button class="dropbtn">Tourism ▾</button>
+        <div class="dropdown-content">
+          <a href="northindia.html">North India</a>
+          <a href="southindia.html">South India</a>
+          <a href="eastindia.html">East India</a>
+          <a href="westindia.html">West India</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">History ▾</button>
+        <div class="dropdown-content">
+          <a href="ancientindia.html">Ancient India</a>
+          <a href="medievalindia.html">Medieval India</a>
+          <a href="modernindia.html">Modern India</a>
+          <a href="heritage.html">Heritage</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">National ▾</button>
+        <div class="dropdown-content">
+          <a href="nationalsymbols.html">National Symbols</a>
+          <a href="government.html">Government</a>
+          <a href="nationals.html">Nationals</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Explore More ▾</button>
+        <div class="dropdown-content">
+          <a href="facts.html">Facts</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="ourpm.html">Our P.M</a>
+          <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
+          <a href="inventions.html">Our Inventions</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+<!-- 🔐 LOGIN -->
+<section id="loginSection">
+<h2 class="section-title">🔐 Admin Login</h2>
+
+<div class="card">
+  <input type="text" id="user" placeholder="Username">
+  <input type="password" id="pass" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+</section>
+
+<!-- 📋 DASHBOARD -->
+<section id="dashboard">
+<h2 class="section-title">📋 Pending Community Posts</h2>
+<div id="pending"></div>
+</section>
+
+<footer>
+© My Bharat | Admin Control 🇮🇳
+</footer>
+
+<script>
+const USER = "karthiks";
+const PASS = "karthik@2012";
+
+/* LOGIN */
+function login(){
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  if(u === USER && p === PASS){
+    document.getElementById("loginSection").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    loadPosts();
+  } else {
+    alert("Invalid admin credentials");
+  }
+}
+
+/* LOAD PENDING POSTS */
+function loadPosts(){
+  const list = document.getElementById("pending");
+  const pending = JSON.parse(localStorage.pendingPosts || "[]");
+
+  list.innerHTML = "";
+
+  if(pending.length === 0){
+    list.innerHTML = "<p>No pending posts.</p>";
+    return;
+  }
+
+  pending.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "card post";
+    div.innerHTML = `
+      <img src="${p.image}">
+      <div>
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <small>Submitted: ${p.date}</small>
+        <div class="actions">
+          <button onclick="approve(${i})">Approve</button>
+          <button onclick="reject(${i})">Reject</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+/* APPROVE POST */
+function approve(i){
+  const pending = JSON.parse(localStorage.pendingPosts || "[]");
+  const approved = JSON.parse(localStorage.approvedPosts || "[]");
+
+  approved.push(pending[i]);
+  pending.splice(i,1);
+
+  localStorage.approvedPosts = JSON.stringify(approved);
+  localStorage.pendingPosts = JSON.stringify(pending);
+
+  loadPosts();
+}
+
+/* REJECT POST */
+function reject(i){
+  if(!confirm("Delete this post?")) return;
+
+  const pending = JSON.parse(localStorage.pendingPosts || "[]");
+  pending.splice(i,1);
+  localStorage.pendingPosts = JSON.stringify(pending);
+
+  loadPosts();
+}
+</script>
+
+</body>
+</html>
