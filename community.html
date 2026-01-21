@@ -280,60 +280,85 @@ footer{
   
   <button onclick="submitPost()">Submit for Approval</button>
 </div>
-</section>
+ <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
+<style id="footer-style">
+  footer {
+    width: 100%;
+    background: linear-gradient(90deg, #2b0a06, #5c2e07);
+    padding: 20px 0;
+    margin-top: 40px;
+    color: var(--accent);
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    text-align: center;
+  }
+
+  footer a {
+    color: #ffd567 !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #ffeb9c !important;
+    text-shadow: 0 0 10px #ffea96;
+  }
+</style>
 
 <footer>
-© My Bharat | Community Contributions 🇮🇳
+  <div class="footer-container">
+    <div><a href="about.html">About Us</a></div>
+    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
+    <div><a href="contactus.html">Contact Us</a></div>
+  </div>
 </footer>
 
 <script>
-let imageData = "";
+const uploadForm = document.getElementById("uploadForm");
 
-/* IMAGE PREVIEW + CONVERT TO BASE64 */
-function previewImage(){
-  const file = document.getElementById("image").files[0];
-  if(!file) return;
+uploadForm.addEventListener("submit", function(e){
+  e.preventDefault();
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    imageData = reader.result;
-    document.getElementById("preview").innerHTML =
-      `<img src="${imageData}">`;
-  };
-  reader.readAsDataURL(file);
-}
-
-/* SUBMIT POST */
-function submitPost(){
   const title = document.getElementById("title").value.trim();
-  const desc  = document.getElementById("desc").value.trim();
+  const desc = document.getElementById("desc").value.trim();
+  const imageInput = document.getElementById("image");
 
-  if(!title || !desc || !imageData){
-    alert("Please fill all fields and upload an image.");
+  if(!title || !desc || imageInput.files.length === 0){
+    alert("Please fill all fields");
     return;
   }
 
-  const pending = JSON.parse(localStorage.pendingPosts || "[]");
+  const reader = new FileReader();
+  reader.onload = function(){
+    const newPost = {
+      title: title,
+      desc: desc,
+      image: reader.result, // ✅ Base64 image
+      date: new Date().toLocaleString()
+    };
 
-  pending.push({
-    title,
-    desc,
-    image: imageData,
-    date: new Date().toLocaleString()
-  });
+    const pending = JSON.parse(localStorage.getItem("pendingPosts")) || [];
+    pending.push(newPost);
+    localStorage.setItem("pendingPosts", JSON.stringify(pending));
 
-  localStorage.pendingPosts = JSON.stringify(pending);
+    alert("✅ Post submitted for admin approval");
+    uploadForm.reset();
+  };
 
-  alert("Your post has been submitted for admin approval.");
-
-  // reset form
-  document.getElementById("title").value = "";
-  document.getElementById("desc").value = "";
-  document.getElementById("image").value = "";
-  document.getElementById("preview").innerHTML = "";
-  imageData = "";
-}
+  reader.readAsDataURL(imageInput.files[0]);
+});
 </script>
+
 
 </body>
 </html>
