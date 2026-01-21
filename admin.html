@@ -273,6 +273,7 @@ footer{
       </div>
     </nav>
   </header>
+
 <!-- 🔐 LOGIN -->
 <section id="loginSection">
 <h2 class="section-title">🔐 Admin Login</h2>
@@ -286,8 +287,13 @@ footer{
 
 <!-- 📋 DASHBOARD -->
 <section id="dashboard">
-<h2 class="section-title">📋 Pending Community Posts</h2>
+
+<h2 class="section-title">📥 Pending Posts</h2>
 <div id="pending"></div>
+
+<h2 class="section-title">✅ Approved Posts</h2>
+<div id="approved"></div>
+
 </section>
 
 <footer>
@@ -295,57 +301,90 @@ footer{
 </footer>
 
 <script>
-const USER = "karthiks";
-const PASS = "karthik@2012";
-  const USER = "jaashwith";
-const PASS = "jaashu6";
+/* ✅ MULTIPLE ADMINS */
+const ADMINS = [
+  { username: "karthiks", password: "karthik@2012" },
+  { username: "jashwith", password: "jaashu6" }
+];
 
 /* LOGIN */
 function login(){
-  const u = document.getElementById("user").value;
-  const p = document.getElementById("pass").value;
+  const u = user.value.trim();
+  const p = pass.value.trim();
 
-  if(u === USER && p === PASS){
-    document.getElementById("loginSection").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    loadPosts();
+  const validAdmin = ADMINS.find(
+    a => a.username === u && a.password === p
+  );
+
+  if(validAdmin){
+    sessionStorage.setItem("isAdmin", "true");
+    loginSection.style.display = "none";
+    dashboard.style.display = "block";
+    loadPending();
+    loadApproved();
   } else {
     alert("Invalid admin credentials");
   }
 }
 
 /* LOAD PENDING POSTS */
-function loadPosts(){
-  const list = document.getElementById("pending");
+function loadPending(){
+  const box = document.getElementById("pending");
   const pending = JSON.parse(localStorage.pendingPosts || "[]");
-
-  list.innerHTML = "";
+  box.innerHTML = "";
 
   if(pending.length === 0){
-    list.innerHTML = "<p>No pending posts.</p>";
+    box.innerHTML = "<p>No pending posts.</p>";
     return;
   }
 
-  pending.forEach((p, i) => {
-    const div = document.createElement("div");
-    div.className = "card post";
-    div.innerHTML = `
-      <img src="${p.image}">
-      <div>
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-        <small>Submitted: ${p.date}</small>
-        <div class="actions">
-          <button onclick="approve(${i})">Approve</button>
-          <button onclick="reject(${i})">Reject</button>
+  pending.forEach((p,i)=>{
+    box.innerHTML += `
+      <div class="card post">
+        <img src="${p.image}">
+        <div>
+          <h3>${p.title}</h3>
+          <p>${p.desc}</p>
+          <small>${p.date}</small>
+          <div class="actions">
+            <button onclick="approve(${i})">Approve</button>
+            <button onclick="reject(${i})">Reject</button>
+          </div>
         </div>
       </div>
     `;
-    list.appendChild(div);
   });
 }
 
-/* APPROVE POST */
+/* LOAD APPROVED POSTS */
+function loadApproved(){
+  const box = document.getElementById("approved");
+  const approved = JSON.parse(localStorage.approvedPosts || "[]");
+  box.innerHTML = "";
+
+  if(approved.length === 0){
+    box.innerHTML = "<p>No approved posts.</p>";
+    return;
+  }
+
+  approved.forEach((p,i)=>{
+    box.innerHTML += `
+      <div class="card post">
+        <img src="${p.image}">
+        <div>
+          <h3>${p.title}</h3>
+          <p>${p.desc}</p>
+          <small>${p.date}</small>
+          <div class="actions">
+            <button onclick="deleteApproved(${i})">Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* APPROVE */
 function approve(i){
   const pending = JSON.parse(localStorage.pendingPosts || "[]");
   const approved = JSON.parse(localStorage.approvedPosts || "[]");
@@ -353,21 +392,33 @@ function approve(i){
   approved.push(pending[i]);
   pending.splice(i,1);
 
-  localStorage.approvedPosts = JSON.stringify(approved);
   localStorage.pendingPosts = JSON.stringify(pending);
+  localStorage.approvedPosts = JSON.stringify(approved);
 
-  loadPosts();
+  loadPending();
+  loadApproved();
 }
 
-/* REJECT POST */
+/* REJECT */
 function reject(i){
-  if(!confirm("Delete this post?")) return;
+  if(!confirm("Reject this post?")) return;
 
   const pending = JSON.parse(localStorage.pendingPosts || "[]");
   pending.splice(i,1);
   localStorage.pendingPosts = JSON.stringify(pending);
 
-  loadPosts();
+  loadPending();
+}
+
+/* DELETE APPROVED */
+function deleteApproved(i){
+  if(!confirm("Delete this approved post?")) return;
+
+  const approved = JSON.parse(localStorage.approvedPosts || "[]");
+  approved.splice(i,1);
+  localStorage.approvedPosts = JSON.stringify(approved);
+
+  loadApproved();
 }
 </script>
 
