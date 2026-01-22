@@ -22,14 +22,72 @@ body{
 
 /* HEADER */
 header{
+  width:100%;
   background:linear-gradient(90deg,var(--brand),#5c2e07);
-  color:white;
-  padding:14px 24px;
+  box-shadow:0 3px 12px rgba(0,0,0,0.25);
+  padding:12px 24px;
+  position:sticky;
+  top:0;
+  z-index:2000;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  flex-wrap:wrap;
 }
-header h1{margin:0;color:var(--accent)}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  background:white;
+}
+.logo span{
+  color:var(--accent);
+  font-weight:700;
+  font-size:1.25rem;
+}
+nav.navbar{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+nav a,.dropbtn{
+  color:#fff;
+  font-weight:500;
+  text-decoration:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:10px 16px;
+  border-radius:6px;
+  font-size:1.05rem;
+}
+nav a:hover,.dropbtn:hover{
+  color:var(--accent);
+  background:rgba(255,255,255,0.08);
+}
+.dropdown{position:relative}
+.dropdown-content{
+  display:none;
+  position:absolute;
+  right:0;
+  background:#fffaf0;
+  min-width:180px;
+  border-radius:6px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.2);
+  padding:6px 0;
+}
+.dropdown-content a{
+  display:block;
+  padding:10px 14px;
+  color:#4b2e05;
+}
+.dropdown:hover .dropdown-content{display:block}
 
 /* SECTION */
 section{
@@ -52,7 +110,7 @@ section{
   box-shadow:0 6px 16px rgba(0,0,0,.15);
 }
 
-input, textarea, button{
+input,textarea,button{
   width:100%;
   padding:12px;
   margin:10px 0;
@@ -60,9 +118,7 @@ input, textarea, button{
   border:1px solid #ccc;
   font-family:inherit;
 }
-
-textarea{resize:vertical; min-height:100px}
-
+textarea{min-height:100px}
 button{
   background:var(--accent);
   border:none;
@@ -71,249 +127,70 @@ button{
 }
 button:hover{opacity:.9}
 
-.preview{
-  margin-top:10px;
-}
 .preview img{
   width:100%;
   max-height:250px;
   object-fit:cover;
   border-radius:12px;
+  margin-top:10px;
 }
 
+/* FOOTER */
 footer{
-  background:var(--brand);
+  background:linear-gradient(90deg,#2b0a06,#5c2e07);
   color:var(--accent);
-  padding:20px;
-  text-align:center;
+  padding:20px 0;
   margin-top:50px;
+}
+.footer-container{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  padding:0 20px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+footer a{
+  color:#ffd567;
+  text-decoration:none;
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🌟 HEADER STYLES (Moved Near Header) -->
-<style id="header-style">
-    :root {
-      --brand: #2b0a06;
-      --accent: #d9a441;
-      --light-text: #fff;
-    }
-  
-    header {
-      width: 100%;
-      background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
-      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-      padding: 12px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 2000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-  
-    .logo img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      object-fit: cover;
-      background: white;
-    }
-  
-    .logo span {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-  
-    nav.navbar {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    nav a, .dropbtn {
-      color: var(--light-text);
-      font-weight: 500;
-      text-decoration: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px 16px;
-      border-radius: 6px;
-      font-size: 1.05rem;
-      transition: 0.25s;
-    }
-  
-    nav a:hover, .dropbtn:hover {
-      color: var(--accent);
-      background: rgba(255,255,255,0.08);
-    }
-  
-    .dropdown { position: relative; }
-  
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background: #fffaf0;
-      min-width: 180px;
-      border-radius: 6px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-      padding: 6px 0;
-      z-index: 3000;
-    }
-  
-    .dropdown-content a {
-      display: block;
-      padding: 10px 14px;
-      color: #4b2e05;
-    }
-  
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-  
-    /* Make month card titles match header accent */
-    .month-head {
-      color: var(--accent);
-    }
-  </style>
-  
-  
-  
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <span>My Bharat</span>
-    </div>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">Art ▾</button>
-        <div class="dropdown-content">
-          <a href="art.html">Art</a>
-          <a href="architecture.html">Architecture</a>
-          <a href="arts@sps.html">Arts at SPS</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Culture ▾</button>
-        <div class="dropdown-content">
-          <a href="dance.html">Dance</a>
-          <a href="music.html">Music</a>
-          <a href="festivals.html">Festivals</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Cuisine ▾</button>
-        <div class="dropdown-content">
-          <a href="northindian.html">North Indian</a>
-          <a href="southindian.html">South Indian</a>
-          <a href="eastindian.html">East Indian</a>
-          <a href="westindian.html">West Indian</a>
-        </div>
-      </div>
-      <a href="states.html">States</a>
-      <div class="dropdown">
-        <button class="dropbtn">Tourism ▾</button>
-        <div class="dropdown-content">
-          <a href="northindia.html">North India</a>
-          <a href="southindia.html">South India</a>
-          <a href="eastindia.html">East India</a>
-          <a href="westindia.html">West India</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">History ▾</button>
-        <div class="dropdown-content">
-          <a href="ancientindia.html">Ancient India</a>
-          <a href="medievalindia.html">Medieval India</a>
-          <a href="modernindia.html">Modern India</a>
-          <a href="heritage.html">Heritage</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">National ▾</button>
-        <div class="dropdown-content">
-          <a href="nationalsymbols.html">National Symbols</a>
-          <a href="government.html">Government</a>
-          <a href="nationals.html">Nationals</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Explore More ▾</button>
-        <div class="dropdown-content">
-          <a href="facts.html">Facts</a>
-          <a href="calendar.html">Calendar</a>
-          <a href="ourpm.html">Our P.M</a>
-          <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
-          <a href="inventions.html">Our Inventions</a>
-        </div>
-      </div>
-    </nav>
-  </header>s
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <span>My Bharat</span>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="facts.html">Facts</a>
+    <a href="media.html">Media</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
 <section>
-<h2 class="section-title">🧑‍🤝‍🧑 Upload Your Culture</h2>
+  <h2 class="section-title">🧑‍🤝‍🧑 Upload Your Culture</h2>
 
-<div class="card">
-  <input type="text" id="title" placeholder="Title (e.g. Pongal Celebration)" required>
-  
-  <textarea id="desc" placeholder="Describe the cultural significance..." required></textarea>
-  
-  <input type="file" id="image" accept="image/*" required onchange="previewImage()">
-  
-  <div class="preview" id="preview"></div>
-  
-  <button onclick="submitPost()">Submit for Approval</button>
-</div>
- <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
-<style id="footer-style">
-  footer {
-    width: 100%;
-    background: linear-gradient(90deg, #2b0a06, #5c2e07);
-    padding: 20px 0;
-    margin-top: 40px;
-    color: var(--accent);
-  }
+  <!-- ✅ FIXED FORM -->
+  <form id="uploadForm" class="card">
 
-  .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    text-align: center;
-  }
+    <input type="text" id="title" placeholder="Title (e.g. Pongal Celebration)" required>
 
-  footer a {
-    color: #ffd567 !important;
-    text-decoration: none !important;
-    font-weight: 600;
-    transition: 0.3s;
-  }
+    <textarea id="desc" placeholder="Describe the cultural significance..." required></textarea>
 
-  footer a:hover {
-    color: #ffeb9c !important;
-    text-shadow: 0 0 10px #ffea96;
-  }
-</style>
+    <input type="file" id="image" accept="image/*" required>
+
+    <div class="preview" id="preview"></div>
+
+    <button type="submit">Submit for Approval</button>
+  </form>
+</section>
 
 <footer>
   <div class="footer-container">
@@ -324,41 +201,56 @@ footer{
 </footer>
 
 <script>
-const uploadForm = document.getElementById("uploadForm");
+const form = document.getElementById("uploadForm");
+const preview = document.getElementById("preview");
 
-uploadForm.addEventListener("submit", function(e){
+document.getElementById("image").addEventListener("change", function(){
+  preview.innerHTML = "";
+  const file = this.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = document.createElement("img");
+    img.src = reader.result;
+    preview.appendChild(img);
+  };
+  reader.readAsDataURL(file);
+});
+
+form.addEventListener("submit", function(e){
   e.preventDefault();
 
-  const title = document.getElementById("title").value.trim();
+  const title = titleInput = document.getElementById("title").value.trim();
   const desc = document.getElementById("desc").value.trim();
-  const imageInput = document.getElementById("image");
+  const imageFile = document.getElementById("image").files[0];
 
-  if(!title || !desc || imageInput.files.length === 0){
+  if(!title || !desc || !imageFile){
     alert("Please fill all fields");
     return;
   }
 
   const reader = new FileReader();
   reader.onload = function(){
-    const newPost = {
-      title: title,
-      desc: desc,
-      image: reader.result, // ✅ Base64 image
+    const post = {
+      title,
+      desc,
+      image: reader.result,
       date: new Date().toLocaleString()
     };
 
     const pending = JSON.parse(localStorage.getItem("pendingPosts")) || [];
-    pending.push(newPost);
+    pending.push(post);
     localStorage.setItem("pendingPosts", JSON.stringify(pending));
 
     alert("✅ Post submitted for admin approval");
-    uploadForm.reset();
+    form.reset();
+    preview.innerHTML = "";
   };
 
-  reader.readAsDataURL(imageInput.files[0]);
+  reader.readAsDataURL(imageFile);
 });
 </script>
-
 
 </body>
 </html>
