@@ -18,396 +18,166 @@
   .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.5); }
   .modal-content { background:#fff8f0; margin:5% auto; padding:20px; border:2px solid #d9a441; border-radius:12px; max-width:600px; position:relative; }
   .close { position:absolute; top:10px; right:15px; color:#4a1a0a; font-size:1.5em; font-weight:bold; cursor:pointer; }
-  .modal-content img { width: 100%; margin: 15px 0; border-radius: 8px; object-fit: cover; }
 </style>
 </head>
 <body>
- <!-- 🌟 HEADER STYLES (Moved Near Header) -->
-<style id="header-style">
-  :root {
-    --brand: #2b0a06;
-    --accent: #d9a441;
-    --light-text: #fff;
-  }
-
-  header {
-    width: 100%;
-    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
-    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-    padding: 12px 24px;
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    object-fit: cover;
-    background: white;
-  }
-
-  .logo span {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
-
-  nav.navbar {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  nav a, .dropbtn {
-    color: var(--light-text);
-    font-weight: 500;
-    text-decoration: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-size: 1.05rem;
-    transition: 0.25s;
-  }
-
-  nav a:hover, .dropbtn:hover {
-    color: var(--accent);
-    background: rgba(255,255,255,0.08);
-  }
-
-  .dropdown { position: relative; }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background: #fffaf0;
-    min-width: 180px;
-    border-radius: 6px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-    padding: 6px 0;
-    z-index: 3000;
-  }
-
-  .dropdown-content a {
-    display: block;
-    padding: 10px 14px;
-    color: #4b2e05;
-  }
-
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-
-  /* Make month card titles match header accent */
-  .month-head {
-    color: var(--accent);
-  }
-</style>
-
-
-<header>
-  <div class="logo">
-    <img src="logo.png" alt="Logo">
-    <span>My Bharat</span>
-  </div>
-  <nav class="navbar">
-    <a href="index.html">Home</a>
-    <div class="dropdown">
-      <button class="dropbtn">Art ▾</button>
-      <div class="dropdown-content">
-        <a href="art.html">Art</a>
-        <a href="architecture.html">Architecture</a>
-        <a href="arts@sps.html">Arts at SPS</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Culture ▾</button>
-      <div class="dropdown-content">
-        <a href="dance.html">Dance</a>
-        <a href="music.html">Music</a>
-        <a href="festivals.html">Festivals</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Cuisine ▾</button>
-      <div class="dropdown-content">
-        <a href="northindian.html">North Indian</a>
-        <a href="southindian.html">South Indian</a>
-        <a href="eastindian.html">East Indian</a>
-        <a href="westindian.html">West Indian</a>
-      </div>
-    </div>
-    <a href="states.html">States</a>
-    <div class="dropdown">
-      <button class="dropbtn">Tourism ▾</button>
-      <div class="dropdown-content">
-        <a href="northindia.html">North India</a>
-        <a href="southindia.html">South India</a>
-        <a href="eastindia.html">East India</a>
-        <a href="westindia.html">West India</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">History ▾</button>
-      <div class="dropdown-content">
-        <a href="ancientindia.html">Ancient India</a>
-        <a href="medievalindia.html">Medieval India</a>
-        <a href="modernindia.html">Modern India</a>
-        <a href="heritage.html">Heritage</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">National ▾</button>
-      <div class="dropdown-content">
-        <a href="nationalsymbols.html">National Symbols</a>
-        <a href="government.html">Government</a>
-        <a href="nationals.html">Nationals</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">Explore More ▾</button>
-      <div class="dropdown-content">
-        <a href="facts.html">Facts</a>
-        <a href="calendar.html">Calendar</a>
-        <a href="ourpm.html">Our P.M</a>
-        <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
-        <a href="inventions.html">Our Inventions</a>
-      </div>
-    </div>
-  </nav>
-</header>
+<header>Ancient India Timeline</header>
 <div class="container">
 
   <!-- Cards 1 to 30 -->
   <div class="card" onclick="openModal(0)">
-    <img src="Indus Valley Civilization.jpg" alt="Indus Valley Civilization">
+    <img src="images/history/indus.jpg" alt="Indus Valley Civilization">
     <div class="card-content"><h3>Indus Valley Civilization</h3><p>c. 3300–1300 BCE</p></div>
   </div>
   <div class="card" onclick="openModal(1)">
-    <img src="Vedic Period.jpg" alt="Vedic Period">
+    <img src="images/history/vedic.jpg" alt="Vedic Period">
     <div class="card-content"><h3>Vedic Period</h3><p>c. 1500–500 BCE</p></div>
   </div>
   <div class="card" onclick="openModal(2)">
-    <img src="Mahajanapadas.jpg" alt="Mahajanapadas">
+    <img src="images/history/mahajanapadas.jpg" alt="Mahajanapadas">
     <div class="card-content"><h3>Mahajanapadas</h3><p>c. 600–300 BCE</p></div>
   </div>
-  <div class="card" onclick="openModal(3)">
-    <img src="maurya.jpeg" alt="Maurya Empire">
+ <div class="card" onclick="openModal(3)">
+    <img src="images/history/mauryan.jpg" alt="Maurya Empire">
     <div class="card-content"><h3>Maurya Empire</h3><p>c. 322–185 BCE</p></div>
   </div>
   <div class="card" onclick="openModal(4)">
-    <img src="Ashoka the Great.jpg" alt="Ashoka the Great">
+    <img src="images/history/ashoka.jpg" alt="Ashoka the Great">
     <div class="card-content"><h3>Ashoka the Great</h3><p>c. 268–232 BCE</p></div>
   </div>
   <div class="card" onclick="openModal(5)">
-    <img src="Gupta Empire.jpg" alt="Gupta Empire">
+    <img src="images/history/gupta.jpg" alt="Gupta Empire">
     <div class="card-content"><h3>Gupta Empire</h3><p>c. 320–550 CE</p></div>
   </div>
   <div class="card" onclick="openModal(6)">
-    <img src="Vedic Culture.jpg" alt="Vedic Culture">
+    <img src="images/history/vedic_culture.jpg" alt="Vedic Culture">
     <div class="card-content"><h3>Vedic Culture</h3><p>Religion, rituals, and social structure evolved.</p></div>
   </div>
   <div class="card" onclick="openModal(7)">
-    <img src="Early Buddhism.jpg" alt="Early Buddhism">
+    <img src="images/history/early_buddhism.jpg" alt="Early Buddhism">
     <div class="card-content"><h3>Early Buddhism</h3><p>c. 6th century BCE, teachings of Buddha emerged.</p></div>
   </div>
   <div class="card" onclick="openModal(8)">
-    <img src="Mahabharata & Ramayana.jpg" alt="Mahabharata">
+    <img src="images/history/mahabharata.jpg" alt="Mahabharata">
     <div class="card-content"><h3>Mahabharata & Ramayana</h3><p>Epic literature shaping Indian culture.</p></div>
   </div>
   <div class="card" onclick="openModal(9)">
-    <img src="Jainism.jpg" alt="Jainism">
+    <img src="images/history/jainism.jpg" alt="Jainism">
     <div class="card-content"><h3>Jainism</h3><p>c. 6th century BCE, teachings of Mahavira.</p></div>
   </div>
   <div class="card" onclick="openModal(10)">
-    <img src="ashoka edicts.jpg" alt="Ashokan Edicts">
+    <img src="images/history/ashokan_edicts.jpg" alt="Ashokan Edicts">
     <div class="card-content"><h3>Ashokan Edicts</h3><p>Spread Buddhism and moral governance.</p></div>
   </div>
   <div class="card" onclick="openModal(11)">
-    <img src="nalanda.jpg" alt="Nalanda University">
+    <img src="images/history/nalanda.jpg" alt="Nalanda University">
     <div class="card-content"><h3>Nalanda University</h3><p>Ancient center of learning, 5th century CE.</p></div>
   </div>
   <div class="card" onclick="openModal(12)">
-    <img src="Rock-cut Caves.jpg" alt="Rock-cut Caves">
+    <img src="images/history/rock_caves.jpg" alt="Rock-cut Caves">
     <div class="card-content"><h3>Rock-cut Caves</h3><p>Architectural marvels like Ajanta & Ellora.</p></div>
   </div>
   <div class="card" onclick="openModal(13)">
-    <img src="Satavahana Dynasty.jpg" alt="Satavahana Dynasty">
+    <img src="images/history/satavahanas.jpg" alt="Satavahana Dynasty">
     <div class="card-content"><h3>Satavahana Dynasty</h3><p>c. 1st century BCE–2nd century CE</p></div>
   </div>
   <div class="card" onclick="openModal(14)">
-    <img src="Kushan Empire.jpg" alt="Kushan Empire">
+    <img src="images/history/kushans.jpg" alt="Kushan Empire">
     <div class="card-content"><h3>Kushan Empire</h3><p>c. 1st–3rd century CE, cultural exchanges with Central Asia.</p></div>
   </div>
   <div class="card" onclick="openModal(15)">
-    <img src="Vedic Science.jpg" alt="Vedic Science">
+    <img src="images/history/vedic_science.jpg" alt="Vedic Science">
     <div class="card-content"><h3>Vedic Science</h3><p>Mathematics, astronomy, and medicine developed.</p></div>
   </div>
   <div class="card" onclick="openModal(16)">
-    <img src="Vedic Literature.jpg" alt="Vedic Literature">
+    <img src="images/history/vedic_literature.jpg" alt="Vedic Literature">
     <div class="card-content"><h3>Vedic Literature</h3><p>Composed Rigveda, Samaveda, Yajurveda, Atharvaveda.</p></div>
   </div>
   <div class="card" onclick="openModal(17)">
-    <img src="Rock Art.jpg" alt="Rock Art">
+    <img src="images/history/rock_art.jpg" alt="Rock Art">
     <div class="card-content"><h3>Rock Art</h3><p>Cave paintings depicting daily life and beliefs.</p></div>
   </div>
   <div class="card" onclick="openModal(18)">
-    <img src="Ancient Coinage.jpg" alt="Ancient Coinage">
+    <img src="images/history/coinage.jpg" alt="Ancient Coinage">
     <div class="card-content"><h3>Ancient Coinage</h3><p>Economic development and trade evidence.</p></div>
   </div>
   <div class="card" onclick="openModal(19)">
-    <img src="Early Temples.jpg" alt="Early Temples">
+    <img src="images/history/temples.jpg" alt="Early Temples">
     <div class="card-content"><h3>Early Temples</h3><p>Architectural advances in worship structures.</p></div>
   </div>
   <div class="card" onclick="openModal(20)">
-    <img src="Sculpture Art.jpg" alt="Sculpture Art">
+    <img src="images/history/sculpture.jpg" alt="Sculpture Art">
     <div class="card-content"><h3>Sculpture Art</h3><p>Stone carvings and metal statues flourished.</p></div>
   </div>
   <div class="card" onclick="openModal(21)">
-    <img src="Vedic Politics.jpg" alt="Vedic Politics">
+    <img src="images/history/vedic_politics.jpg" alt="Vedic Politics">
     <div class="card-content"><h3>Vedic Politics</h3><p>Kingdoms, assemblies, and governance structures.</p></div>
   </div>
+  <div class="card" onclick="openModal(22)">
+    <img src="images/history/vedic_economy.jpg" alt="Vedic Economy">
+    <div class="card-content"><h3>Vedic Economy</h3><p>Agriculture, trade, and craftsmanship thrived.</p></div>
+  </div>
+  <div class="card" onclick="openModal(23)">
+    <img src="images/history/vedic_society.jpg" alt="Vedic Society">
+    <div class="card-content"><h3>Vedic Society</h3><p>Social classes and cultural norms formed.</p></div>
+  </div>
   <div class="card" onclick="openModal(24)">
-    <img src="Ancient Trade.jpg" alt="Ancient Trade">
+    <img src="images/history/trade.jpg" alt="Ancient Trade">
     <div class="card-content"><h3>Ancient Trade</h3><p>Trade with Mesopotamia and Persia.</p></div>
   </div>
   <div class="card" onclick="openModal(25)">
-    <img src="Vedic Philosophy.jpg" alt="Vedic Philosophy">
+    <img src="images/history/vedic_philosophy.jpg" alt="Vedic Philosophy">
     <div class="card-content"><h3>Vedic Philosophy</h3><p>Concepts of Dharma, Karma, and Moksha.</p></div>
   </div>
   <div class="card" onclick="openModal(26)">
-    <img src="Brahmi Script.jpg" alt="Brahmi Script">
+    <img src="images/history/brahmi.jpg" alt="Brahmi Script">
     <div class="card-content"><h3>Brahmi Script</h3><p>Early writing system for record-keeping.</p></div>
   </div>
   <div class="card" onclick="openModal(27)">
-    <img src="Urban Development.jpg" alt="Urban Development">
+    <img src="images/history/early_city.jpg" alt="Urban Development">
     <div class="card-content"><h3>Urban Development</h3><p>Planned cities with drainage and granaries.</p></div>
   </div>
   <div class="card" onclick="openModal(28)">
-    <img src="Water Systems.jpg" alt="Water Systems">
+    <img src="images/history/water_systems.jpg" alt="Water Systems">
     <div class="card-content"><h3>Water Systems</h3><p>Advanced wells, baths, and canals in cities.</p></div>
   </div>
   <div class="card" onclick="openModal(29)">
-    <img src="Cultural Exchange.jpg" alt="Cultural Exchange">
+    <img src="images/history/cultural_exchange.jpg" alt="Cultural Exchange">
     <div class="card-content"><h3>Cultural Exchange</h3><p>Interaction between regions led to art and science growth.</p></div>
   </div>
 </div>
-  <!-- 🦶 FOOTER STYLES (Moved Near Footer) -->
-<style id="footer-style">
-  footer {
-    width: 100%;
-    background: linear-gradient(90deg, #2b0a06, #5c2e07);
-    padding: 20px 0;
-    margin-top: 40px;
-    color: var(--accent);
-  }
 
-  .footer-container {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    text-align: center;
-  }
-
-  footer a {
-    color: #ffd567 !important;
-    text-decoration: none !important;
-    font-weight: 600;
-    transition: 0.3s;
-  }
-
-  footer a:hover {
-    color: #ffeb9c !important;
-    text-shadow: 0 0 10px #ffea96;
-  }
-</style>
-
-<footer>
-  <div class="footer-container">
-    <div><a href="about.html">About Us</a></div>
-    <div>© 2025 My Bharat | Unity In Our Hearts ❤️</div>
-    <div><a href="contactus.html">Contact Us</a></div>
-  </div>
-</footer>
-<!-- Modals 1 to 30 with images -->
-<div id="modal0" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(0)">&times;</span><h2>Indus Valley Civilization</h2>
-  <img src="Indus Valley Civilization.jpg" alt="Indus Valley Civilization"><p>The Indus Valley Civilization was one of the world's earliest urban cultures, known for its advanced city planning, drainage systems, and trade networks.</p></div></div>
-<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(1)">&times;</span><h2>Vedic Period</h2>
-  <img src="Vedic Period.jpg" alt="Vedic Period"><p>The Vedic period saw the composition of the Vedas, the emergence of Hinduism, and the foundations of Indian society and politics.</p></div></div>
-<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(2)">&times;</span><h2>Mahajanapadas</h2>
-  <img src="Mahajanapadas.jpg" alt="Mahajanapadas"><p>Sixteen major kingdoms and republics formed, laying political foundations for India.</p></div></div>
-<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(3)">&times;</span><h2>Maurya Empire</h2>
-  <img src="maurya.jpeg" alt="Maurya Empire"><p>Founded by Chandragupta Maurya, it united most of India under a single administration.</p></div></div>
-<div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(4)">&times;</span><h2>Ashoka the Great</h2>
-  <img src="Ashoka the Great.jpg" alt="Ashoka the Great"><p>Promoted Buddhism and ethical governance across his empire.</p></div></div>
-<div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(5)">&times;</span><h2>Gupta Empire</h2>
-  <img src="Gupta Empire.jpg" alt="Gupta Empire"><p>Known as the Golden Age of India for science, arts, and literature.</p></div></div>
-<div id="modal6" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(6)">&times;</span><h2>Vedic Culture</h2>
-  <img src="Vedic Culture.jpg" alt="Vedic Culture"><p>Religion, rituals, and social structure evolved during this period.</p></div></div>
-<div id="modal7" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(7)">&times;</span><h2>Early Buddhism</h2>
-  <img src="Early Buddhism.jpg" alt="Early Buddhism"><p>Buddhism emerged in India, teaching compassion and the path to enlightenment.</p></div></div>
-<div id="modal8" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(8)">&times;</span><h2>Mahabharata & Ramayana</h2>
-  <img src="Mahabharata & Ramayana.jpg" alt="Mahabharata & Ramayana"><p>Epic literature shaping Indian culture, values, and history.</p></div></div>
-<div id="modal9" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(9)">&times;</span><h2>Jainism</h2>
-  <img src="Jainism.jpg" alt="Jainism"><p>Founded by Mahavira, emphasizing nonviolence, truth, and asceticism.</p></div></div>
-<div id="modal10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(10)">&times;</span><h2>Ashokan Edict</h2>
-  <img src="ashoka edicts.jpg" alt="Ashokan Edicts"><p>Stone inscriptions promoting moral law and Buddhist principles.</p></div></div>
-<div id="modal11" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(11)">&times;</span><h2>Nalanda University</h2>
-  <img src="nalanda.jpg" alt="Nalanda University"><p>One of the world's earliest residential universities, attracting scholars from Asia.</p></div></div>
-<div id="modal12" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(12)">&times;</span><h2>Rock-cut Caves</h2>
-  <img src="Rock-cut Caves.jpg" alt="Rock-cut Caves"><p>Architectural marvels like Ajanta and Ellora showcasing religion and art.</p></div></div>
-<div id="modal13" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(13)">&times;</span><h2>Satavahana Dynasty</h2>
-  <img src="Satavahana Dynasty.jpg" alt="Satavahana Dynasty"><p>Rule in Deccan, fostering trade and cultural growth.</p></div></div>
-<div id="modal14" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(14)">&times;</span><h2>Kushan Empire</h2>
-  <img src="Kushan Empire.jpg" alt="Kushan Empire"><p>Central Asian influences merged with Indian culture, promoting Buddhism.</p></div></div>
-<div id="modal15" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(15)">&times;</span><h2>Vedic Science</h2>
-  <img src="Vedic Science.jpg" alt="Vedic Science"><p>Developments in astronomy, mathematics, and medicine.</p></div></div>
-<div id="modal16" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(16)">&times;</span><h2>Vedic Literature</h2>
-  <img src="Vedic Literature.jpg" alt="Vedic Literature"><p>Collection of sacred texts shaping spiritual and social life.</p></div></div>
-<div id="modal17" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(17)">&times;</span><h2>Rock Art</h2>
-  <img src="Rock Art.jpg" alt="Rock Art"><p>Paintings depicting life, rituals, and beliefs of ancient people.</p></div></div>
-<div id="modal18" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(18)">&times;</span><h2>Ancient Coinage</h2>
-  <img src="Ancient Coinage.jpg" alt="Ancient Coinage"><p>Trade and economy evidence through coins from various periods.</p></div></div>
-<div id="modal19" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(19)">&times;</span><h2>Early Temples</h2>
-  <img src="Early Temples.jpg" alt="Early Temples"><p>Development of temples reflecting religious devotion and architecture.</p></div></div>
-<div id="modal20" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(20)">&times;</span><h2>Sculpture Art</h2>
-  <img src="culpture Art.jpg" alt="Sculpture Art"><p>Stone and metal sculptures depicting gods, leaders, and everyday life.</p></div></div>
-<div id="modal21" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(21)">&times;</span><h2>Vedic Politics</h2>
-  <img src="Vedic Politics.jpg" alt="Vedic Politics"><p>Governance through kings, assemblies, and councils.</p></div></div
-<div id="modal24" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(24)">&times;</span><h2>Ancient Trade</h2>
-  <img src="Ancient Trade.jpg" alt="Ancient Trade"><p>Exchange of goods with Mesopotamia, Persia, and Southeast Asia.</p></div></div>
-<div id="modal25" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(25)">&times;</span><h2>Vedic Philosophy</h2>
-  <img src="Vedic Philosophy.jpg" alt="Vedic Philosophy"><p>Ideas of Dharma, Karma, and Moksha emerged.</p></div></div>
-<div id="modal26" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(26)">&times;</span><h2>Brahmi Script</h2>
-  <img src="Brahmi Script.jpg" alt="Brahmi Script"><p>One of the earliest writing systems, used in inscriptions and records.</p></div></div>
-<div id="modal27" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(27)">&times;</span><h2>Urban Development</h2>
-  <img src="Urban Development.jpg" alt="Urban Development"><p>Cities with planned streets, drainage, and granaries.</p></div></div>
-<div id="modal28" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(28)">&times;</span><h2>Water Systems</h2>
-  <img src="Water Systems.jpg" alt="Water Systems"><p>Advanced wells, baths, and canals reflecting engineering skill.</p></div></div>
-<div id="modal29" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(29)">&times;</span><h2>Cultural Exchange</h2>
-  <img src="Cultural Exchange.jpg" alt="Cultural Exchange"><p>Interaction between regions fostered art, science, and trade growth.</p></div></div>
+<!-- Modals 1 to 30 -->
+<div id="modal0" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(0)">&times;</span><h2>Indus Valley Civilization</h2><p>The Indus Valley Civilization was one of the world's earliest urban cultures, known for its advanced city planning, drainage systems, and trade networks.</p></div></div>
+<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(1)">&times;</span><h2>Vedic Period</h2><p>The Vedic period saw the composition of the Vedas, the emergence of Hinduism, and the foundations of Indian society and politics.</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(2)">&times;</span><h2>Mahajanapadas</h2><p>Sixteen major kingdoms and republics formed, laying political foundations for India.</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(3)">&times;</span><h2>Maurya Empire</h2><p>Founded by Chandragupta Maurya, it united most of India under a single administration.</p></div></div>
+<div id="modal4" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(4)">&times;</span><h2>Ashoka the Great</h2><p>Promoted Buddhism and ethical governance across his empire.</p></div></div>
+<div id="modal5" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(5)">&times;</span><h2>Gupta Empire</h2><p>Known as the Golden Age of India for science, arts, and literature.</p></div></div>
+<div id="modal6" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(6)">&times;</span><h2>Vedic Culture</h2><p>Religion, rituals, and social structure evolved during this period.</p></div></div>
+<div id="modal7" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(7)">&times;</span><h2>Early Buddhism</h2><p>Buddhism emerged in India, teaching compassion and the path to enlightenment.</p></div></div>
+<div id="modal8" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(8)">&times;</span><h2>Mahabharata & Ramayana</h2><p>Epic literature shaping Indian culture, values, and history.</p></div></div>
+<div id="modal9" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(9)">&times;</span><h2>Jainism</h2><p>Founded by Mahavira, emphasizing nonviolence, truth, and asceticism.</p></div></div>
+<div id="modal10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(10)">&times;</span><h2>Ashokan Edicts</h2><p>Stone inscriptions promoting moral law and Buddhist principles.</p></div></div>
+<div id="modal11" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(11)">&times;</span><h2>Nalanda University</h2><p>One of the world's earliest residential universities, attracting scholars from Asia.</p></div></div>
+<div id="modal12" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(12)">&times;</span><h2>Rock-cut Caves</h2><p>Architectural marvels like Ajanta and Ellora showcasing religion and art.</p></div></div>
+<div id="modal13" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(13)">&times;</span><h2>Satavahana Dynasty</h2><p>Rule in Deccan, fostering trade and cultural growth.</p></div></div>
+<div id="modal14" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(14)">&times;</span><h2>Kushan Empire</h2><p>Central Asian influences merged with Indian culture, promoting Buddhism.</p></div></div>
+<div id="modal15" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(15)">&times;</span><h2>Vedic Science</h2><p>Mathematics, astronomy, and medicine flourished.</p></div></div>
+<div id="modal16" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(16)">&times;</span><h2>Vedic Literature</h2><p>Compilation of Rigveda, Samaveda, Yajurveda, and Atharvaveda.</p></div></div>
+<div id="modal17" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(17)">&times;</span><h2>Rock Art</h2><p>Cave paintings depicting daily life and religious practices.</p></div></div>
+<div id="modal18" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(18)">&times;</span><h2>Ancient Coinage</h2><p>Coins indicate trade, governance, and cultural exchange.</p></div></div>
+<div id="modal19" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(19)">&times;</span><h2>Early Temples</h2><p>Architecture of early temples reflects religious devotion.</p></div></div>
+<div id="modal20" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(20)">&times;</span><h2>Sculpture Art</h2><p>Stone carvings and bronze statues showcasing skill and devotion.</p></div></div>
+<div id="modal21" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(21)">&times;</span><h2>Vedic Politics</h2><p>Kings, assemblies, and governance structures were developed.</p></div></div>
+<div id="modal22" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(22)">&times;</span><h2>Vedic Economy</h2><p>Agriculture, trade, and craftsmanship formed the economic base.</p></div></div>
+<div id="modal23" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(23)">&times;</span><h2>Vedic Society</h2><p>Social hierarchy, rituals, and community life took shape.</p></div></div>
+<div id="modal24" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(24)">&times;</span><h2>Ancient Trade</h2><p>Trade networks connected India with Mesopotamia and Persia.</p></div></div>
+<div id="modal25" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(25)">&times;</span><h2>Vedic Philosophy</h2><p>Concepts of Dharma, Karma, Moksha, and ethical living emerged.</p></div></div>
+<div id="modal26" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(26)">&times;</span><h2>Brahmi Script</h2><p>Early writing system used for inscriptions and administration.</p></div></div>
+<div id="modal27" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(27)">&times;</span><h2>Urban Development</h2><p>Planned cities with streets, drainage, and granaries.</p></div></div>
+<div id="modal28" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(28)">&times;</span><h2>Water Systems</h2><p>Innovative wells, baths, and canals supported urban life.</p></div></div>
+<div id="modal29" class="modal"><div class="modal-content"><span class="close" onclick="closeModal(29)">&times;</span><h2>Cultural Exchange</h2><p>Exchange between regions led to art, literature, and scientific growth.</p></div></div>
 
 <script>
 function openModal(i) { document.getElementById('modal'+i).style.display='block'; }
@@ -420,9 +190,3 @@ window.onclick = function(event) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
