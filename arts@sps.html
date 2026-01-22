@@ -4,89 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Arts Done at SPS | My Bharat</title>
-
-<!-- ===== HEADER STYLE ===== -->
-<style>
-:root{
-  --deep-maroon:#4a1a0a;
-  --gold:#f5c542;
-  --sand:#ffeecf;
-  --light-bg:#fff9f0;
-  --text:#2d1b0f;
-}
-
-/* HEADER */
-header{
-  background:linear-gradient(90deg,var(--deep-maroon),var(--gold));
-  padding:10px 30px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 3px 12px rgba(0,0,0,0.3);
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.logo img{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  border:2px solid var(--gold);
-}
-.logo span{
-  color:var(--gold);
-  font-size:1.4rem;
-  font-weight:700;
-}
-
-.navbar{
-  display:flex;
-  gap:20px;
-}
-
-.navbar a, .dropbtn{
-  color:#fff;
-  text-decoration:none;
-  padding:8px 12px;
-  border-radius:6px;
-  font-weight:600;
-  cursor:pointer;
-  background:transparent;
-  border:none;
-}
-.navbar a:hover, .dropbtn:hover{
-  color:var(--sand);
-}
-
-/* DROPDOWN */
-.dropdown{position:relative;}
-.dropdown-content{
-  display:none;
-  position:absolute;
-  background:#fffaf0;
-  min-width:160px;
-  border-radius:6px;
-  box-shadow:0 8px 16px rgba(0,0,0,0.2);
-  z-index:1500;
-}
-.dropdown-content a{
-  display:block;
-  padding:10px;
-  text-decoration:none;
-  color:var(--deep-maroon);
-}
-.dropdown:hover .dropdown-content{display:block;}
-.dropdown-content a:hover{
-  background:var(--gold);
-  color:#000;
-}
-</style>
-
 <!-- ===== PAGE STYLE ===== -->
 <style>
 body{
@@ -188,22 +105,119 @@ body{
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- 🌟 HEADER STYLES (Moved Near Header) -->
+<style id="header-style">
+  :root {
+    --brand: #2b0a06;
+    --accent: #d9a441;
+    --light-text: #fff;
+  }
+
+  header {
+    width: 100%;
+    background: linear-gradient(90deg, var(--brand), #5c2e07); /* solid gradient instead of transparent */
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    background: white;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  nav.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a, .dropbtn {
+    color: var(--light-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    transition: 0.25s;
+  }
+
+  nav a:hover, .dropbtn:hover {
+    color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .dropdown { position: relative; }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #fffaf0;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    padding: 6px 0;
+    z-index: 3000;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    color: #4b2e05;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Make month card titles match header accent */
+  .month-head {
+    color: var(--accent);
+  }
+</style>
+
+
 <header>
   <div class="logo">
     <img src="logo.png" alt="Logo">
     <span>My Bharat</span>
   </div>
-
   <nav class="navbar">
     <a href="index.html">Home</a>
-
     <div class="dropdown">
-      <button class="dropbtn">Art  ▾</button>
+      <button class="dropbtn">Art ▾</button>
       <div class="dropdown-content">
         <a href="art.html">Art</a>
         <a href="architecture.html">Architecture</a>
-        <a href="arts@sps.html">Arts Done at SPS</a>
+        <a href="arts@sps.html">Arts at SPS</a>
       </div>
     </div>
     <div class="dropdown">
@@ -211,12 +225,11 @@ body{
       <div class="dropdown-content">
         <a href="dance.html">Dance</a>
         <a href="music.html">Music</a>
-        <a href="heritage.html">Heritage</a>
         <a href="festivals.html">Festivals</a>
       </div>
     </div>
     <div class="dropdown">
-      <button class="dropbtn">Cuisine  ▾</button>
+      <button class="dropbtn">Cuisine ▾</button>
       <div class="dropdown-content">
         <a href="northindian.html">North Indian</a>
         <a href="southindian.html">South Indian</a>
@@ -237,33 +250,32 @@ body{
     <div class="dropdown">
       <button class="dropbtn">History ▾</button>
       <div class="dropdown-content">
-        <a href="ancientindia.html">Ancient India </a>
+        <a href="ancientindia.html">Ancient India</a>
         <a href="medievalindia.html">Medieval India</a>
         <a href="modernindia.html">Modern India</a>
+        <a href="heritage.html">Heritage</a>
       </div>
     </div>
     <div class="dropdown">
       <button class="dropbtn">National ▾</button>
       <div class="dropdown-content">
         <a href="nationalsymbols.html">National Symbols</a>
-        <a href="government.html">Government</a> 
-        <a href="nationals.html">Nationals </a>
+        <a href="government.html">Government</a>
+        <a href="nationals.html">Nationals</a>
       </div>
     </div>
     <div class="dropdown">
       <button class="dropbtn">Explore More ▾</button>
       <div class="dropdown-content">
         <a href="facts.html">Facts</a>
-        <a href="calendar.html">Calendar</a> 
-        <a href="ourpm.html">Our P.M </a>
+        <a href="calendar.html">Calendar</a>
+        <a href="ourpm.html">Our P.M</a>
         <a href="rashtrapatibhavan.html">Rashtrapati Bhavan</a>
         <a href="inventions.html">Our Inventions</a>
       </div>
     </div>
-    <a href="about.html">About</a>
   </nav>
 </header>
-
 <!-- ===== HERO SECTION ===== -->
 <section class="hero">
   <img src="logo3.png" alt="School Logo" class="school-logo">
@@ -318,3 +330,4 @@ document.getElementById("modalBox").addEventListener("click", function(e){
 
 </body>
 </html>
+
